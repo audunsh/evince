@@ -1,3 +1,3 @@
-<img src="graphics/evince_logo.png" width ="100px">
+<img src="graphics/evince_logo.png" width ="150px">
 
 ## EVINCE 
