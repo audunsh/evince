@@ -1,6 +1,10 @@
 <img src="graphics/evince_logo.png" width ="200px">
 
-## EVINCE 
+# EVINCE 
+
+## Install from PyPI
+
+```pip install evince
 
 ## Quick example usage for Notebooks
 
