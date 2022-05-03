@@ -4,7 +4,7 @@
 
 ## Install from PyPI
 
-```pip install evince
+```pip install evince```
 
 ## Quick example usage for Notebooks
 
@@ -27,4 +27,4 @@ m.add_atoms(atoms)
 
 
 # show visualization
-m.render()
+m.render()```
