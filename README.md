@@ -18,4 +18,4 @@ atoms[:,1:] = positions
 
 m.add_atoms(atoms)
 
-m.render()```
+m.render()
