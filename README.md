@@ -2,6 +2,8 @@
 
 # EVINCE 
 
+Molecular visualization prototype
+
 ## Install from PyPI
 
 ```pip install evince```
