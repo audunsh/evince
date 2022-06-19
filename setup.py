@@ -6,7 +6,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
      name='Evince',  
-     version='0.9',
+     version='0.13',
      author="Audun Skau Hansen",
      author_email="a.s.hansen@kjemi.uio.no",
      description="Visualization tools for computational chemistry",

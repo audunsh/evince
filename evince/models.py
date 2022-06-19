@@ -7,7 +7,18 @@ import evince.processing as pr
 import evince.system as esys
 
 class molecule():
+    """
+    A visual representation of a chemical system
+
+    
+
+    """
     def __init__(self, ket = None, atoms = None, extent = 8):
+        """
+        
+        """
+        self.colors = esys.colorscheme() # color of atoms
+
         if atoms is not None:
             self.add_atoms(atoms)
         
@@ -16,7 +27,7 @@ class molecule():
             
         
         self.scene = three.Scene(children=[three.AmbientLight(color='#ffffff', intensity = 0.2), three.DirectionalLight(color='#ffffff', position=[2, 2, 2], intensity=0.5)])
-        self.colors = esys.colorscheme() # color of atoms
+        
         self.extent = extent # max distance 
         
 
@@ -94,7 +105,7 @@ class molecule():
 
 
         # orbital
-        for i in np.linspace((vmax*1e-2)**(aa**-1),.6*vmax**(aa**-1),15)**aa:
+        for i in np.linspace((vmax*1e-2)**(aa**-1),vmax**(aa**-1),15)**aa:
             #print(i)
             try:
                 self.add_orbital_(orb_p, val = i, color = c1, n_exp = n_exp)
