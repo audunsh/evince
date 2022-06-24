@@ -20,11 +20,131 @@ def enable_notebook():
     """
     s = """require.undef('mdview');
 require.undef('latticeview');
-require.config({paths: {three: "https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three"}});
+require.config({paths: {three: "https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three"}});
 
 
 
 define('mdview', ['@jupyter-widgets/base','three' ], function(widgets, THREE, object) {
+    const _instanceLocalMatrix = /*@__PURE__*/ new THREE.Matrix4();
+    const _instanceWorldMatrix = /*@__PURE__*/ new THREE.Matrix4();
+
+    const _instanceIntersects = [];
+
+    const _mesh = /*@__PURE__*/ new THREE.Mesh();
+
+    class InstancedMesh extends THREE.Mesh {
+
+        constructor( geometry, material, count ) {
+
+            super( geometry, material );
+
+            this.isInstancedMesh = true;
+
+            this.instanceMatrix = new THREE.InstancedBufferAttribute( new Float32Array( count * 16 ), 16 );
+            this.instanceColor = null;
+
+            this.count = count;
+
+            this.frustumCulled = false;
+
+        }
+
+        copy( source, recursive ) {
+
+            super.copy( source, recursive );
+
+            this.instanceMatrix.copy( source.instanceMatrix );
+
+            if ( source.instanceColor !== null ) this.instanceColor = source.instanceColor.clone();
+
+            this.count = source.count;
+
+            return this;
+
+        }
+
+        getColorAt( index, color ) {
+
+            color.fromArray( this.instanceColor.array, index * 3 );
+
+        }
+
+        getMatrixAt( index, matrix ) {
+
+            matrix.fromArray( this.instanceMatrix.array, index * 16 );
+
+        }
+
+        raycast( raycaster, intersects ) {
+
+            const matrixWorld = this.matrixWorld;
+            const raycastTimes = this.count;
+
+            _mesh.geometry = this.geometry;
+            _mesh.material = this.material;
+
+            if ( _mesh.material === undefined ) return;
+
+            for ( let instanceId = 0; instanceId < raycastTimes; instanceId ++ ) {
+
+                // calculate the world matrix for each instance
+
+                this.getMatrixAt( instanceId, _instanceLocalMatrix );
+
+                _instanceWorldMatrix.multiplyMatrices( matrixWorld, _instanceLocalMatrix );
+
+                // the mesh represents this single instance
+
+                _mesh.matrixWorld = _instanceWorldMatrix;
+
+                _mesh.raycast( raycaster, _instanceIntersects );
+
+                // process the result of raycast
+
+                for ( let i = 0, l = _instanceIntersects.length; i < l; i ++ ) {
+
+                    const intersect = _instanceIntersects[ i ];
+                    intersect.instanceId = instanceId;
+                    intersect.object = this;
+                    intersects.push( intersect );
+
+                }
+
+                _instanceIntersects.length = 0;
+
+            }
+
+        }
+
+        setColorAt( index, color ) {
+
+            if ( this.instanceColor === null ) {
+
+                this.instanceColor = new InstancedBufferAttribute( new Float32Array( this.instanceMatrix.count * 3 ), 3 );
+
+            }
+
+            color.toArray( this.instanceColor.array, index * 3 );
+
+        }
+
+        setMatrixAt( index, matrix ) {
+
+            matrix.toArray( this.instanceMatrix.array, index * 16 );
+
+        }
+
+        updateMorphTargets() {
+
+        }
+
+        dispose() {
+
+            this.dispatchEvent( { type: 'dispose' } );
+
+        }
+
+    }
     
     /**
      * @author qiao / https://github.com/qiao
@@ -731,6 +851,88 @@ define('mdview', ['@jupyter-widgets/base','three' ], function(widgets, THREE, ob
                 console.log("3d initt");
             }
             
+            let baseGeometry = new THREE.SphereBufferGeometry(1);
+            let instancedGeometry = new THREE.InstancedBufferGeometry().copy(baseGeometry);
+            let instanceCount = this.pos.length;
+            instancedGeometry.maxInstancedCount = instanceCount;
+            //let material = new THREE.ShaderMaterial();
+            //let mesh = new THREE.Mesh(instancedGeometry, material);
+            
+            
+            
+            
+            
+            let aColor = [];
+            let aCurve = [];
+            
+            for (let i = 0; i < instanceCount; i++) {
+              aCurve.push(.01, this.pos[i][0], this.pos[i][1], this.pos[i][2]);
+              //aColor.push(.3 + .001*this.colors[i][0], .3+ .001*this.colors[i][1], .3+ .001*this.colors[i][2]);
+              aColor.push(this.colors[i][0], this.colors[i][1], this.colors[i][2]);
+            }
+            let aCurveFloat32 = new Float32Array(aCurve);
+            instancedGeometry.addAttribute(
+              "aCurve",
+              new THREE.InstancedBufferAttribute(aCurveFloat32, 4, false)
+            );
+            let aColorFloat32 = new Float32Array(aColor);
+            instancedGeometry.addAttribute(
+              "aColor",
+              new THREE.InstancedBufferAttribute(aColorFloat32, 3, false)
+            );
+            
+            this.instancedGeometry = instancedGeometry;
+            
+            
+            var vertexShader = `attribute vec3 aColor;
+varying vec3 vColor;
+//varying vec3 vPos;
+
+// 1. Define the attributes
+attribute vec4 aCurve;
+
+void main(){
+  vec3 transformed = position;
+  
+  // 2. Extract values from attribute
+  //float aRadius = aCurve.x;
+
+  
+  // 3. Get position and add it to the final position
+  vec3 curvePosition = vec3(aCurve.y, aCurve.z, aCurve.w);
+   
+  
+
+  transformed += curvePosition;
+  
+  gl_Position = projectionMatrix * modelViewMatrix * vec4(transformed, 1.0);
+  vColor = aColor;
+  //vPis = gl_position;
+}`;
+            
+            var fragmentShader = `varying vec3 vColor;
+void main(){
+  gl_FragColor = gl_FragColor + vec4(vColor, 1.0);
+}`;
+            
+            let material = new THREE.ShaderMaterial({
+              fragmentShader: fragmentShader,
+              vertexShader: vertexShader
+            });
+            
+            //console.log(THREE);
+            
+            
+            let imesh = new InstancedMesh( instancedGeometry, material, instanceCount );
+            imesh.instanceMatrix.needsUpdate = true;
+            this.scene.add(imesh);
+            
+
+            
+            
+            
+            /*
+            
             
             for (let i =0; i < this.pos.length; i++){
                 let material = new THREE.MeshStandardMaterial( { color:  "rgb(" + [this.colors[i][0], this.colors[i][1], this.colors[i][2]].join(",") + ")"}  );
@@ -757,7 +959,7 @@ define('mdview', ['@jupyter-widgets/base','three' ], function(widgets, THREE, ob
                 
                 
                 
-            }
+            }*/
             
             //draw walls
             if(this.box.length>2){
@@ -926,17 +1128,37 @@ define('mdview', ['@jupyter-widgets/base','three' ], function(widgets, THREE, ob
         pos_changed: function() {
             
             this.pos = this.model.get('pos');
+            let mesh = this.scene.children[0];
+            let m4 = THREE.Matrix4();
             
-            for (let i =0; i < this.pos.length; i++){
-                let pos_i = this.pos[i];
-                let children_i = this.scene.children[i];
-                children_i.position.x = pos_i[0];
-                children_i.position.y = pos_i[1];
-                if(this.box.length>2){
-                    children_i.position.z = pos_i[2];
-                }
-                
+            let aCurve = [];
+            
+            for (let i = 0; i < mesh.count; i++) {
+              aCurve.push(.1, this.pos[i][0], this.pos[i][1], this.pos[i][2]);
             }
+            let aCurveFloat32 = new Float32Array(aCurve);
+            //console.log(mesh, mesh.geometry);
+            this.scene.children[0].geometry.addAttribute(
+              "aCurve",
+              new THREE.InstancedBufferAttribute(aCurveFloat32, 4, false)
+            );
+            
+            
+            /*
+            
+            for (let i =0; i < mesh.count; i++){
+                let pos_i = this.pos[i];
+                //m4.setPosition(pos_i[0], pos_i[1], pos_i[2] );
+                mesh.setMatrixAt ( {index : i, matrix : m4} );
+                
+                //let children_i = this.scene.children[i];
+                //children_i.position.x = pos_i[0];
+                //children_i.position.y = pos_i[1];
+                //if(this.box.length>2){
+                //    children_i.position.z = pos_i[2];
+                //}
+                
+            }*/
         }
         
         

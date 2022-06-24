@@ -29,5 +29,5 @@ class MDView(widgets.DOMWidget):
         self.masses = b.masses.tolist()
         self.init = True #trigger frontend init
         nc = 20
-        self.colors = np.array((interp1d(np.linspace(0,1,nc), np.random.randint(0,255,(3, nc)) )(b.masses/b.masses.max()).T), dtype = int).tolist()
+        self.colors = np.array((interp1d(np.linspace(0,1,nc), np.random.uniform(0,1,(3, nc)) )(b.masses/b.masses.max()).T), dtype = float).tolist()
 
