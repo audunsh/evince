@@ -24,7 +24,9 @@ class MDView(widgets.DOMWidget):
     def __init__(self, b):
         
         super().__init__() # execute init of parent class, append:
-        self.pos = b.pos.T.tolist()
+        pos = np.zeros((b.pos.shape[1],3), dtype = float)
+        pos[:, :b.pos.shape[0]] = b.pos.T
+        self.pos = pos.tolist()
         self.box = b.size.tolist()
         self.masses = b.masses.tolist()
         self.init = True #trigger frontend init
