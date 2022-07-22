@@ -1,6 +1,6 @@
 <img src="graphics/evince_logo.png" width ="200px">
 
-# EVINCE 
+# evince
 
 One tool to evince them all
 
