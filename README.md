@@ -2,7 +2,7 @@
 
 # EVINCE 
 
-Molecular visualization prototype
+One tool to evince them all
 
 ## Install from PyPI
 
