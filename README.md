@@ -2,6 +2,7 @@ evince
 ===============================
 
 A visualization module for the HSP environment
+Author: Audun Skau Hansen
 
 Installation
 ------------
@@ -12,7 +13,7 @@ To install use pip:
 
 For a development installation (requires [Node.js](https://nodejs.org) and [Yarn version 1](https://classic.yarnpkg.com/)),
 
-    $ git clone https://github.com/The Hylleraas Centre for Quantum Molecular Sciences/evince.git
+    $ git clone https://github.com/audunsh/evince.git
     $ cd evince
     $ pip install -e .
     $ jupyter nbextension install --py --symlink --overwrite --sys-prefix evince
