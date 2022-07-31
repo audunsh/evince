@@ -136,10 +136,10 @@ class BraketView(widgets.DOMWidget):
     _model_module = Unicode('evince').tag(sync=True)
 
     # Version of the front-end module containing widget view
-    _view_module_version = Unicode('^0.2.0').tag(sync=True)
+    _view_module_version = Unicode('^0.23.0').tag(sync=True)
 
     # Version of the front-end module containing widget model
-    _model_module_version = Unicode('^0.2.0').tag(sync=True)
+    _model_module_version = Unicode('^0.23.0').tag(sync=True)
 
     
     
@@ -196,7 +196,7 @@ void main() {
 
 
 
-
+@widgets.register
 class MDView(widgets.DOMWidget):
     # Name of the widget view class in front-end
     _view_name = Unicode('MDView').tag(sync=True)
@@ -211,10 +211,10 @@ class MDView(widgets.DOMWidget):
     _model_module = Unicode('evince').tag(sync=True)
 
     # Version of the front-end module containing widget view
-    _view_module_version = Unicode('^0.2.0').tag(sync=True)
+    _view_module_version = Unicode('^0.23.0').tag(sync=True)
 
     # Version of the front-end module containing widget model
-    _model_module_version = Unicode('^0.2.0').tag(sync=True)
+    _model_module_version = Unicode('^0.23.0').tag(sync=True)
 
 
     pos = tl.List([1,2,3]).tag(sync=True)

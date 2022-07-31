@@ -4,4 +4,4 @@
 module.exports = require('./braketview.js');
 //module.exports = require('./braketview_2.js');
 //module.exports = require('./mdview.js');
-module.exports['version'] = '0.2.0'  //require('../package.json').version;
+module.exports['version'] = '0.23.0'  //require('../package.json').version;

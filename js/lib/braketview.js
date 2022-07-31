@@ -1322,8 +1322,8 @@ var BraketModel = widgets.DOMWidgetModel.extend({
         _view_name : 'BraketView',
         _model_module : 'evince',
         _view_module : 'evince',
-        _model_module_version : '0.2.0',
-        _view_module_version : '0.2.0'
+        _model_module_version : '0.23.0',
+        _view_module_version : '0.23.0'
     })
 });
 
@@ -1334,6 +1334,7 @@ var BraketModel = widgets.DOMWidgetModel.extend({
 // Custom View. Renders the widget model.
 var BraketView = widgets.DOMWidgetView.extend({
     render: function() {
+		console.log("Hello from BraketView 2");
         const scene = new THREE.Scene();
         this.scene = scene;
 
@@ -1350,10 +1351,10 @@ var BraketView = widgets.DOMWidgetView.extend({
         const renderer = new THREE.WebGLRenderer();
         //document.body.appendChild( VRButton.createButton( renderer ) );
         this.renderer = renderer;
-        renderer.setSize( .5*window.innerWidth, .5*window.innerHeight );
+        this.renderer.setSize( .5*window.innerWidth, .5*window.innerHeight );
         //renderer.setClearColor( 0xfaf8ec, 1);
         this.renderer.setClearColor( 0x0f0f2F, 1);
-        renderer.antialias = true;
+        this.renderer.antialias = true;
         //renderer.xr.enabled = true;
         
         //let uniforms;
@@ -1363,7 +1364,13 @@ var BraketView = widgets.DOMWidgetView.extend({
         //	};
 
         this.el.appendChild( VRButton.createButton( this.renderer ) );
+		this.renderer.xr.enabled = true;
+		//this.renderer.setAnimationLoop( function () {
+        //    this.renderer.render( this.scene, this.camera );
+        //} );
 
+		
+		
         
         ////this.controls = new THREE.OrbitControls( this.camera, this.renderer.domElement );
         //const controls = new OrbitControls(this.camera, this.renderer.domElement);
@@ -1381,22 +1388,37 @@ var BraketView = widgets.DOMWidgetView.extend({
         this.model.on('change:init', this.init_changed, this);
         //this.model.on('change:surf', this.surf_changed, this);
         this.model.on('change:ao', this.ao_changed, this);
+
+		//console.log(this.render2);
+		//console.log(this.renderer.render);
+		//console.log(this.camera);
+		//console.log(this.scene);
+
+		animate();
+
+		function animate() {
+			renderer.setAnimationLoop( render );
+
+		}
+
+		function render() {
+			for(let i = 0; i < scene.children.length; i++){
+				let time = performance.now()
+				scene.children[i].material.uniforms.time.value += 0.0001; //time;
+			}
+			renderer.render( scene, camera );
+
+		}
+
+		
         
 
-        this.animate();
+        
         
         
         
     },
-    animate: function() {
-        requestAnimationFrame( this.animate.bind(this) );
-        this.renderer.render( this.scene, this.camera );
-        for(let i = 0; i < this.scene.children.length; i++){
-            let time = performance.now()
-            this.scene.children[i].material.uniforms.time.value += 0.0001; //time;
-        }
-        //this.uniforms[ 'time' ].value = performance.now() / 1000;
-    },
+
     init_changed: function() {
         this.pos = this.model.get('pos');
         this.masses = this.model.get('masses');
@@ -1557,7 +1579,7 @@ float q = tex[0]*tex[0] + tex[1]*tex[1] + tex[2]*tex[2];
         
         var fragment_shader = this.model.get('fragment_shader')
         
-        console.log("ao changed");
+        
 
 
 
@@ -1668,8 +1690,8 @@ var MDModel = widgets.DOMWidgetModel.extend({
         _view_name : 'MDView',
         _model_module : 'evince',
         _view_module : 'evince',
-        _model_module_version : '0.2.0',
-        _view_module_version : '0.2.0'
+        _model_module_version : '0.23.0',
+        _view_module_version : '0.23.0'
     })
 });
 
@@ -1704,11 +1726,12 @@ var MDView = widgets.DOMWidgetView.extend({
             renderer.render( scene, camera );
 
         } );
+
         this.renderer.setSize( .5*window.innerWidth, .5*window.innerHeight );
         //this.renderer.setClearColor( 0xfaf8ec, 1);
         this.renderer.setClearColor( 0x0f0f2F, 1);
         this.renderer.antialias = true;
-        //this.renderer.xr.enabled = true;
+        this.renderer.xr.enabled = true;
         
         let controls = new THREE.OrbitControls( this.camera, this.renderer.domElement );
         this.controls = controls;
@@ -1721,14 +1744,24 @@ var MDView = widgets.DOMWidgetView.extend({
         this.model.on('change:init', this.init_changed, this);
         
 
-        this.animate();
+        //this.animate();
+
+
+		animate();
+
+		function animate() {
+			renderer.setAnimationLoop( render );
+
+		}
+
+		function render() {
+			renderer.render( scene, camera );
+
+		}
+
         
         
         
-    },
-    animate: function() {
-        requestAnimationFrame( this.animate.bind(this) );
-        this.renderer.render( this.scene, this.camera );
     },
     init_changed: function() {
         console.log("init change");

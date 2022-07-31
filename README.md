@@ -1,8 +1,11 @@
 evince
 ===============================
 
-A visualization module for the HSP environment
-Author: Audun Skau Hansen
+Creating learning experiences in the microscopic realm.
+
+Evince is a visualization module for the <a href="https://hylleraas.readthedocs.io/en/latest/">Hylleraas Software Platform</a>.
+
+Authored by Audun Skau Hansen, summer 2022
 
 Installation
 ------------
@@ -19,7 +22,7 @@ For a development installation (requires [Node.js](https://nodejs.org) and [Yarn
     $ jupyter nbextension install --py --symlink --overwrite --sys-prefix evince
     $ jupyter nbextension enable --py --sys-prefix evince
 
-When actively developing your extension for JupyterLab, run the command:
+To actively developing Evince for JupyterLab, run the command:
 
     $ jupyter labextension develop --overwrite evince
 
