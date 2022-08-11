@@ -2,7 +2,7 @@ from ._version import version_info, __version__
 
 from .example import *
 from .braketview import *
-from .example_2 import *
+#from .example_2 import *
 #from .mdview import *
 
 
