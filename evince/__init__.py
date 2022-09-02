@@ -2,6 +2,8 @@ from ._version import __version__
 
 from .braketview import *
 from .mdview import *
+from .latticeview import *
+from .spotlight import *
 
 def _jupyter_labextension_paths():
     """Called by Jupyter Lab Server to detect if it is a valid labextension and

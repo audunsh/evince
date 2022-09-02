@@ -14,6 +14,7 @@
 const braketview = require('./braketview.js');
 const mdview = require('./mdview.js');
 const latticeview = require('./latticeview.js');
+const spotlightview = require('./spotlightview.js');
 //module.exports = require('./mdview.js');
 
 
@@ -29,6 +30,8 @@ module.exports = {
 	MDView: mdview.MDView,
     LatticeModel: latticeview.LatticeModel,
 	LatticeView: latticeview.LatticeView,
+    SpotlightModel: spotlightview.SpotlightModel,
+	SpotlightView: spotlightview.SpotlightView,
 }
 
 module.exports['version'] = require('../package.json').version;
