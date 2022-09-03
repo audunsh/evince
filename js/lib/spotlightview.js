@@ -1,6 +1,12 @@
 var widgets = require('@jupyter-widgets/base');
 var _ = require('lodash');
 var THREE = require('three');
+//import * as THREE from 'three';
+//import { VRButton } from 'three/examples/jsm/webxr/VRButton.js';
+//import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
+//import OrbitControls from 'three/examples/jsm/Controls/OrbitControls.js';
+//THREE.OrbitControls = OrbitControls;
+
 
 ( function () {
 
@@ -3047,6 +3053,10 @@ VRButton.registerSessionGrantedListener();
 
 // When serialiazing the entire widget state for embedding, only values that
 // differ from the defaults will be specified.
+
+
+// When serialiazing the entire widget state for embedding, only values that
+// differ from the defaults will be specified.
 var SpotlightModel = widgets.DOMWidgetModel.extend({
     defaults: _.extend(widgets.DOMWidgetModel.prototype.defaults(), {
         _model_name : 'SpotlightModel',
@@ -3219,6 +3229,19 @@ var SpotlightView = widgets.DOMWidgetView.extend({
 
 		this.renderer.autoClear = false;
 
+		/*
+		function onPointerMove( event ) {
+
+			if ( event.isPrimary === false ) return;
+
+			mouse.x = ( event.clientX - windowHalfX ) / windowHalfX;
+			mouse.y = - ( event.clientY - windowHalfY ) / windowHalfY;
+
+			postprocessing.bokeh_uniforms[ 'focusCoords' ].value.set( event.clientX / window.innerWidth, 1 - ( event.clientY / window.innerHeight ) );
+
+		}
+		*/
+
         
 
 
@@ -3341,16 +3364,12 @@ var SpotlightView = widgets.DOMWidgetView.extend({
 
 
             /*
-
             let lmat = new THREE.LineBasicMaterial( { color: 0x999999 } );
             lmat.linewidth = 5;
-
             let points = [];
             points.push( new THREE.Vector3(pos_a[0], pos_a[1], pos_a[2]) );
             points.push( new THREE.Vector3(pos_b[0], pos_b[1], pos_b[2]) );
-
             let lgeom = new THREE.BufferGeometry().setFromPoints( points );
-
             let line = new THREE.Line( lgeom, lmat );
             this.scene.add(line);
             */
