@@ -4,6 +4,7 @@ from .braketview import *
 from .mdview import *
 from .latticeview import *
 from .spotlight import *
+from .template import *
 
 def _jupyter_labextension_paths():
     """Called by Jupyter Lab Server to detect if it is a valid labextension and
