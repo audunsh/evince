@@ -1,7 +1,10 @@
-var widgets = require('@jupyter-widgets/base');
-var _ = require('lodash');
-var THREE = require('three');
-var OrbitControls = require('three/examples/jsm/Controls/OrbitControls');
+import { DOMWidgetModel, DOMWidgetView } from '@jupyter-widgets/base';
+
+import * as THREE from 'three';
+//var THREE = require('three');
+import { OrbitControls } from 'three/examples/jsm/Controls/OrbitControls.js';
+//import { VRButton } from 'three/examples/jsm/webxr/VRButton.js';
+
 
 // See example.py for the kernel counterpart to this file.
 
@@ -21,35 +24,23 @@ var OrbitControls = require('three/examples/jsm/Controls/OrbitControls');
 
 // When serialiazing the entire widget state for embedding, only values that
 // differ from the defaults will be specified.
-var HelloModel = widgets.DOMWidgetModel.extend({
-    defaults: _.extend(widgets.DOMWidgetModel.prototype.defaults(), {
-        _model_name : 'HelloModel',
-        _view_name : 'HelloView',
-        _model_module : 'evince',
-        _view_module : 'evince',
-        _model_module_version : '0.30.0',
-        _view_module_version : '0.30.0',
-        value : 'Hello World!'
-    })
-});
-
-class TemplateModel extends widgets.DOMWidgetModel {
+export class TemplateModel extends DOMWidgetModel {
     defaults() {
         return {
             ...super.defaults(),
             _model_name : 'TemplateModel',
-            _view_name : 'TemaplteView',
+            _view_name : 'TemplateView',
             _model_module : 'evince',
             _view_module : 'evince',
-            _model_module_version : '0.30.0',
-            _view_module_version : '0.30.0'
+            _model_module_version : '0.31.0',
+            _view_module_version : '0.31.0'
         };
     }
 }
 
 
 // Custom View. Renders the widget model.
-class TemplateView extends widgets.DOMWidgetView {
+export class TemplateView extends DOMWidgetView {
     render() {
 
         // initialize the THREE.Scene object, the campera and the renderer
@@ -64,11 +55,7 @@ class TemplateView extends widgets.DOMWidgetView {
         this.renderer = renderer;
 
         // set the animation loop
-        this.renderer.setAnimationLoop( function () {
-
-            renderer.render( scene, camera );
-
-        } );
+        //this.renderer.setAnimationLoop( this.animationLoop );
 
         this.renderer.setSize( .5*window.innerWidth, .5*window.innerHeight );
         //this.renderer.setClearColor( 0xfaf8ec, 1);
@@ -77,8 +64,23 @@ class TemplateView extends widgets.DOMWidgetView {
 
 
         // init user controls for the 3D scene
-        let controls = new THREE.OrbitControls( this.camera, this.renderer.domElement );
+        let controls = new OrbitControls( this.camera, this.renderer.domElement );
         this.controls = controls;
+
+        this.renderer.render(this.scene, this.camera);
+
+        this.el.append(this.renderer.domElement);
+
+        // add objects to the scene here
+
+        let baseGeometry = new THREE.SphereBufferGeometry(1.0, 20, 10);
+        let material = new THREE.MeshStandardMaterial( );
+        material.roughness = 0.2;
+        material.metalness = 0.2;
+        let mesh = new THREE.Mesh( baseGeometry, material );
+
+        this.scene.add(mesh);
+
 
 
 
@@ -91,15 +93,26 @@ class TemplateView extends widgets.DOMWidgetView {
         // Observe changes in the value traitlet in Python, and define
         // a custom callback.
         this.model.on('change:value', this.value_changed, this);
+
+        animate();
+
+		function animate() {
+			renderer.setAnimationLoop( render );
+
+		}
+
+		function render() {
+			renderer.render( scene, camera );
+
+		}
+
+
     }
+
+
+
 
     value_changed() {
-        this.el.textContent = this.model.get('value');
+        //this.el.textContent = this.model.get('value');
     }
-};
-
-
-module.exports = {
-    TemplateModel: TemplateModel,
-    TemplateView: TemplateView
 };

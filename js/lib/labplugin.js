@@ -1,16 +1,19 @@
-var plugin = require('./index');
-var base = require('@jupyter-widgets/base');
+import {BraketModel, BraketView, version} from './index';
+import {IJupyterWidgetRegistry} from '@jupyter-widgets/base';
 
-module.exports = {
+
+export const BraketViewPlugin = {
   id: 'evince:plugin',
-  requires: [base.IJupyterWidgetRegistry],
+  requires: [IJupyterWidgetRegistry],
   activate: function(app, widgets) {
       widgets.registerWidget({
           name: 'evince',
-          version: plugin.version,
-          exports: plugin
+          version: version,
+          exports: { BraketModel, BraketView }
       });
   },
   autoStart: true
 };
+
+export default BraketViewPlugin;
 

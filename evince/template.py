@@ -33,5 +33,4 @@ class Template(widgets.DOMWidget):
     # It is synced back to Python from the frontend *any* time the model is touched.
     value = tl.Unicode('Hello World!').tag(sync=True)
 
-    def __init__(self, value):
-        self.value = value
+    
