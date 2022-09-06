@@ -1,0 +1,512 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Hybrid orbitals &#8212; Evince - developers guide</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="High quality 3D graphics - the Spotlight module" href="../tutorials/spotlight.html" />
+    <link rel="prev" title="A gallery of gaussian type orbitals" href="gto_gallery.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../../_static/evince_logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Evince - developers guide</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    What is Evince?
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="../tutorials/overview.html">
+   Tutorials
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../tutorials/installation.html">
+     User installation
+    </a>
+   </li>
+   <li class="toctree-l2 current active has-children">
+    <a class="reference internal" href="../tutorials/braketview.html">
+     GPU performance
+    </a>
+    <input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+    <label for="toctree-checkbox-2">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul class="current">
+     <li class="toctree-l3">
+      <a class="reference internal" href="gto_gallery.html">
+       A gallery of gaussian type orbitals
+      </a>
+     </li>
+     <li class="toctree-l3 current active">
+      <a class="current reference internal" href="#">
+       Hybrid orbitals
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="../tutorials/spotlight.html">
+     High quality 3D graphics - the Spotlight module
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+    <label for="toctree-checkbox-3">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul class="simple">
+    </ul>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/audunsh/evince/master?urlpath=tree/docs/docs/braketview/hybridization.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/audunsh/evince"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/audunsh/evince/issues/new?title=Issue%20on%20page%20%2Fdocs/braketview/hybridization.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../../_sources/docs/braketview/hybridization.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Hybrid orbitals</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="hybrid-orbitals">
+<h1>Hybrid orbitals<a class="headerlink" href="#hybrid-orbitals" title="Permalink to this headline">#</a></h1>
+<p><b>Author</b> Audun Skau Hansen <a href="mailto:a.s.hansen@kjemi.uio.no">✉️</a></p>
+<p>The Hylleraas Centre for Quantum Molecular Sciences, 2022</p>
+<hr class="docutils" />
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">braketlab</span> <span class="k">as</span> <span class="nn">bk</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">a</span> <span class="o">=</span> <span class="mf">5.0</span>
+ 
+<span class="n">pos</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">5.0</span><span class="p">,</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">])</span>
+ 
+<span class="n">s1</span> <span class="o">=</span> <span class="n">bk</span><span class="o">.</span><span class="n">basisbank</span><span class="o">.</span><span class="n">get_gto</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span> <span class="n">position</span> <span class="o">=</span> <span class="n">pos</span><span class="p">)</span>
+<span class="n">p1</span> <span class="o">=</span> <span class="n">bk</span><span class="o">.</span><span class="n">basisbank</span><span class="o">.</span><span class="n">get_gto</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">position</span> <span class="o">=</span> <span class="n">pos</span><span class="p">)</span>
+<span class="n">p2</span> <span class="o">=</span> <span class="n">bk</span><span class="o">.</span><span class="n">basisbank</span><span class="o">.</span><span class="n">get_gto</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">position</span> <span class="o">=</span> <span class="n">pos</span><span class="p">)</span>
+<span class="n">p3</span> <span class="o">=</span> <span class="n">bk</span><span class="o">.</span><span class="n">basisbank</span><span class="o">.</span><span class="n">get_gto</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">position</span> <span class="o">=</span> <span class="n">pos</span><span class="p">)</span>
+ 
+<span class="n">SP1</span> <span class="o">=</span> <span class="p">(</span><span class="n">s1</span> <span class="o">+</span> <span class="n">p1</span> <span class="o">+</span> <span class="n">p2</span> <span class="o">+</span> <span class="n">p3</span><span class="p">)</span>
+ 
+<span class="n">pos</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">2.5</span><span class="p">,</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">])</span>
+ 
+<span class="n">s1</span> <span class="o">=</span> <span class="n">bk</span><span class="o">.</span><span class="n">basisbank</span><span class="o">.</span><span class="n">get_gto</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span> <span class="n">position</span> <span class="o">=</span> <span class="n">pos</span><span class="p">)</span>
+<span class="n">p1</span> <span class="o">=</span> <span class="n">bk</span><span class="o">.</span><span class="n">basisbank</span><span class="o">.</span><span class="n">get_gto</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">position</span> <span class="o">=</span> <span class="n">pos</span><span class="p">)</span>
+<span class="n">p2</span> <span class="o">=</span> <span class="n">bk</span><span class="o">.</span><span class="n">basisbank</span><span class="o">.</span><span class="n">get_gto</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">position</span> <span class="o">=</span> <span class="n">pos</span><span class="p">)</span>
+<span class="n">p3</span> <span class="o">=</span> <span class="n">bk</span><span class="o">.</span><span class="n">basisbank</span><span class="o">.</span><span class="n">get_gto</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">position</span> <span class="o">=</span> <span class="n">pos</span><span class="p">)</span>
+ 
+<span class="n">SP2</span> <span class="o">=</span> <span class="p">(</span><span class="n">s1</span> <span class="o">-</span> <span class="n">p1</span> <span class="o">+</span> <span class="n">p2</span> <span class="o">-</span> <span class="n">p3</span><span class="p">)</span>
+ 
+<span class="n">pos</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">])</span>
+ 
+<span class="n">s1</span> <span class="o">=</span> <span class="n">bk</span><span class="o">.</span><span class="n">basisbank</span><span class="o">.</span><span class="n">get_gto</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span> <span class="n">position</span> <span class="o">=</span> <span class="n">pos</span><span class="p">)</span>
+<span class="n">p1</span> <span class="o">=</span> <span class="n">bk</span><span class="o">.</span><span class="n">basisbank</span><span class="o">.</span><span class="n">get_gto</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">position</span> <span class="o">=</span> <span class="n">pos</span><span class="p">)</span>
+<span class="n">p2</span> <span class="o">=</span> <span class="n">bk</span><span class="o">.</span><span class="n">basisbank</span><span class="o">.</span><span class="n">get_gto</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">position</span> <span class="o">=</span> <span class="n">pos</span><span class="p">)</span>
+<span class="n">p3</span> <span class="o">=</span> <span class="n">bk</span><span class="o">.</span><span class="n">basisbank</span><span class="o">.</span><span class="n">get_gto</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">position</span> <span class="o">=</span> <span class="n">pos</span><span class="p">)</span>
+ 
+<span class="n">SP3</span> <span class="o">=</span> <span class="p">(</span><span class="n">s1</span> <span class="o">+</span> <span class="n">p1</span> <span class="o">-</span> <span class="n">p2</span> <span class="o">-</span> <span class="n">p3</span><span class="p">)</span>
+ 
+<span class="n">pos</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">2.5</span><span class="p">,</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">])</span>
+ 
+<span class="n">s1</span> <span class="o">=</span> <span class="n">bk</span><span class="o">.</span><span class="n">basisbank</span><span class="o">.</span><span class="n">get_gto</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span> <span class="n">position</span> <span class="o">=</span> <span class="n">pos</span><span class="p">)</span>
+<span class="n">p1</span> <span class="o">=</span> <span class="n">bk</span><span class="o">.</span><span class="n">basisbank</span><span class="o">.</span><span class="n">get_gto</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">position</span> <span class="o">=</span> <span class="n">pos</span><span class="p">)</span>
+<span class="n">p2</span> <span class="o">=</span> <span class="n">bk</span><span class="o">.</span><span class="n">basisbank</span><span class="o">.</span><span class="n">get_gto</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">position</span> <span class="o">=</span> <span class="n">pos</span><span class="p">)</span>
+<span class="n">p3</span> <span class="o">=</span> <span class="n">bk</span><span class="o">.</span><span class="n">basisbank</span><span class="o">.</span><span class="n">get_gto</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">position</span> <span class="o">=</span> <span class="n">pos</span><span class="p">)</span>
+ 
+<span class="n">SP4</span> <span class="o">=</span> <span class="p">(</span><span class="n">s1</span> <span class="o">-</span> <span class="n">p1</span> <span class="o">-</span> <span class="n">p2</span> <span class="o">+</span> <span class="n">p3</span><span class="p">)</span>
+ 
+ 
+<span class="p">(</span><span class="n">SP1</span> <span class="o">+</span> <span class="n">SP2</span> <span class="o">+</span> <span class="n">SP3</span> <span class="o">+</span> <span class="n">SP4</span><span class="p">)</span><span class="o">.</span><span class="n">view</span><span class="p">()</span>
+ 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "4953a32481e64576af01699fc9ace620", "version_major": 2, "version_minor": 0}
+</script></div>
+</div>
+</section>
+
+
+<script type="application/vnd.jupyter.widget-state+json">
+{"state": {"104d2cb6b08844fe9d3ee853db876b06": {"model_module": "evince", "model_module_version": "^0.24.0", "model_name": "BraketModel", "state": {"_model_module_version": "^0.24.0", "_view_module_version": "^0.24.0", "ao": [1], "fragment_shader": "uniform vec3 user_color;\nuniform float time;\n\nvarying vec2 vUv;\nvarying vec3 pos;\nvarying vec3 tex;\nvarying float q;\nvarying float csI;\nvarying float csR;\nvarying float cs0;\nvarying float cs1;\nvarying float cs2;\nvarying float cs3;\nvarying float cs4;\nvarying float cs5;\nvarying float cs6;\nvarying float cs7;\nvarying float cs8;\nvarying float cs9;\nvarying float cs10;\nvarying float cs11;\nvarying float cs12;\nvarying float cs13;\nvarying float cs14;\nvarying float cs15;\nvarying float cs;\n\nvoid main() {\n\n    vec2 p = vUv;\n    float q = tex[0]*tex[0] +tex[1]*tex[1] +tex[2]*tex[2] ;\n    float cs0 = 2.3830743680178026*exp(-5.0*pow(tex[1], 2.0) - 5.0*pow(tex[2], 2.0) - 125.0*pow(0.20000000000000001*tex[0] + 1.0, 2.0));\n    float cs1 = 10.657432564650314*tex[1]*exp(-5.0*pow(tex[1], 2.0) - 5.0*pow(tex[2], 2.0) - 125.0*pow(0.20000000000000001*tex[0] + 1.0, 2.0));\n    float cs2 = 10.657432564650314*tex[2]*exp(-5.0*pow(tex[1], 2.0) - 5.0*pow(tex[2], 2.0) - 125.0*pow(0.20000000000000001*tex[0] + 1.0, 2.0));\n    float cs3 = (10.657432564650314*tex[0] + 53.28716282325157)*exp(-5.0*pow(tex[1], 2.0) - 5.0*pow(tex[2], 2.0) - 125.0*pow(0.20000000000000001*tex[0] + 1.0, 2.0));\n    float cs4 = 2.3830743680178026*exp(-5.0*pow(tex[1], 2.0) - 5.0*pow(tex[2], 2.0) - 31.25*pow(0.40000000000000002*tex[0] + 1.0, 2.0));\n    float cs5 = -10.657432564650314*tex[1]*exp(-5.0*pow(tex[1], 2.0) - 5.0*pow(tex[2], 2.0) - 31.25*pow(0.40000000000000002*tex[0] + 1.0, 2.0));\n    float cs6 = 10.657432564650314*tex[2]*exp(-5.0*pow(tex[1], 2.0) - 5.0*pow(tex[2], 2.0) - 31.25*pow(0.40000000000000002*tex[0] + 1.0, 2.0));\n    float cs7 = (-10.657432564650314*tex[0] - 26.643581411625785)*exp(-5.0*pow(tex[1], 2.0) - 5.0*pow(tex[2], 2.0) - 31.25*pow(0.40000000000000002*tex[0] + 1.0, 2.0));\n    float cs8 = 2.3830743680178026*exp(-5.0*q);\n    float cs9 = 10.657432564650314*tex[1]*exp(-5.0*q);\n    float cs10 = -10.657432564650314*tex[2]*exp(-5.0*q);\n    float cs11 = -10.657432564650314*tex[0]*exp(-5.0*q);\n    float cs12 = 2.3830743680178026*exp(-5.0*pow(tex[1], 2.0) - 5.0*pow(tex[2], 2.0) - 31.25*pow(0.40000000000000002*tex[0] - 1.0, 2.0));\n    float cs13 = -10.657432564650314*tex[1]*exp(-5.0*pow(tex[1], 2.0) - 5.0*pow(tex[2], 2.0) - 31.25*pow(0.40000000000000002*tex[0] - 1.0, 2.0));\n    float cs14 = -10.657432564650314*tex[2]*exp(-5.0*pow(tex[1], 2.0) - 5.0*pow(tex[2], 2.0) - 31.25*pow(0.40000000000000002*tex[0] - 1.0, 2.0));\n    float cs15 = (10.657432564650314*tex[0] - 26.643581411625785)*exp(-5.0*pow(tex[1], 2.0) - 5.0*pow(tex[2], 2.0) - 31.25*pow(0.40000000000000002*tex[0] - 1.0, 2.0));\n    float csI = 0.0 ;\n    float csR = cs0 + cs1 + cs2 + cs3 + cs4 + cs5 + cs6 + cs7 + cs8 + cs9 + cs10 + cs11 + cs12 + cs13 + cs14 + cs15 ;\n    gl_FragColor = gl_FragColor + vec4(csR, csI, -1.0*csR, .1);\n}", "layout": "IPY_MODEL_74643b94fc614f3bbef3c6357e66ce1e", "pos": [], "surf": []}}, "3556abd97ce0407b8dfb92cb3211750d": {"model_module": "@jupyter-widgets/base", "model_module_version": "2.0.0", "model_name": "LayoutModel", "state": {"_model_module_version": "2.0.0", "_view_module_version": "2.0.0", "border_bottom": null, "border_left": null, "border_right": null, "border_top": null}}, "4953a32481e64576af01699fc9ace620": {"model_module": "evince", "model_module_version": "^0.33.0", "model_name": "BraketModel", "state": {"_model_module_version": "^0.33.0", "_view_module_version": "^0.33.0", "additive": true, "ao": [1], "bg_color": [0, 0, 0], "fragment_shader": "uniform vec3 user_color;\nuniform float time;\n\nvarying vec2 vUv;\nvarying vec3 pos;\nvarying vec3 tex;\nvarying float q;\nvarying float csI;\nvarying float csR;\nvarying float cs0;\nvarying float cs1;\nvarying float cs2;\nvarying float cs3;\nvarying float cs4;\nvarying float cs5;\nvarying float cs6;\nvarying float cs7;\nvarying float cs8;\nvarying float cs9;\nvarying float cs10;\nvarying float cs11;\nvarying float cs12;\nvarying float cs13;\nvarying float cs14;\nvarying float cs15;\nvarying float cs;\n\nvoid main() {\n\n    vec2 p = vUv;\n    float q = tex[0]*tex[0] +tex[1]*tex[1] +tex[2]*tex[2] ;\n    float cs0 = 2.3830743680178026*exp(-5.0*pow(tex[1], 2.0) - 5.0*pow(tex[2], 2.0) - 125.0*pow(0.20000000000000001*tex[0] + 1.0, 2.0));\n    float cs1 = 10.657432564650314*tex[1]*exp(-5.0*pow(tex[1], 2.0) - 5.0*pow(tex[2], 2.0) - 125.0*pow(0.20000000000000001*tex[0] + 1.0, 2.0));\n    float cs2 = 10.657432564650314*tex[2]*exp(-5.0*pow(tex[1], 2.0) - 5.0*pow(tex[2], 2.0) - 125.0*pow(0.20000000000000001*tex[0] + 1.0, 2.0));\n    float cs3 = (10.657432564650314*tex[0] + 53.28716282325157)*exp(-5.0*pow(tex[1], 2.0) - 5.0*pow(tex[2], 2.0) - 125.0*pow(0.20000000000000001*tex[0] + 1.0, 2.0));\n    float cs4 = 2.3830743680178026*exp(-5.0*pow(tex[1], 2.0) - 5.0*pow(tex[2], 2.0) - 31.25*pow(0.40000000000000002*tex[0] + 1.0, 2.0));\n    float cs5 = -10.657432564650314*tex[1]*exp(-5.0*pow(tex[1], 2.0) - 5.0*pow(tex[2], 2.0) - 31.25*pow(0.40000000000000002*tex[0] + 1.0, 2.0));\n    float cs6 = 10.657432564650314*tex[2]*exp(-5.0*pow(tex[1], 2.0) - 5.0*pow(tex[2], 2.0) - 31.25*pow(0.40000000000000002*tex[0] + 1.0, 2.0));\n    float cs7 = (-10.657432564650314*tex[0] - 26.643581411625785)*exp(-5.0*pow(tex[1], 2.0) - 5.0*pow(tex[2], 2.0) - 31.25*pow(0.40000000000000002*tex[0] + 1.0, 2.0));\n    float cs8 = 2.3830743680178026*exp(-5.0*q);\n    float cs9 = 10.657432564650314*tex[1]*exp(-5.0*q);\n    float cs10 = -10.657432564650314*tex[2]*exp(-5.0*q);\n    float cs11 = -10.657432564650314*tex[0]*exp(-5.0*q);\n    float cs12 = 2.3830743680178026*exp(-5.0*pow(tex[1], 2.0) - 5.0*pow(tex[2], 2.0) - 31.25*pow(0.40000000000000002*tex[0] - 1.0, 2.0));\n    float cs13 = -10.657432564650314*tex[1]*exp(-5.0*pow(tex[1], 2.0) - 5.0*pow(tex[2], 2.0) - 31.25*pow(0.40000000000000002*tex[0] - 1.0, 2.0));\n    float cs14 = -10.657432564650314*tex[2]*exp(-5.0*pow(tex[1], 2.0) - 5.0*pow(tex[2], 2.0) - 31.25*pow(0.40000000000000002*tex[0] - 1.0, 2.0));\n    float cs15 = (10.657432564650314*tex[0] - 26.643581411625785)*exp(-5.0*pow(tex[1], 2.0) - 5.0*pow(tex[2], 2.0) - 31.25*pow(0.40000000000000002*tex[0] - 1.0, 2.0));\n    float csI = 0.0 ;\n    float csR = cs0 + cs1 + cs2 + cs3 + cs4 + cs5 + cs6 + cs7 + cs8 + cs9 + cs10 + cs11 + cs12 + cs13 + cs14 + cs15 ;\n    gl_FragColor = gl_FragColor + vec4(csR, csI, -1.0*csR, .1);\n}", "layout": "IPY_MODEL_3556abd97ce0407b8dfb92cb3211750d", "pos": [], "surf": [], "surface_view": false, "tabbable": null, "tooltip": null}}, "74643b94fc614f3bbef3c6357e66ce1e": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "df1734f4fb3d4832812d1e40a40f705a": {"model_module": "@jupyter-widgets/base", "model_module_version": "2.0.0", "model_name": "LayoutModel", "state": {"_model_module_version": "2.0.0", "_view_module_version": "2.0.0", "border_bottom": null, "border_left": null, "border_right": null, "border_top": null}}, "f238a2088afb4ce5b046bfb8ea539225": {"model_module": "evince", "model_module_version": "^0.33.0", "model_name": "BraketModel", "state": {"_model_module_version": "^0.33.0", "_view_module_version": "^0.33.0", "additive": true, "ao": [1], "bg_color": [0, 0, 0], "fragment_shader": "uniform vec3 user_color;\nuniform float time;\n\nvarying vec2 vUv;\nvarying vec3 pos;\nvarying vec3 tex;\nvarying float q;\nvarying float csI;\nvarying float csR;\nvarying float cs0;\nvarying float cs1;\nvarying float cs2;\nvarying float cs3;\nvarying float cs4;\nvarying float cs5;\nvarying float cs6;\nvarying float cs7;\nvarying float cs8;\nvarying float cs9;\nvarying float cs10;\nvarying float cs11;\nvarying float cs12;\nvarying float cs13;\nvarying float cs14;\nvarying float cs15;\nvarying float cs;\n\nvoid main() {\n\n    vec2 p = vUv;\n    float q = tex[0]*tex[0] +tex[1]*tex[1] +tex[2]*tex[2] ;\n    float cs0 = 2.3830743680178026*exp(-5.0*pow(tex[1], 2.0) - 5.0*pow(tex[2], 2.0) - 125.0*pow(0.20000000000000001*tex[0] + 1.0, 2.0));\n    float cs1 = 10.657432564650314*tex[1]*exp(-5.0*pow(tex[1], 2.0) - 5.0*pow(tex[2], 2.0) - 125.0*pow(0.20000000000000001*tex[0] + 1.0, 2.0));\n    float cs2 = 10.657432564650314*tex[2]*exp(-5.0*pow(tex[1], 2.0) - 5.0*pow(tex[2], 2.0) - 125.0*pow(0.20000000000000001*tex[0] + 1.0, 2.0));\n    float cs3 = (10.657432564650314*tex[0] + 53.28716282325157)*exp(-5.0*pow(tex[1], 2.0) - 5.0*pow(tex[2], 2.0) - 125.0*pow(0.20000000000000001*tex[0] + 1.0, 2.0));\n    float cs4 = 2.3830743680178026*exp(-5.0*pow(tex[1], 2.0) - 5.0*pow(tex[2], 2.0) - 31.25*pow(0.40000000000000002*tex[0] + 1.0, 2.0));\n    float cs5 = -10.657432564650314*tex[1]*exp(-5.0*pow(tex[1], 2.0) - 5.0*pow(tex[2], 2.0) - 31.25*pow(0.40000000000000002*tex[0] + 1.0, 2.0));\n    float cs6 = 10.657432564650314*tex[2]*exp(-5.0*pow(tex[1], 2.0) - 5.0*pow(tex[2], 2.0) - 31.25*pow(0.40000000000000002*tex[0] + 1.0, 2.0));\n    float cs7 = (-10.657432564650314*tex[0] - 26.643581411625785)*exp(-5.0*pow(tex[1], 2.0) - 5.0*pow(tex[2], 2.0) - 31.25*pow(0.40000000000000002*tex[0] + 1.0, 2.0));\n    float cs8 = 2.3830743680178026*exp(-5.0*q);\n    float cs9 = 10.657432564650314*tex[1]*exp(-5.0*q);\n    float cs10 = -10.657432564650314*tex[2]*exp(-5.0*q);\n    float cs11 = -10.657432564650314*tex[0]*exp(-5.0*q);\n    float cs12 = 2.3830743680178026*exp(-5.0*pow(tex[1], 2.0) - 5.0*pow(tex[2], 2.0) - 31.25*pow(0.40000000000000002*tex[0] - 1.0, 2.0));\n    float cs13 = -10.657432564650314*tex[1]*exp(-5.0*pow(tex[1], 2.0) - 5.0*pow(tex[2], 2.0) - 31.25*pow(0.40000000000000002*tex[0] - 1.0, 2.0));\n    float cs14 = -10.657432564650314*tex[2]*exp(-5.0*pow(tex[1], 2.0) - 5.0*pow(tex[2], 2.0) - 31.25*pow(0.40000000000000002*tex[0] - 1.0, 2.0));\n    float cs15 = (10.657432564650314*tex[0] - 26.643581411625785)*exp(-5.0*pow(tex[1], 2.0) - 5.0*pow(tex[2], 2.0) - 31.25*pow(0.40000000000000002*tex[0] - 1.0, 2.0));\n    float csI = 0.0 ;\n    float csR = cs0 + cs1 + cs2 + cs3 + cs4 + cs5 + cs6 + cs7 + cs8 + cs9 + cs10 + cs11 + cs12 + cs13 + cs14 + cs15 ;\n    gl_FragColor = gl_FragColor + vec4(csR, csI, -1.0*csR, .1);\n}", "layout": "IPY_MODEL_df1734f4fb3d4832812d1e40a40f705a", "pos": [], "surf": [], "surface_view": false, "tabbable": null, "tooltip": null}}}, "version_major": 2, "version_minor": 0}
+</script>
+
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./docs/braketview"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="gto_gallery.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">A gallery of gaussian type orbitals</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="../tutorials/spotlight.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">High quality 3D graphics - the Spotlight module</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Audun Skau Hansen<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

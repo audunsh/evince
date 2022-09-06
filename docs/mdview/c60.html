@@ -1,0 +1,681 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Interactivity &#8212; Evince - developers guide</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../../_static/evince_logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Evince - developers guide</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    What is Evince?
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../tutorials/overview.html">
+   Tutorials
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../tutorials/installation.html">
+     User installation
+    </a>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="../tutorials/braketview.html">
+     GPU performance
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+    <label for="toctree-checkbox-2">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../braketview/gto_gallery.html">
+       A gallery of gaussian type orbitals
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../braketview/hybridization.html">
+       What is hybridization?
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="../tutorials/spotlight.html">
+     High quality 3D graphics - the Spotlight module
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+    <label for="toctree-checkbox-3">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul class="simple">
+    </ul>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/audunsh/evince/master?urlpath=tree/docs/docs/mdview/c60.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/audunsh/evince"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/audunsh/evince/issues/new?title=Issue%20on%20page%20%2Fdocs/mdview/c60.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../../_sources/docs/mdview/c60.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Interactivity</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="interactivity">
+<h1>Interactivity<a class="headerlink" href="#interactivity" title="Permalink to this headline">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># run the first cell before presentation</span>
+
+<span class="kn">import</span> <span class="nn">bubblebox</span> <span class="k">as</span> <span class="nn">bb</span>
+<span class="kn">from</span> <span class="nn">bubblebox.mdbox</span> <span class="kn">import</span> <span class="n">lj_force</span><span class="p">,</span> <span class="n">hook_force</span><span class="p">,</span> <span class="n">no_force</span><span class="p">,</span> <span class="n">coulomb_force</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="k">def</span> <span class="nf">ring_connector</span><span class="p">(</span><span class="n">ring_configuration</span><span class="p">,</span> <span class="n">connection_pattern</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+    
+    <span class="n">connections</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    
+    <span class="c1"># create unconnected rings</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ring_configuration</span><span class="p">)):</span>
+        <span class="c1"># shift indices of rings</span>
+        <span class="n">dR</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">ring_configuration</span><span class="p">[:</span><span class="n">i</span><span class="p">]))</span>
+        
+        <span class="c1"># create current ring</span>
+        <span class="n">current_connections</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ring_configuration</span><span class="p">[</span><span class="n">i</span><span class="p">]):</span>
+            <span class="n">current_connections</span><span class="o">.</span><span class="n">append</span><span class="p">([(</span><span class="mi">1</span><span class="o">+</span><span class="n">j</span><span class="p">)</span><span class="o">%</span><span class="k">ring_configuration</span>[i]+dR,(-1+j)%ring_configuration[i]+dR])
+        
+        <span class="n">connections</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">current_connections</span><span class="p">)</span>
+        
+    
+    <span class="n">unconnected_edges</span> <span class="o">=</span> <span class="n">ring_configuration</span><span class="o">*</span><span class="mi">1</span>
+    
+    <span class="c1"># connect rings sucessively</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ring_configuration</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        
+        <span class="c1"># how many exterior sites per internal site?</span>
+       
+        <span class="n">inner</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">unconnected_edges</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">)[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">outer</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">ring_configuration</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">)[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        
+        <span class="n">ci</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">((</span><span class="n">inner</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">-</span> <span class="n">outer</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:])</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+
+        
+        <span class="k">if</span> <span class="n">connection_pattern</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+
+
+            <span class="n">inc</span> <span class="o">=</span> <span class="n">ring_configuration</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">/</span> <span class="n">unconnected_edges</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="c1">#print(&quot;increment:&quot;, inc)</span>
+
+            <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span>
+
+
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ring_configuration</span><span class="p">[</span><span class="n">i</span><span class="p">]):</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">connections</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">])</span><span class="o">&lt;</span><span class="mi">3</span><span class="p">:</span>
+                    <span class="n">connect_k</span> <span class="o">=</span> <span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">k</span><span class="o">*</span><span class="n">inc</span><span class="p">))</span><span class="o">+</span><span class="n">i</span><span class="o">//</span><span class="mi">2</span><span class="p">)</span><span class="o">%</span><span class="k">ring_configuration</span>[i+1]
+                    <span class="n">connections</span><span class="p">[</span><span class="n">i</span>  <span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">connect_k</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">ring_configuration</span><span class="p">[:</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]))</span>
+                    <span class="n">connections</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">][</span><span class="n">connect_k</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">j</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">ring_configuration</span><span class="p">[:</span><span class="n">i</span><span class="p">]))</span>
+
+
+                    <span class="c1">#book-keeping</span>
+                    <span class="n">unconnected_edges</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">-=</span> <span class="mi">1</span>
+                    <span class="n">unconnected_edges</span><span class="p">[</span><span class="n">i</span>  <span class="p">]</span> <span class="o">-=</span> <span class="mi">1</span>
+
+                    <span class="n">k</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">nc</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">connection_pattern</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+            
+            
+            <span class="n">repeat_times</span> <span class="o">=</span> <span class="n">ring_configuration</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">/</span><span class="n">nc</span>
+            
+
+            
+            
+            <span class="n">connection_i</span> <span class="o">=</span> <span class="p">[]</span><span class="c1"># </span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">repeat_times</span><span class="p">)):</span>
+                <span class="n">connection_i</span> <span class="o">+=</span> <span class="n">connection_pattern</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                
+            <span class="n">outer_connection_sites</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">ring_configuration</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">])[</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">connection_i</span><span class="p">)]</span>
+            
+            <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ring_configuration</span><span class="p">[</span><span class="n">i</span><span class="p">]):</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">connections</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">])</span><span class="o">&lt;</span><span class="mi">3</span><span class="p">:</span>
+                    <span class="c1">#print(&quot;connecting&quot;)</span>
+                    <span class="n">connect_k</span> <span class="o">=</span> <span class="n">outer_connection_sites</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+                    <span class="n">connections</span><span class="p">[</span><span class="n">i</span>  <span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">connect_k</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">ring_configuration</span><span class="p">[:</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]))</span>
+                    <span class="n">connections</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">][</span><span class="n">connect_k</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">j</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">ring_configuration</span><span class="p">[:</span><span class="n">i</span><span class="p">]))</span>
+
+
+                    <span class="c1">#book-keeping</span>
+                    <span class="n">unconnected_edges</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">-=</span> <span class="mi">1</span>
+                    <span class="n">unconnected_edges</span><span class="p">[</span><span class="n">i</span>  <span class="p">]</span> <span class="o">-=</span> <span class="mi">1</span>
+
+                    <span class="n">k</span> <span class="o">+=</span> <span class="mi">1</span>
+                    
+                
+    <span class="c1"># create final graph</span>
+    <span class="n">graph</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">layer</span> <span class="ow">in</span> <span class="n">connections</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">connectivity</span> <span class="ow">in</span> <span class="n">layer</span><span class="p">:</span>
+            <span class="n">graph</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">connectivity</span><span class="p">)</span>
+
+            
+    <span class="n">graph</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
+    
+
+    <span class="k">return</span> <span class="n">graph</span>
+
+<span class="k">def</span> <span class="nf">connected_structure</span><span class="p">(</span><span class="n">connection_indices</span><span class="p">,</span> <span class="n">n_dimensions</span> <span class="o">=</span> <span class="mi">3</span><span class="p">):</span>
+    <span class="n">n_atoms</span> <span class="o">=</span> <span class="n">connection_indices</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    
+    
+    <span class="n">b</span> <span class="o">=</span> <span class="n">bb</span><span class="o">.</span><span class="n">bubblebox</span><span class="o">.</span><span class="n">mdbox</span><span class="p">(</span><span class="n">n_bubbles</span> <span class="o">=</span> <span class="n">n_atoms</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">n_dimensions</span><span class="p">,</span> <span class="n">dtype</span> <span class="o">=</span> <span class="nb">float</span><span class="p">)</span><span class="o">*</span><span class="mi">20</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+    
+
+    
+    <span class="n">b</span><span class="o">.</span><span class="n">set_forces</span><span class="p">(</span><span class="n">coulomb_force</span><span class="p">,</span> <span class="n">force_params</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">7.0</span><span class="p">,</span><span class="mf">7.0</span><span class="p">]))</span>
+    
+    
+    
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_atoms</span><span class="p">):</span>
+        <span class="c1"># connect atom i to the respective atoms</span>
+        <span class="n">bubbles_a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n_atoms</span><span class="p">,</span> <span class="n">dtype</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">)</span>
+        <span class="n">bubbles_a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+            
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">connection_indices</span><span class="p">[</span><span class="n">i</span><span class="p">])):</span>
+            
+            
+            <span class="n">bubbles_b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n_atoms</span><span class="p">,</span> <span class="n">dtype</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">)</span>
+            <span class="n">bubbles_b</span><span class="p">[</span><span class="n">connection_indices</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">True</span>
+            
+            <span class="c1">#print(bubbles_a, bubbles_b)</span>
+            
+            <span class="n">b</span><span class="o">.</span><span class="n">set_forces</span><span class="p">(</span><span class="n">hook_force</span><span class="p">,</span> <span class="n">bubbles_a</span> <span class="o">=</span> <span class="n">bubbles_a</span><span class="p">,</span> <span class="n">bubbles_b</span> <span class="o">=</span> <span class="n">bubbles_b</span><span class="p">,</span> <span class="n">force_params</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">20</span><span class="p">,</span><span class="mi">3</span><span class="p">]))</span>
+    <span class="n">b</span><span class="o">.</span><span class="n">r2_cut</span> <span class="o">=</span> <span class="mi">100000</span>
+    <span class="c1">#b.pos += np.random.multivariate_normal(np.zeros(3), np.eye(3)*.1, n_atoms).T</span>
+    <span class="c1">#b.pos = b.pos[:, np.random.choice(n_atoms, n_atoms, replace = False)]</span>
+    <span class="n">b</span><span class="o">.</span><span class="n">pair_list_update_frequency</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="k">return</span> <span class="n">b</span>
+
+<span class="c1"># visualize ring</span>
+
+<span class="k">def</span> <span class="nf">show_graph</span><span class="p">(</span><span class="n">ring_configuration</span><span class="p">,</span> <span class="n">connectivity</span><span class="p">):</span>
+    
+    
+    <span class="n">pos</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">ring_configuration</span><span class="p">)),</span> <span class="n">dtype</span> <span class="o">=</span> <span class="nb">float</span><span class="p">)</span>
+    
+    <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+    
+    <span class="n">count_sum</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">ring_configuration</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ring_configuration</span><span class="p">)):</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">ring_configuration</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">)[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> 
+        <span class="c1">#print(int(np.sum(ring_configuration[:i])),int(np.sum(ring_configuration[:i])+ring_configuration[i]))</span>
+        <span class="n">pos</span><span class="p">[:,</span><span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">ring_configuration</span><span class="p">[:</span><span class="n">i</span><span class="p">])):</span><span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">ring_configuration</span><span class="p">[:</span><span class="n">i</span><span class="p">])</span><span class="o">+</span><span class="n">ring_configuration</span><span class="p">[</span><span class="n">i</span><span class="p">])]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">t</span><span class="p">),</span> <span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">t</span><span class="p">),</span> <span class="mi">0</span><span class="o">*</span><span class="n">t</span><span class="p">])</span>
+                   
+    <span class="c1">#print(pos)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">pos</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">pos</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span>
+    
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">connectivity</span><span class="p">)):</span>
+        <span class="n">pi</span> <span class="o">=</span> <span class="n">pos</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">connectivity</span><span class="p">[</span><span class="n">i</span><span class="p">])):</span>
+            <span class="n">pj</span> <span class="o">=</span> <span class="n">pos</span><span class="p">[:,</span> <span class="nb">int</span><span class="p">(</span><span class="n">connectivity</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">])]</span>
+            
+            <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">pi</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">pj</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="p">[</span><span class="n">pi</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">pj</span><span class="p">[</span><span class="mi">1</span><span class="p">]],</span> <span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="n">zorder</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+            
+            
+            
+        
+    <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">pos</span>
+
+<span class="n">connection_pattern</span> <span class="o">=</span> <span class="p">[[</span><span class="kc">False</span><span class="p">,</span> <span class="kc">True</span> <span class="p">,</span> <span class="kc">False</span><span class="p">],</span>
+<span class="p">[</span><span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">],</span>
+<span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">],</span>
+<span class="p">[</span><span class="kc">True</span><span class="p">]]</span> <span class="c1">#working</span>
+
+
+<span class="c1">#connection_pattern = [[True, False , False],</span>
+<span class="c1">#[False, True, True, False],</span>
+<span class="c1">#[False, True, True],</span>
+<span class="c1">#[True]]</span>
+
+<span class="n">ring</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span><span class="mi">15</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">15</span><span class="p">,</span><span class="mi">5</span><span class="p">])</span> <span class="c1">#c60</span>
+
+<span class="n">m</span> <span class="o">=</span> <span class="n">ring_connector</span><span class="p">(</span><span class="n">ring</span><span class="p">,</span> <span class="n">connection_pattern</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pos</span> <span class="o">=</span> <span class="n">show_graph</span><span class="p">(</span><span class="n">ring</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/c60_2_0.png" src="../../_images/c60_2_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">b</span> <span class="o">=</span> <span class="n">connected_structure</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">dtype</span> <span class="o">=</span> <span class="nb">int</span><span class="p">))</span>
+<span class="n">b</span><span class="o">.</span><span class="n">pos</span> <span class="o">=</span> <span class="n">pos</span>
+<span class="n">b</span><span class="o">.</span><span class="n">pos</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">+=</span> <span class="mf">.1</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">pos</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">pos</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">b</span><span class="o">.</span><span class="n">view</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "8e3f2514e0c44b7fae4a899c8dc4575f", "version_major": 2, "version_minor": 0}
+</script></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># relax structure</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10000</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+        <span class="n">b</span><span class="o">.</span><span class="n">advance</span><span class="p">()</span>
+    <span class="n">b</span><span class="o">.</span><span class="n">vel_</span> <span class="o">*=</span> <span class="mf">0.99</span>
+    <span class="n">b</span><span class="o">.</span><span class="n">update_view</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">evince</span> <span class="k">as</span> <span class="nn">ev</span>
+
+<span class="n">b</span><span class="o">.</span><span class="n">pos</span> <span class="o">*=</span> <span class="mi">2</span>
+<span class="n">bonds</span> <span class="o">=</span> <span class="n">ev</span><span class="o">.</span><span class="n">spotlight</span><span class="o">.</span><span class="n">extract_bonds</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+<span class="n">mv</span> <span class="o">=</span> <span class="n">ev</span><span class="o">.</span><span class="n">SpotlightView</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">window_scale_height</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span><span class="n">window_scale_width</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">realism</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">sao</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">dof</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">fxaa</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">bonds</span> <span class="o">=</span> <span class="n">bonds</span><span class="p">,</span> <span class="n">bg_color</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">0.05</span><span class="p">,</span><span class="mf">0.0</span><span class="p">],</span> <span class="n">focus</span> <span class="o">=</span> <span class="mi">8</span><span class="p">,</span> <span class="n">aperture</span> <span class="o">=</span> <span class="mf">.0010</span><span class="p">,</span> <span class="n">max_blur</span> <span class="o">=</span> <span class="mf">.01</span><span class="p">,</span>
+                 <span class="n">saoScale</span> <span class="o">=</span> <span class="mi">360</span><span class="p">,</span> <span class="n">saoIntensity</span> <span class="o">=</span> <span class="mf">1.5</span><span class="p">,</span> <span class="n">saoKernelRadius</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">saoMinResolution</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+
+<span class="n">mv</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "77d31374b6424b8e8f75c2044a5eaa6e", "version_major": 2, "version_minor": 0}
+</script></div>
+</div>
+</section>
+
+
+<script type="application/vnd.jupyter.widget-state+json">
+{"state": {"77d31374b6424b8e8f75c2044a5eaa6e": {"model_module": "evince", "model_module_version": "^0.33.0", "model_name": "SpotlightModel", "state": {"_model_module_version": "^0.33.0", "_view_module_version": "^0.33.0", "additive": false, "aperture": 0.001, "bg_color": [0, 0.05, 0], "bonds": [[0, 1], [0, 4], [0, 6], [1, 2], [1, 9], [2, 3], [2, 12], [3, 4], [3, 15], [4, 18], [5, 6], [5, 19], [5, 22], [6, 7], [7, 8], [7, 23], [8, 9], [8, 26], [9, 10], [10, 11], [10, 27], [11, 12], [11, 30], [12, 13], [13, 14], [13, 31], [14, 15], [14, 34], [15, 16], [16, 17], [16, 35], [17, 18], [17, 38], [18, 19], [19, 39], [20, 21], [20, 39], [20, 40], [21, 22], [21, 42], [22, 23], [23, 24], [24, 25], [24, 43], [25, 26], [25, 45], [26, 27], [27, 28], [28, 29], [28, 46], [29, 30], [29, 48], [30, 31], [31, 32], [32, 33], [32, 49], [33, 34], [33, 51], [34, 35], [35, 36], [36, 37], [36, 52], [37, 38], [37, 54], [38, 39], [40, 41], [40, 54], [41, 42], [41, 55], [42, 43], [43, 44], [44, 45], [44, 56], [45, 46], [46, 47], [47, 48], [47, 57], [48, 49], [49, 50], [50, 51], [50, 58], [51, 52], [52, 53], [53, 54], [53, 59], [55, 56], [55, 59], [56, 57], [57, 58], [58, 59]], "box": [20, 20, 20], "colors": [[1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1]], "dof": true, "focus": 8, "fxaa": true, "init": true, "layout": "IPY_MODEL_fae1492402f1479ab8de7005819f0fa7", "masses": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], "max_blur": 0.01, "pos": [[4.494201369921512, 4.420807434752767, -16.088445569979758], [5.593222317556647, -2.908134872208701, -16.08844556997979], [-1.0373998710370058, -6.218133629646545, -16.088445569979758], [-6.234370697782218, -0.934883057501621, -16.0884455699797], [-2.81565311865874, 5.640344124604147, -16.088445569979708], [6.198295358880563, 14.507087549294402, -8.274031878557844], [9.013948477539342, 8.866743424690089, -12.170165610033115], [14.607170795096035, 5.958608552481305, -8.274031878557816], [15.712438748270214, -1.411992599368231, -8.274031878557869], [11.218237378348627, -5.832800034121028, -12.170165610033232], [10.180837507311482, -12.050933663767706, -8.274031878557896], [3.5125258337012344, -15.37974696756727, -8.274031878557963], [-2.080696483855451, -12.471612095358418, -12.170165610033242], [-8.315067181637819, -13.406495152860026, -8.274031878557908], [-13.5415783966808, -8.093213764961456, -8.274031878557926], [-12.504178525643662, -1.8750801353147766, -12.17016561003324], [-15.319831644302528, 3.765263989289469, -8.27403187855795], [-11.881681544171274, 10.377865782602505, -8.274031878557954], [-5.64731084638888, 11.312748840104167, -12.1701656100332], [-1.153109476467311, 15.733556274857012, -8.274031878557889], [-0.7349566348032687, 18.111956219962533, 4.369955076315759], [6.574897853777042, 16.892419530111454, 4.369955076315805], [10.051348348576449, 15.084877054336813, -1.969955076315588], [15.248319175321583, 9.801626482191775, -1.969955076315594], [16.99837989556505, 6.295887570067454, 4.369955076315709], [18.097400843200436, -1.0330547368940053, 4.369955076315714], [17.45260807613113, -4.897916976619497, -1.9699550763156726], [14.033890497007418, -11.473144158725178, -1.9699550763156695], [11.240533163945415, -14.220883712312927, 4.369955076315633], [4.60991097535186, -17.53088246975104, 4.369955076315606], [0.7349566348033287, -18.111956219962867, -1.9699550763157572], [-6.5748978537769105, -16.892419530111223, -1.9699550763156906], [-10.051348348576463, -15.084877054336603, 4.369955076315636], [-15.24831917532182, -9.80162648219177, 4.369955076315676], [-16.998379895565364, -6.2958875700676, -1.9699550763157], [-18.097400843200234, 1.0330547368939198, -1.9699550763156626], [-17.452608076130616, 4.89791697661942, 4.36995507631567], [-14.033890497007288, 11.473144158725296, 4.369955076315778], [-11.240533163945509, 14.22088371231287, -1.9699550763156786], [-4.609910975351796, 17.5308824697506, -1.969955076315579], [-3.5125258337011696, 15.379746967567211, 10.674031878558049], [2.080696483855545, 12.471612095358449, 14.57016561003331], [8.315067181637888, 13.406495152860193, 10.674031878558013], [13.541578396680666, 8.093213764961432, 10.674031878557983], [12.504178525643729, 1.8750801353146935, 14.570165610033264], [15.319831644302605, -3.765263989289555, 10.674031878557976], [11.881681544171263, -10.377865782602562, 10.674031878557896], [5.6473108463889234, -11.312748840104344, 14.57016561003318], [1.1531094764673377, -15.733556274857134, 10.67403187855784], [-6.19829535888052, -14.507087549294349, 10.67403187855787], [-9.013948477539474, -8.86674342469021, 14.57016561003325], [-14.607170795096176, -5.9586085524814285, 10.67403187855798], [-15.712438748270037, 1.4119925993681455, 10.674031878557937], [-11.218237378348558, 5.832800034121026, 14.570165610033293], [-10.180837507311455, 12.050933663767776, 10.674031878558079], [1.0373998710371104, 6.218133629646486, 18.48844556997969], [6.234370697782255, 0.934883057501493, 18.48844556997965], [2.8156531186587785, -5.640344124604287, 18.488445569979618], [-4.494201369921471, -4.4208074347528905, 18.488445569979657], [-5.593222317556517, 2.908134872208594, 18.488445569979675]], "radius": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], "sao": true, "saoBias": 0.1, "saoBlur": false, "saoBlurDepthCutoff": 0.05, "saoBlurRadius": 50, "saoBlurStdDev": 1, "saoIntensity": 1.5, "saoKernelRadius": 1, "saoMinResolution": 100, "saoScale": 360, "tabbable": null, "tooltip": null, "window_scale_height": 1, "window_scale_width": 1}}, "8e3f2514e0c44b7fae4a899c8dc4575f": {"model_module": "evince", "model_module_version": "^0.33.0", "model_name": "MDModel", "state": {"_model_module_version": "^0.33.0", "_view_module_version": "^0.33.0", "additive": false, "bg_color": [1, 1, 1], "box": [20, 20, 20], "colors": [[0.8788274503791459, 0.9379008853255043, 0.7776220964623264], [0.8788274503791459, 0.9379008853255043, 0.7776220964623264], [0.8788274503791459, 0.9379008853255043, 0.7776220964623264], [0.8788274503791459, 0.9379008853255043, 0.7776220964623264], [0.8788274503791459, 0.9379008853255043, 0.7776220964623264], [0.8788274503791459, 0.9379008853255043, 0.7776220964623264], [0.8788274503791459, 0.9379008853255043, 0.7776220964623264], [0.8788274503791459, 0.9379008853255043, 0.7776220964623264], [0.8788274503791459, 0.9379008853255043, 0.7776220964623264], [0.8788274503791459, 0.9379008853255043, 0.7776220964623264], [0.8788274503791459, 0.9379008853255043, 0.7776220964623264], [0.8788274503791459, 0.9379008853255043, 0.7776220964623264], [0.8788274503791459, 0.9379008853255043, 0.7776220964623264], [0.8788274503791459, 0.9379008853255043, 0.7776220964623264], [0.8788274503791459, 0.9379008853255043, 0.7776220964623264], [0.8788274503791459, 0.9379008853255043, 0.7776220964623264], [0.8788274503791459, 0.9379008853255043, 0.7776220964623264], [0.8788274503791459, 0.9379008853255043, 0.7776220964623264], [0.8788274503791459, 0.9379008853255043, 0.7776220964623264], [0.8788274503791459, 0.9379008853255043, 0.7776220964623264], [0.8788274503791459, 0.9379008853255043, 0.7776220964623264], [0.8788274503791459, 0.9379008853255043, 0.7776220964623264], [0.8788274503791459, 0.9379008853255043, 0.7776220964623264], [0.8788274503791459, 0.9379008853255043, 0.7776220964623264], [0.8788274503791459, 0.9379008853255043, 0.7776220964623264], [0.8788274503791459, 0.9379008853255043, 0.7776220964623264], [0.8788274503791459, 0.9379008853255043, 0.7776220964623264], [0.8788274503791459, 0.9379008853255043, 0.7776220964623264], [0.8788274503791459, 0.9379008853255043, 0.7776220964623264], [0.8788274503791459, 0.9379008853255043, 0.7776220964623264], [0.8788274503791459, 0.9379008853255043, 0.7776220964623264], [0.8788274503791459, 0.9379008853255043, 0.7776220964623264], [0.8788274503791459, 0.9379008853255043, 0.7776220964623264], [0.8788274503791459, 0.9379008853255043, 0.7776220964623264], [0.8788274503791459, 0.9379008853255043, 0.7776220964623264], [0.8788274503791459, 0.9379008853255043, 0.7776220964623264], [0.8788274503791459, 0.9379008853255043, 0.7776220964623264], [0.8788274503791459, 0.9379008853255043, 0.7776220964623264], [0.8788274503791459, 0.9379008853255043, 0.7776220964623264], [0.8788274503791459, 0.9379008853255043, 0.7776220964623264], [0.8788274503791459, 0.9379008853255043, 0.7776220964623264], [0.8788274503791459, 0.9379008853255043, 0.7776220964623264], [0.8788274503791459, 0.9379008853255043, 0.7776220964623264], [0.8788274503791459, 0.9379008853255043, 0.7776220964623264], [0.8788274503791459, 0.9379008853255043, 0.7776220964623264], [0.8788274503791459, 0.9379008853255043, 0.7776220964623264], [0.8788274503791459, 0.9379008853255043, 0.7776220964623264], [0.8788274503791459, 0.9379008853255043, 0.7776220964623264], [0.8788274503791459, 0.9379008853255043, 0.7776220964623264], [0.8788274503791459, 0.9379008853255043, 0.7776220964623264], [0.8788274503791459, 0.9379008853255043, 0.7776220964623264], [0.8788274503791459, 0.9379008853255043, 0.7776220964623264], [0.8788274503791459, 0.9379008853255043, 0.7776220964623264], [0.8788274503791459, 0.9379008853255043, 0.7776220964623264], [0.8788274503791459, 0.9379008853255043, 0.7776220964623264], [0.8788274503791459, 0.9379008853255043, 0.7776220964623264], [0.8788274503791459, 0.9379008853255043, 0.7776220964623264], [0.8788274503791459, 0.9379008853255043, 0.7776220964623264], [0.8788274503791459, 0.9379008853255043, 0.7776220964623264], [0.8788274503791459, 0.9379008853255043, 0.7776220964623264]], "init": true, "layout": "IPY_MODEL_e7b98cdf6d0f4e299e6e2b978f401793", "masses": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], "pos": [[1.123550342480378, 1.1052018586881918, -4.022111392494939], [1.3983055793891617, -0.7270337180521752, -4.022111392494947], [-0.25934996775925145, -1.5545334074116361, -4.022111392494939], [-1.5585926744455545, -0.23372076437540526, -4.022111392494925], [-0.703913279664685, 1.4100860311510368, -4.022111392494927], [1.5495738397201408, 3.6267718873236006, -2.068507969639461], [2.2534871193848356, 2.2166858561725222, -3.0425414025082786], [3.651792698774009, 1.4896521381203263, -2.068507969639454], [3.9281096870675536, -0.35299814984205774, -2.0685079696394673], [2.804559344587157, -1.458200008530257, -3.042541402508308], [2.5452093768278705, -3.0127334159419266, -2.068507969639474], [0.8781314584253086, -3.8449367418918174, -2.068507969639491], [-0.5201741209638627, -3.1179030238396046, -3.0425414025083106], [-2.0787667954094546, -3.3516237882150066, -2.068507969639477], [-3.3853945991702, -2.023303441240364, -2.0685079696394815], [-3.1260446314109154, -0.46877003382869414, -3.04254140250831], [-3.829957911075632, 0.9413159973223673, -2.0685079696394877], [-2.9704203860428184, 2.5944664456506263, -2.0685079696394886], [-1.41182771159722, 2.8281872100260417, -3.0425414025083], [-0.2882773691168278, 3.933389068714253, -2.068507969639472], [-0.18373915870081717, 4.527989054990633, 1.0924887690789398], [1.6437244634442605, 4.223104882527863, 1.0924887690789513], [2.512837087144112, 3.7712192635842032, -0.492488769078897], [3.812079793830396, 2.450406620547944, -0.4924887690788985], [4.249594973891263, 1.5739718925168635, 1.0924887690789273], [4.524350210800109, -0.2582636842235013, 1.0924887690789284], [4.363152019032783, -1.2244792441548742, -0.49248876907891814], [3.5084726242518545, -2.8682860396812946, -0.49248876907891737], [2.8101332909863537, -3.555220928078232, 1.0924887690789082], [1.152477743837965, -4.38272061743776, 1.0924887690789016], [0.18373915870083218, -4.527989054990717, -0.4924887690789393], [-1.6437244634442276, -4.223104882527806, -0.49248876907892264], [-2.5128370871441157, -3.771219263584151, 1.092488769078909], [-3.812079793830455, -2.4504066205479424, 1.092488769078919], [-4.249594973891341, -1.5739718925169, -0.492488769078925], [-4.524350210800058, 0.25826368422347995, -0.49248876907891564], [-4.363152019032654, 1.224479244154855, 1.0924887690789176], [-3.508472624251822, 2.868286039681324, 1.0924887690789444], [-2.810133290986377, 3.5552209280782177, -0.49248876907891964], [-1.152477743837949, 4.38272061743765, -0.4924887690788948], [-0.8781314584252924, 3.844936741891803, 2.668507969639512], [0.5201741209638863, 3.117903023839612, 3.6425414025083276], [2.078766795409472, 3.3516237882150484, 2.6685079696395033], [3.3853945991701666, 2.023303441240358, 2.6685079696394958], [3.1260446314109323, 0.4687700338286734, 3.642541402508316], [3.829957911075651, -0.9413159973223888, 2.668507969639494], [2.9704203860428158, -2.5944664456506406, 2.668507969639474], [1.4118277115972309, -2.828187210026086, 3.642541402508295], [0.28827736911683444, -3.9333890687142836, 2.66850796963946], [-1.54957383972013, -3.6267718873235872, 2.6685079696394673], [-2.2534871193848685, -2.2166858561725524, 3.6425414025083125], [-3.651792698774044, -1.4896521381203571, 2.668507969639495], [-3.928109687067509, 0.35299814984203637, 2.6685079696394842], [-2.8045593445871395, 1.4582000085302564, 3.642541402508323], [-2.545209376827864, 3.012733415941944, 2.6685079696395198], [0.2593499677592776, 1.5545334074116215, 4.622111392494922], [1.5585926744455638, 0.23372076437537326, 4.622111392494912], [0.7039132796646946, -1.4100860311510717, 4.622111392494904], [-1.1235503424803677, -1.1052018586882226, 4.622111392494914], [-1.3983055793891292, 0.7270337180521484, 4.622111392494919]], "tabbable": null, "tooltip": null}}, "e7b98cdf6d0f4e299e6e2b978f401793": {"model_module": "@jupyter-widgets/base", "model_module_version": "2.0.0", "model_name": "LayoutModel", "state": {"_model_module_version": "2.0.0", "_view_module_version": "2.0.0", "border_bottom": null, "border_left": null, "border_right": null, "border_top": null}}, "fae1492402f1479ab8de7005819f0fa7": {"model_module": "@jupyter-widgets/base", "model_module_version": "2.0.0", "model_name": "LayoutModel", "state": {"_model_module_version": "2.0.0", "_view_module_version": "2.0.0", "border_bottom": null, "border_left": null, "border_right": null, "border_top": null}}}, "version_major": 2, "version_minor": 0}
+</script>
+
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./docs/mdview"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Audun Skau Hansen<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
