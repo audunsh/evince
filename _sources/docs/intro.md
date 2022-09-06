@@ -1,6 +1,7 @@
 <div id="fb-root"></div>
 <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v12.0" nonce="tlriJYau"></script>
 
+<iframe src="https://audunsh.github.io/evince-presentation/harmonic_chain.html" width = "600px" height="400px" frameBorder="0"></iframe>
 
 # What is Evince?
 
@@ -22,7 +23,7 @@ Check out the <a href="spotlight">evince.spotligh</a>-module for an example on p
 
 Furthermore, the framework allows you to write custom <a href="https://en.wikipedia.org/wiki/Shader">shaders</a> (programs executed by the GPU) used for high-performance operations. Note that this does not have to be directly graphics related, the same procedure may be used to do general calculations and transfer data to and from the GPU cache. <a href="threejs.org">THREE.JS</a> will likely support the modern WebGPU-standard (for modern GPUs with shared memory and other features), meaning that future capabilities will be even higher.
 
-# Customizability and extendabilitu
+# Customizability and extendability
 
 The <a href="https://github.com/jupyter-widgets/widget-cookiecutter">Widget Cookiecutter</a> is a tool for making widgets for the Jupyter Environment. A widget is a piece of software connecting several layers of the Jupyter environment, with an interactive graphical user representation running on the Javascript front-end, connected to the Python-kernel using the 
 
