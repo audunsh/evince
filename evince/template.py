@@ -1,5 +1,6 @@
 import ipywidgets as widgets
 import traitlets as tl
+from ipywidgets import embed
 from ._version import NPM_PACKAGE_RANGE
 
 # See js/lib/example.js for the frontend counterpart to this file.
@@ -33,4 +34,9 @@ class Template(widgets.DOMWidget):
     # It is synced back to Python from the frontend *any* time the model is touched.
     value = tl.Unicode('Hello World!').tag(sync=True)
 
+def save(self, filename, title = ""):
+    """
+    Save a standalone html embedding of the view
+    """
+    embed.embed_minimal_html(filename, [self], title)
     

@@ -6,6 +6,10 @@ from ._version import NPM_PACKAGE_RANGE
 
 from scipy.interpolate import interp1d
 
+from ipywidgets import embed
+
+
+
 import sympy as sp
 import numpy as np
 
@@ -185,3 +189,9 @@ class BraketView(widgets.DOMWidget):
 
         if self.nd<3:
             self.surface_view = True
+
+    def save(self, filename, title = ""):
+        """
+        Save a standalone html embedding of the view
+        """
+        embed.embed_minimal_html(filename, [self], title)

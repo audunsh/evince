@@ -32,8 +32,8 @@ export class TemplateModel extends DOMWidgetModel {
             _view_name : 'TemplateView',
             _model_module : 'evince',
             _view_module : 'evince',
-            _model_module_version : '0.31.0',
-            _view_module_version : '0.31.0'
+            _model_module_version : '0.35.0',
+            _view_module_version : '0.35.0'
         };
     }
 }
@@ -47,7 +47,9 @@ export class TemplateView extends DOMWidgetView {
         const scene = new THREE.Scene();
 		this.scene = scene;
 
-        let camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+        let camera = new THREE.PerspectiveCamera( 75, document.activeElement.clientWidth/(document.activeElement.clientWidth*.6), 0.1, 1000 );
+        
+        //let camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
 		this.camera = camera;
 		this.camera.position.z = 5;
 
@@ -57,7 +59,9 @@ export class TemplateView extends DOMWidgetView {
         // set the animation loop
         //this.renderer.setAnimationLoop( this.animationLoop );
 
-        this.renderer.setSize( .5*window.innerWidth, .5*window.innerHeight );
+        //this.renderer.setSize( .5*window.innerWidth, .5*window.innerHeight );
+        this.renderer.setSize( .99*document.activeElement.clientWidth, .99*document.activeElement.clientWidth*.6);
+        
         //this.renderer.setClearColor( 0xfaf8ec, 1);
         this.renderer.setClearColor( 0x0f0f2F, 1);
         this.renderer.antialias = true;

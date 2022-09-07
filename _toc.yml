@@ -5,5 +5,21 @@ format: jb-book
 root: docs/intro.md
 chapters:
 - file: docs/tutorials/overview.md
+- file: docs/tutorials/installation.md
+- file: docs/tutorials/braketview.md
   sections:
-  - file: docs/tutorials/installation.md
+  - file: docs/braketview/gto_gallery.ipynb
+  - file: docs/braketview/hybridization.ipynb
+  - file: docs/mdview/instancing.ipynb
+- file: docs/tutorials/mdview.md
+  sections:
+  - file: docs/mdview/c60.ipynb
+  - file: docs/mdview/interactivity.ipynb
+- file: docs/tutorials/customization.md
+  sections:
+  - file: docs/custom/templateview.ipynb
+- file: docs/tutorials/spotlight.md
+  sections:
+  - file: docs/spotlight/harmonic_chain.ipynb
+- file: docs/tutorials/embedding.ipynb
+- file: docs/mdview/harmonic_chain.html

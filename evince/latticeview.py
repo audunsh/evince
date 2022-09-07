@@ -6,7 +6,7 @@ from ._version import NPM_PACKAGE_RANGE
 
 import numpy as np
 
-
+from ipywidgets import embed
 
 @widgets.register
 class LatticeView(widgets.DOMWidget):
@@ -64,3 +64,8 @@ class LatticeView(widgets.DOMWidget):
         #print(interp1d(np.linspace(0,1,nc), np.random.randint(0,255,(3, nc)) )(b.lattice/b.lattice.max()).shape)
         
         self.init = True #trigger frontend init
+    def save(self, filename, title = ""):
+        """
+        Save a standalone html embedding of the view
+        """
+        embed.embed_minimal_html(filename, [self], title)

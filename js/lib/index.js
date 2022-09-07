@@ -44,7 +44,7 @@ module.exports['version'] = require('../package.json').version;
 */
 
 
-export {BraketModel, BraketView} from './braketview_new';
+export {BraketModel, BraketView} from './braketview';
 export {SpotlightModel, SpotlightView} from './spotlightview';
 export {MDModel, MDView} from './mdview';
 export {TemplateModel, TemplateView} from './templateview';

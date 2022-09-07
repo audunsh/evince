@@ -1,4 +1,5 @@
 import ipywidgets as widgets
+from ipywidgets import embed
 from traitlets import Unicode, validate
 import traitlets as tl
 from IPython.display import Javascript
@@ -57,5 +58,11 @@ class MDView(widgets.DOMWidget):
         
 
         self.colors = np.array((interp1d(np.linspace(0,1,nc), np.random.uniform(0,1,(3, nc)) )(b.masses/b.masses.max()).T), dtype = float).tolist()
+
+    def save(self, filename, title = ""):
+        """
+        Save a standalone html embedding of the view
+        """
+        embed.embed_minimal_html(filename, [self], title)
 
 

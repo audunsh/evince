@@ -1,5 +1,6 @@
 from webbrowser import get
 import ipywidgets as widgets
+from ipywidgets import embed
 from traitlets import Unicode, validate
 import traitlets as tl
 from IPython.display import Javascript
@@ -98,6 +99,9 @@ class SpotlightView(widgets.DOMWidget):
     box = tl.List([]).tag(sync=True)
     bonds = tl.List([]).tag(sync=True)
 
+    window_scale_height = tl.Float().tag(sync=True)
+    window_scale_width = tl.Float().tag(sync=True)
+
     #fxaa
     fxaa = tl.Bool(False).tag(sync=True)
 
@@ -124,7 +128,7 @@ class SpotlightView(widgets.DOMWidget):
 
     bg_color = tl.List([]).tag(sync=True)
     
-    def __init__(self, b, fxaa = True, sao  =False, dof = False, additive = False, bg_color = [1.0, 1.0, 1.0], focus = 100, aperture = 2.5, max_blur = 0.1, bonds = [], saoScale = 2,saoBias = .1,saoIntensity = .1,saoKernelRadius = 10,saoMinResolution = .5,saoBlur = False,saoBlurRadius = 50,saoBlurStdDev = 1.0,saoBlurDepthCutoff = 0.05, realism = False, radius_scale = 1.0):
+    def __init__(self, b, window_scale_height = 0.5, window_scale_width=0.75, fxaa = True, sao  =False, dof = False, additive = False, bg_color = [1.0, 1.0, 1.0], focus = 100, aperture = 2.5, max_blur = 0.1, bonds = [], saoScale = 2,saoBias = .1,saoIntensity = .1,saoKernelRadius = 10,saoMinResolution = .5,saoBlur = False,saoBlurRadius = 50,saoBlurStdDev = 1.0,saoBlurDepthCutoff = 0.05, realism = False, radius_scale = 1.0):
 
         self.sao = sao
         self.saoScale = saoScale
@@ -136,6 +140,11 @@ class SpotlightView(widgets.DOMWidget):
         self.saoBlurRadius = saoBlurRadius
         self.saoBlurStdDev = saoBlurStdDev
         self.saoBlurDepthCutoff = saoBlurDepthCutoff
+
+        self.window_scale_height = window_scale_height
+        self.window_scale_width = window_scale_width
+
+
 
         self.fxaa = fxaa
 
@@ -165,6 +174,8 @@ class SpotlightView(widgets.DOMWidget):
 
         self.masses = b.masses.tolist()
         self.init = True #trigger frontend init
+    def save(self, filename, title = ""):
+        embed.embed_minimal_html(filename, [self], title)
         
 
         
