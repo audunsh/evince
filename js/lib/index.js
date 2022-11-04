@@ -49,4 +49,5 @@ export {SpotlightModel, SpotlightView} from './spotlightview';
 export {MDModel, MDView} from './mdview';
 export {TemplateModel, TemplateView} from './templateview';
 export {LatticeModel, LatticeView} from './latticeview';
+export {FashionModel, FashionView} from './fashionview';
 export {version} from '../package.json';

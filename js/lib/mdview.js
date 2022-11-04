@@ -14,8 +14,8 @@ export class MDModel extends DOMWidgetModel {
 			_view_name : 'MDView',
 			_model_module : 'evince',
 			_view_module : 'evince',
-			_model_module_version : '0.35.0',
-			_view_module_version : '0.35.0'
+			_model_module_version : '0.44.0',
+			_view_module_version : '0.44.0'
         };
     }
 }
@@ -46,18 +46,19 @@ export class MDView extends DOMWidgetView {
 
         //console.log(VRButton);
         const renderer = new THREE.WebGLRenderer();
+        renderer.setPixelRatio( window.devicePixelRatio );
         //document.body.appendChild( VRButton.createButton( renderer ) );
         this.renderer = renderer;
         
         this.el.appendChild( VRButton.createButton( this.renderer ) );
-        this.renderer.setAnimationLoop( function () {
-
-            renderer.render( scene, camera );
-
-        } );
+        
+        // the purpose of this line has been forgotten (was XR-compliant code)
+        //this.renderer.setAnimationLoop( function () {
+        //    renderer.render( scene, camera );
+        //} );
 
         //this.renderer.setSize( .5*window.innerWidth, .5*window.innerHeight );
-		this.renderer.setSize( .99*document.activeElement.clientWidth, .99*document.activeElement.clientWidth*.6);
+		this.renderer.setSize( document.activeElement.clientWidth, document.activeElement.clientWidth*.6);
         
         //this.renderer.setClearColor( 0xfaf8ec, 1);
         //this.renderer.setClearColor( 0x0f0f2F, 1);
@@ -90,8 +91,51 @@ export class MDView extends DOMWidgetView {
 			renderer.setAnimationLoop( render );
 
 		}
+        var self = this;
 
 		function render() {
+            self.pos = self.model.get('pos');
+            //console.log(typeof this.pos);
+            let mesh = self.scene.children[0];
+            let m4 = new THREE.Matrix4();
+            
+            let aCurve = [];
+            
+            if(self.box.length>2){
+
+
+            
+                //for (let i = 0; i < mesh.count; i++) {
+                //  aCurve.push(this.pos[i][0], this.pos[i][1], this.pos[i][2]);
+                //}
+
+                let aCurveFloat32 = new Float32Array(self.pos.flat(), 3);
+                //console.log(mesh, mesh.geometry);
+                //console.log(typeof aCurve);
+                //console.log(typeof this.pos[0]);
+                self.scene.children[0].geometry.setAttribute(
+                "aCurve",
+                new THREE.InstancedBufferAttribute(aCurveFloat32, 3, false)
+                );
+            }
+            if(self.box.length==2){
+                //for (let i = 0; i < mesh.count; i++) {
+                //  aCurve.push(this.pos[i][0], this.pos[i][1]);
+                //}
+                let aCurveFloat32 = new Float32Array(self.pos.flat(), 2);
+                //let aCurveFloat32 = new Float32Array(aCurve);
+                //console.log(mesh, mesh.geometry);
+                self.scene.children[0].geometry.setAttribute(
+                "aCurve",
+                new THREE.InstancedBufferAttribute(aCurveFloat32, 2, false)
+                );
+                
+            }
+
+
+
+
+
 			renderer.render( scene, camera );
             //postprocessing.composer.render(  );
 
@@ -194,7 +238,7 @@ vec3 curvePosition = vec3(aCurve.x, aCurve.y, aCurve.z);
 transformed += curvePosition;
 
 gl_Position = projectionMatrix * modelViewMatrix * vec4(transformed, 1.0);
-vColor = aColor;
+vColor = aColor*(.7 + .3*normal[0]);
 //vPis = gl_position;
 }`;             
         }
@@ -390,36 +434,48 @@ gl_FragColor = gl_FragColor + vec4(vColor, 1.0);
     
     pos_changed() {
         
-        this.pos = this.model.get('pos');
+        
+        //this.pos = this.model.get('pos');
+        //console.log(typeof this.pos);
+
+        /*
         let mesh = this.scene.children[0];
         let m4 = new THREE.Matrix4();
         
         let aCurve = [];
         
         if(this.box.length>2){
+
+
         
-            for (let i = 0; i < mesh.count; i++) {
-              aCurve.push(this.pos[i][0], this.pos[i][1], this.pos[i][2]);
-            }
-            let aCurveFloat32 = new Float32Array(aCurve);
+            //for (let i = 0; i < mesh.count; i++) {
+            //  aCurve.push(this.pos[i][0], this.pos[i][1], this.pos[i][2]);
+            //}
+
+            let aCurveFloat32 = new Float32Array(this.pos.flat(), 3);
             //console.log(mesh, mesh.geometry);
+            //console.log(typeof aCurve);
+            //console.log(typeof this.pos[0]);
             this.scene.children[0].geometry.setAttribute(
               "aCurve",
               new THREE.InstancedBufferAttribute(aCurveFloat32, 3, false)
             );
         }
         if(this.box.length==2){
-            for (let i = 0; i < mesh.count; i++) {
-              aCurve.push(this.pos[i][0], this.pos[i][1]);
-            }
-            let aCurveFloat32 = new Float32Array(aCurve);
+            //for (let i = 0; i < mesh.count; i++) {
+            //  aCurve.push(this.pos[i][0], this.pos[i][1]);
+            //}
+            let aCurveFloat32 = new Float32Array(this.pos.flat(), 2);
+            //let aCurveFloat32 = new Float32Array(aCurve);
             //console.log(mesh, mesh.geometry);
             this.scene.children[0].geometry.setAttribute(
               "aCurve",
               new THREE.InstancedBufferAttribute(aCurveFloat32, 2, false)
             );
+
             
         }
+        */
         
         
        

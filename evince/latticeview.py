@@ -1,5 +1,5 @@
 import ipywidgets as widgets
-from traitlets import Unicode, validate
+from traitlets import Unicode, validate, observe
 import traitlets as tl
 from IPython.display import Javascript
 from ._version import NPM_PACKAGE_RANGE
@@ -30,6 +30,7 @@ class LatticeView(widgets.DOMWidget):
 
 
     pos = tl.List([1,2,3]).tag(sync=True)
+    add_molecule = tl.List([]).tag(sync=True)
     init = tl.Bool(False).tag(sync=True)
     masses = tl.List([]).tag(sync=True)
     colors = tl.List([]).tag(sync=True)
@@ -64,6 +65,13 @@ class LatticeView(widgets.DOMWidget):
         #print(interp1d(np.linspace(0,1,nc), np.random.randint(0,255,(3, nc)) )(b.lattice/b.lattice.max()).shape)
         
         self.init = True #trigger frontend init
+
+
+    @observe('add_molecule')
+    def _observe_bar(self, change):
+        print(change['old'])
+        print(change['new'])
+
     def save(self, filename, title = ""):
         """
         Save a standalone html embedding of the view

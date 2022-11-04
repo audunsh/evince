@@ -1,7 +1,7 @@
 from webbrowser import get
 import ipywidgets as widgets
 from ipywidgets import embed
-from traitlets import Unicode, validate
+from traitlets import Unicode, validate, observe
 import traitlets as tl
 from IPython.display import Javascript
 from ._version import NPM_PACKAGE_RANGE
@@ -72,12 +72,12 @@ def get_vwv_radius_from_atomic_number(masses):
 
 
 @widgets.register
-class SpotlightView(widgets.DOMWidget):
+class FashionView(widgets.DOMWidget):
     # Name of the widget view class in front-end
-    _view_name = Unicode('SpotlightView').tag(sync=True)
+    _view_name = Unicode('FashionView').tag(sync=True)
 
     # Name of the widget model class in front-end
-    _model_name = Unicode('SpotlightModel').tag(sync=True)
+    _model_name = Unicode('FashionModel').tag(sync=True)
 
     # Name of the front-end module containing widget view
     _view_module = Unicode('evince').tag(sync=True)
@@ -99,6 +99,10 @@ class SpotlightView(widgets.DOMWidget):
     colors = tl.List([]).tag(sync=True)
     box = tl.List([]).tag(sync=True)
     bonds = tl.List([]).tag(sync=True)
+
+    trigger_advance = tl.Bool(False).tag(sync=True)
+
+    add_new_atom = tl.List([]).tag(sync=True)
 
     window_scale_height = tl.Float().tag(sync=True)
     window_scale_width = tl.Float().tag(sync=True)
@@ -145,6 +149,8 @@ class SpotlightView(widgets.DOMWidget):
         self.window_scale_height = window_scale_height
         self.window_scale_width = window_scale_width
 
+        self.b = b
+
 
 
         self.fxaa = fxaa
@@ -175,6 +181,49 @@ class SpotlightView(widgets.DOMWidget):
 
         self.masses = b.masses.tolist()
         self.init = True #trigger frontend init
+
+
+
+    @observe('add_new_atom')
+    def _observe_add_new_atom(self, change):
+        #print(change['old'])
+        #print(change['new'])
+        self.new_atom_observed = True
+
+        self.b.run(500)
+
+        #self.pos[0][] = (1.1*self.b.pos.T).tolist()
+        #self.b.pos[:, self.add_new_atom[0]] *= 0.0
+
+        # add a new atom at site
+
+        # self.add_new_atom = self.add_new_atom.default()
+
+        # add new atom 
+        #self.b.run(100)
+
+
+    @observe('trigger_advance')
+    def _observe_trigger_advance(self, change):
+        #print(change['old'])
+        #print(change['new'])
+        #self.new_atom_observed = True
+
+        self.b.advance()
+
+        #self.trigger_advance = False
+
+        #self.pos[0][] = (1.1*self.b.pos.T).tolist()
+        #self.b.pos[:, self.add_new_atom[0]] *= 0.0
+
+        # add a new atom at site
+
+        # self.add_new_atom = self.add_new_atom.default()
+
+        # add new atom 
+        #self.b.run(100)
+
+    
 
     def save(self, filename, title = ""):
         """

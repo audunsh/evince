@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>IPyWidget export</title>
+</head>
+<body>
+
+
+<!-- Load require.js. Delete this if your page already loads require.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js" crossorigin="anonymous"></script>
+
+<script type="application/vnd.jupyter.widget-state+json">
+{
+  "version_major": 2,
+  "version_minor": 0,
+  "state": {
+    "bbb8477afea7409388a36bf995b123bc": {
+      "model_name": "LayoutModel",
+      "model_module": "@jupyter-widgets/base",
+      "model_module_version": "2.0.0",
+      "state": {}
+    },
+    "e2f74f3be7304784be3be1cbdcb62e8f": {
+      "model_name": "BraketModel",
+      "model_module": "evince",
+      "model_module_version": "^0.37.0",
+      "state": {
+        "_dom_classes": [],
+        "ao": [
+          1
+        ],
+        "bg_color": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "fragment_shader": "uniform vec3 user_color;\nuniform float time;\n\nvarying vec2 vUv;\nvarying vec3 pos;\nvarying vec3 tex;\nvarying float q;\nvarying float csI;\nvarying float csR;\nvarying float cs0;\nvarying float cs1;\nvarying float cs2;\nvarying float cs3;\nvarying float cs4;\nvarying float cs5;\nvarying float cs6;\nvarying float cs7;\nvarying float cs8;\nvarying float cs9;\nvarying float cs10;\nvarying float cs11;\nvarying float cs12;\nvarying float cs13;\nvarying float cs14;\nvarying float cs15;\nvarying float cs;\n\nvoid main() {\n\n    vec2 p = vUv;\n    float q = tex[0]*tex[0] +tex[1]*tex[1] +tex[2]*tex[2] ;\n    float cs0 = 2.3830743680178026*exp(-5.0*pow(tex[1], 2.0) - 5.0*pow(tex[2], 2.0) - 125.0*pow(0.20000000000000001*tex[0] + 1.0, 2.0));\n    float cs1 = 10.657432564650314*tex[1]*exp(-5.0*pow(tex[1], 2.0) - 5.0*pow(tex[2], 2.0) - 125.0*pow(0.20000000000000001*tex[0] + 1.0, 2.0));\n    float cs2 = 10.657432564650314*tex[2]*exp(-5.0*pow(tex[1], 2.0) - 5.0*pow(tex[2], 2.0) - 125.0*pow(0.20000000000000001*tex[0] + 1.0, 2.0));\n    float cs3 = (10.657432564650314*tex[0] + 53.28716282325157)*exp(-5.0*pow(tex[1], 2.0) - 5.0*pow(tex[2], 2.0) - 125.0*pow(0.20000000000000001*tex[0] + 1.0, 2.0));\n    float cs4 = 2.3830743680178026*exp(-5.0*pow(tex[1], 2.0) - 5.0*pow(tex[2], 2.0) - 31.25*pow(0.40000000000000002*tex[0] + 1.0, 2.0));\n    float cs5 = -10.657432564650314*tex[1]*exp(-5.0*pow(tex[1], 2.0) - 5.0*pow(tex[2], 2.0) - 31.25*pow(0.40000000000000002*tex[0] + 1.0, 2.0));\n    float cs6 = 10.657432564650314*tex[2]*exp(-5.0*pow(tex[1], 2.0) - 5.0*pow(tex[2], 2.0) - 31.25*pow(0.40000000000000002*tex[0] + 1.0, 2.0));\n    float cs7 = (-10.657432564650314*tex[0] - 26.643581411625785)*exp(-5.0*pow(tex[1], 2.0) - 5.0*pow(tex[2], 2.0) - 31.25*pow(0.40000000000000002*tex[0] + 1.0, 2.0));\n    float cs8 = 2.3830743680178026*exp(-5.0*q);\n    float cs9 = 10.657432564650314*tex[1]*exp(-5.0*q);\n    float cs10 = -10.657432564650314*tex[2]*exp(-5.0*q);\n    float cs11 = -10.657432564650314*tex[0]*exp(-5.0*q);\n    float cs12 = 2.3830743680178026*exp(-5.0*pow(tex[1], 2.0) - 5.0*pow(tex[2], 2.0) - 31.25*pow(0.40000000000000002*tex[0] - 1.0, 2.0));\n    float cs13 = -10.657432564650314*tex[1]*exp(-5.0*pow(tex[1], 2.0) - 5.0*pow(tex[2], 2.0) - 31.25*pow(0.40000000000000002*tex[0] - 1.0, 2.0));\n    float cs14 = -10.657432564650314*tex[2]*exp(-5.0*pow(tex[1], 2.0) - 5.0*pow(tex[2], 2.0) - 31.25*pow(0.40000000000000002*tex[0] - 1.0, 2.0));\n    float cs15 = (10.657432564650314*tex[0] - 26.643581411625785)*exp(-5.0*pow(tex[1], 2.0) - 5.0*pow(tex[2], 2.0) - 31.25*pow(0.40000000000000002*tex[0] - 1.0, 2.0));\n    float csI = 0.0 ;\n    float csR = cs0 + cs1 + cs2 + cs3 + cs4 + cs5 + cs6 + cs7 + cs8 + cs9 + cs10 + cs11 + cs12 + cs13 + cs14 + cs15 ;\n    gl_FragColor = gl_FragColor + vec4(csR, csI, -1.0*csR, .1);\n}",
+        "layout": "IPY_MODEL_bbb8477afea7409388a36bf995b123bc",
+        "n_concentric": 100,
+        "pos": [],
+        "surf": []
+      }
+    },
+    "3e94a89ad4eb47ac9d0f8609ea89e86d": {
+      "model_name": "LayoutModel",
+      "model_module": "@jupyter-widgets/base",
+      "model_module_version": "2.0.0",
+      "state": {}
+    },
+    "94e8465ae2584162871506e50f03f5b2": {
+      "model_name": "BraketModel",
+      "model_module": "evince",
+      "model_module_version": "^0.37.0",
+      "state": {
+        "_dom_classes": [],
+        "ao": [
+          1
+        ],
+        "bg_color": [
+          0.1,
+          0.1,
+          0.1
+        ],
+        "fragment_shader": "uniform vec3 user_color;\nuniform float time;\n\nvarying vec2 vUv;\nvarying vec3 pos;\nvarying vec3 tex;\nvarying float q;\nvarying float csI;\nvarying float csR;\nvarying float cs0;\nvarying float cs1;\nvarying float cs2;\nvarying float cs3;\nvarying float cs4;\nvarying float cs5;\nvarying float cs6;\nvarying float cs7;\nvarying float cs8;\nvarying float cs9;\nvarying float cs10;\nvarying float cs11;\nvarying float cs12;\nvarying float cs13;\nvarying float cs14;\nvarying float cs15;\nvarying float cs;\n\nvoid main() {\n\n    vec2 p = vUv;\n    float q = tex[0]*tex[0] +tex[1]*tex[1] +tex[2]*tex[2] ;\n    float cs0 = 2.3830743680178026*exp(-5.0*pow(tex[1], 2.0) - 5.0*pow(tex[2], 2.0) - 125.0*pow(0.20000000000000001*tex[0] + 1.0, 2.0));\n    float cs1 = 10.657432564650314*tex[1]*exp(-5.0*pow(tex[1], 2.0) - 5.0*pow(tex[2], 2.0) - 125.0*pow(0.20000000000000001*tex[0] + 1.0, 2.0));\n    float cs2 = 10.657432564650314*tex[2]*exp(-5.0*pow(tex[1], 2.0) - 5.0*pow(tex[2], 2.0) - 125.0*pow(0.20000000000000001*tex[0] + 1.0, 2.0));\n    float cs3 = (10.657432564650314*tex[0] + 53.28716282325157)*exp(-5.0*pow(tex[1], 2.0) - 5.0*pow(tex[2], 2.0) - 125.0*pow(0.20000000000000001*tex[0] + 1.0, 2.0));\n    float cs4 = 2.3830743680178026*exp(-5.0*pow(tex[1], 2.0) - 5.0*pow(tex[2], 2.0) - 31.25*pow(0.40000000000000002*tex[0] + 1.0, 2.0));\n    float cs5 = -10.657432564650314*tex[1]*exp(-5.0*pow(tex[1], 2.0) - 5.0*pow(tex[2], 2.0) - 31.25*pow(0.40000000000000002*tex[0] + 1.0, 2.0));\n    float cs6 = 10.657432564650314*tex[2]*exp(-5.0*pow(tex[1], 2.0) - 5.0*pow(tex[2], 2.0) - 31.25*pow(0.40000000000000002*tex[0] + 1.0, 2.0));\n    float cs7 = (-10.657432564650314*tex[0] - 26.643581411625785)*exp(-5.0*pow(tex[1], 2.0) - 5.0*pow(tex[2], 2.0) - 31.25*pow(0.40000000000000002*tex[0] + 1.0, 2.0));\n    float cs8 = 2.3830743680178026*exp(-5.0*q);\n    float cs9 = 10.657432564650314*tex[1]*exp(-5.0*q);\n    float cs10 = -10.657432564650314*tex[2]*exp(-5.0*q);\n    float cs11 = -10.657432564650314*tex[0]*exp(-5.0*q);\n    float cs12 = 2.3830743680178026*exp(-5.0*pow(tex[1], 2.0) - 5.0*pow(tex[2], 2.0) - 31.25*pow(0.40000000000000002*tex[0] - 1.0, 2.0));\n    float cs13 = -10.657432564650314*tex[1]*exp(-5.0*pow(tex[1], 2.0) - 5.0*pow(tex[2], 2.0) - 31.25*pow(0.40000000000000002*tex[0] - 1.0, 2.0));\n    float cs14 = -10.657432564650314*tex[2]*exp(-5.0*pow(tex[1], 2.0) - 5.0*pow(tex[2], 2.0) - 31.25*pow(0.40000000000000002*tex[0] - 1.0, 2.0));\n    float cs15 = (10.657432564650314*tex[0] - 26.643581411625785)*exp(-5.0*pow(tex[1], 2.0) - 5.0*pow(tex[2], 2.0) - 31.25*pow(0.40000000000000002*tex[0] - 1.0, 2.0));\n    float csI = 0.0 ;\n    float csR = cs0 + cs1 + cs2 + cs3 + cs4 + cs5 + cs6 + cs7 + cs8 + cs9 + cs10 + cs11 + cs12 + cs13 + cs14 + cs15 ;\n    gl_FragColor = gl_FragColor + vec4(csR, csI, -1.0*csR, .1);\n}",
+        "layout": "IPY_MODEL_3e94a89ad4eb47ac9d0f8609ea89e86d",
+        "n_concentric": 100,
+        "pos": [],
+        "surf": []
+      }
+    }
+  }
+}
+</script>
+<script type="application/vnd.jupyter.widget-view+json">
+{"version_major": 2, "version_minor": 0, "model_id": "94e8465ae2584162871506e50f03f5b2"}
+</script>
+
+</body>
+</html>

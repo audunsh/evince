@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>IPyWidget export</title>
+</head>
+<body>
+
+
+<!-- Load require.js. Delete this if your page already loads require.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js" crossorigin="anonymous"></script>
+
+<script type="application/vnd.jupyter.widget-state+json">
+{
+  "version_major": 2,
+  "version_minor": 0,
+  "state": {
+    "0e643aea2dcd4c4b8d5b6a6fb09cef15": {
+      "model_name": "LayoutModel",
+      "model_module": "@jupyter-widgets/base",
+      "model_module_version": "2.0.0",
+      "state": {}
+    },
+    "6bedb8286d8c45a3971dd821f0b37bb8": {
+      "model_name": "BraketModel",
+      "model_module": "evince",
+      "model_module_version": "^0.36.0",
+      "state": {
+        "_dom_classes": [],
+        "ao": [
+          1
+        ],
+        "bg_color": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "fragment_shader": "uniform vec3 user_color;\nuniform float time;\n\nvarying vec2 vUv;\nvarying vec3 pos;\nvarying vec3 tex;\nvarying float q;\nvarying float csI;\nvarying float csR;\nvarying float cs0;\nvarying float cs;\n\nvoid main() {\n\n    vec2 p = vUv;\n    float q = tex[0]*tex[0] ;\n    float cs0 = 0.10841563382300971*tex[0]*(8.0*q - 12.0)*exp(-1.0/2.0*q);\n    float csI = -1.0*cs0*sin(3.500000*time) ;\n    float csR = cs0*cos(3.500000*time) ;\n    csR = smoothstep(0.9*tex[1], tex[1], csR);\n    csI = smoothstep(0.9*tex[1], tex[1], csI);\n    gl_FragColor = gl_FragColor + vec4(csR, csI, -1.0*csR, 1);\n}",
+        "layout": "IPY_MODEL_0e643aea2dcd4c4b8d5b6a6fb09cef15",
+        "pos": [],
+        "surf": [],
+        "surface_view": true
+      }
+    },
+    "bc023376bb1e4c91872f2a183fe1e933": {
+      "model_name": "LayoutModel",
+      "model_module": "@jupyter-widgets/base",
+      "model_module_version": "2.0.0",
+      "state": {}
+    },
+    "e804296881554c1ba7ed84df807476f5": {
+      "model_name": "BraketModel",
+      "model_module": "evince",
+      "model_module_version": "^0.36.0",
+      "state": {
+        "_dom_classes": [],
+        "additive": false,
+        "ao": [
+          1
+        ],
+        "bg_color": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "fragment_shader": "uniform vec3 user_color;\nuniform float time;\n\nvarying vec2 vUv;\nvarying vec3 pos;\nvarying vec3 tex;\nvarying float q;\nvarying float csI;\nvarying float csR;\nvarying float cs0;\nvarying float cs;\n\nvoid main() {\n\n    vec2 p = vUv;\n    float q = tex[0]*tex[0] ;\n    float cs0 = 0.10841563382300971*tex[0]*(8.0*q - 12.0)*exp(-1.0/2.0*q);\n    float csI = -1.0*cs0*sin(3.500000*time) ;\n    float csR = cs0*cos(3.500000*time) ;\n    csR = smoothstep(0.9*tex[1], tex[1], csR);\n    csI = smoothstep(0.9*tex[1], tex[1], csI);\n    gl_FragColor = gl_FragColor + vec4(csR + .06*csI, csR + .1*csI, .7*csR + .5*csI, 1.0);\n}",
+        "layout": "IPY_MODEL_bc023376bb1e4c91872f2a183fe1e933",
+        "pos": [],
+        "surf": [],
+        "surface_view": true
+      }
+    }
+  }
+}
+</script>
+<script type="application/vnd.jupyter.widget-view+json">
+{"version_major": 2, "version_minor": 0, "model_id": "e804296881554c1ba7ed84df807476f5"}
+</script>
+
+</body>
+</html>

@@ -30,8 +30,8 @@ export class BraketModel extends DOMWidgetModel {
         _view_name : 'BraketView',
         _model_module : 'evince',
         _view_module : 'evince',
-        _model_module_version : '0.35.0',
-        _view_module_version : '0.35.0'
+        _model_module_version : '0.44.0',
+        _view_module_version : '0.44.0'
       };
     }
   }
@@ -40,7 +40,7 @@ export class BraketModel extends DOMWidgetModel {
 
 export class BraketView extends DOMWidgetView {
     render() {
-		console.log("Hello from BraketView 3.2");
+		console.log("Hello from BraketView 43.0");
         const scene = new THREE.Scene();
         this.scene = scene;
 
@@ -59,6 +59,9 @@ export class BraketView extends DOMWidgetView {
         // this should be changed in future implementations, to ensure correct behaviour in various contexts
         this.renderer.setSize( .99*document.activeElement.clientWidth, .99*document.activeElement.clientWidth*.6);
         
+        // uncomment the following line for correct pixelratio (yet, slows down code significantly)
+        //renderer.setPixelRatio( window.devicePixelRatio );
+        
         //renderer.setClearColor( 0xfaf8ec, 1);
         //this.renderer.setClearColor( 0x0f0f2F, 1);
 		//console.log(this.model.get("bg_color"));
@@ -69,12 +72,13 @@ export class BraketView extends DOMWidgetView {
         //renderer.xr.enabled = true;
         
 
-
-        this.el.appendChild( VRButton.createButton( this.renderer ) );
-		this.renderer.xr.enabled = true;
-		//this.renderer.setAnimationLoop( function () {
-        //    this.renderer.render( this.scene, this.camera );
-        //} );
+        if(this.model.get('vr_button')){
+            this.el.appendChild( VRButton.createButton( this.renderer ) );
+            this.renderer.xr.enabled = true;
+            //this.renderer.setAnimationLoop( function () {
+            //    this.renderer.render( this.scene, this.camera );
+            //} );
+        }
 
 		
 		
@@ -83,9 +87,38 @@ export class BraketView extends DOMWidgetView {
         //const controls = new OrbitControls(this.camera, this.renderer.domElement);
         //var control = new OrbitControls(this.camera, this.renderer.domElement);
         const controls = new OrbitControls(this.camera, this.renderer.domElement);
+
         
+        /*
+        controls.addEventListener( 'change', reduce_aspect );
+        controls.addEventListener( 'change', _.debounce(function() {
+            renderer.setPixelRatio( window.devicePixelRatio/2 );
+            render();
+          }));
+
+
+
+        function reduce_aspect(){
+            renderer.setPixelRatio( window.devicePixelRatio/4 );
+        }
+        */
         
         //this.controls = controls;
+        window.addEventListener( 'resize', onWindowResize );
+
+        
+
+
+        //controllers for molecule editing
+        function onWindowResize() {
+            console.log("window_resize");
+            camera.aspect = document.activeElement.clientWidth/(document.activeElement.clientWidth*.6);
+            camera.updateProjectionMatrix();
+
+            renderer.setSize( document.activeElement.clientWidth, document.activeElement.clientWidth*.6 );
+
+        }
+
         
         this.init_changed();
         this.el.append(this.renderer.domElement);
@@ -103,7 +136,9 @@ export class BraketView extends DOMWidgetView {
 		//console.log(this.camera);
 		//console.log(this.scene);
 
+        //only if evolving in time
 		animate();
+        //render();
 
 		function animate() {
 			renderer.setAnimationLoop( render );
@@ -361,9 +396,12 @@ attribute vec3 aRadius;
 attribute vec3 aCurve;
 
 void main(){
-vec3 transformed = position*aRadius.x*length(cameraPosition);
-tex = vec3(transformed.x, transformed.y, transformed.z) + cameraPosition;
+//vec3 transformed = position*aRadius.x*length(cameraPosition);
+vec3 transformed = position*aRadius.x*length(cameraPosition); //n
+//vec3 transformed = position*aRadius.x*length(modelViewMatrix[3])*2.0; 
 
+//tex = vec3(transformed.x, transformed.y, transformed.z) + cameraPosition; // + 3.0*cameraPosition; 
+tex = vec3(transformed.x, transformed.y, transformed.z) + 3.0*cameraPosition; //n
 
 // 3. Get position and add it to the final position
 //vec3 curvePosition = vec3(aCurve.x, aCurve.y, aCurve.z);
@@ -371,13 +409,15 @@ tex = vec3(transformed.x, transformed.y, transformed.z) + cameraPosition;
 //transformed += curvePosition;
 
 gl_Position = projectionMatrix * modelViewMatrix * vec4(tex, 1.0);
+
 //vColor = aColor;
 //vPis = gl_position;
 }`; 
 
-			let baseGeometry = new THREE.SphereBufferGeometry(.3);
+			let baseGeometry = new THREE.SphereBufferGeometry(1.0);
 			let instancedGeometry = new THREE.InstancedBufferGeometry().copy(baseGeometry);
-			let instanceCount = 120;
+			let instanceCount = this.model.get("n_concentric");
+            console.log("number of concetric spheres:", instanceCount);
 			instancedGeometry.maxInstancedCount = instanceCount;
 
 			let aRadius = []; //array to contain size
@@ -386,8 +426,11 @@ gl_Position = projectionMatrix * modelViewMatrix * vec4(tex, 1.0);
 			for (let i = 0; i < instanceCount; i++) {
 				aCurve.push(0.0, 0.0, 0.0);
 				//aColor.push(.3 + .001*this.colors[i][0], .3+ .001*this.colors[i][1], .3+ .001*this.colors[i][2]);
-				//aRadius.push((i**1.1+.1)*.3, 0.0, 0.0); //no camera scaling
-				aRadius.push((i**1.1+.1)*.03, 0.0, 0.0);
+				//aRadius.push((i**1.1+.1)*0.03, 0.0, 0.0); //no camera scaling
+                //aRadius.push((i**1.1 + 1.0)*0.03, 0.0, 0.0); //no camera scaling
+				aRadius.push(2.0*(i/instanceCount)**1.5 + 3.0 - 1.0, 0.0, 0.0); // offset impl
+                //aRadius.push(2.0*(i/instanceCount)**0.5 + 0.1, 0.0, 0.0);
+                //r = (2*(t/N)**1.5  + dist-0.9)*c_length
 			}
 
 			let aCurveFloat32 = new Float32Array(aCurve);
