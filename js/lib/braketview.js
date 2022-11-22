@@ -30,8 +30,8 @@ export class BraketModel extends DOMWidgetModel {
         _view_name : 'BraketView',
         _model_module : 'evince',
         _view_module : 'evince',
-        _model_module_version : '0.44.0',
-        _view_module_version : '0.44.0'
+        _model_module_version : '0.45.0',
+        _view_module_version : '0.45.0'
       };
     }
   }
@@ -428,7 +428,9 @@ gl_Position = projectionMatrix * modelViewMatrix * vec4(tex, 1.0);
 				//aColor.push(.3 + .001*this.colors[i][0], .3+ .001*this.colors[i][1], .3+ .001*this.colors[i][2]);
 				//aRadius.push((i**1.1+.1)*0.03, 0.0, 0.0); //no camera scaling
                 //aRadius.push((i**1.1 + 1.0)*0.03, 0.0, 0.0); //no camera scaling
-				aRadius.push(2.0*(i/instanceCount)**1.5 + 3.0 - 1.0, 0.0, 0.0); // offset impl
+				
+                aRadius.push(2.0*(i/instanceCount)**1.5 + 3.0 - 1.0, 0.0, 0.0); // offset impl
+                
                 //aRadius.push(2.0*(i/instanceCount)**0.5 + 0.1, 0.0, 0.0);
                 //r = (2*(t/N)**1.5  + dist-0.9)*c_length
 			}

@@ -100,6 +100,8 @@ class SpotlightView(widgets.DOMWidget):
     box = tl.List([]).tag(sync=True)
     bonds = tl.List([]).tag(sync=True)
 
+
+    window_scale = tl.Float().tag(sync=True)
     window_scale_height = tl.Float().tag(sync=True)
     window_scale_width = tl.Float().tag(sync=True)
 
@@ -129,7 +131,7 @@ class SpotlightView(widgets.DOMWidget):
 
     bg_color = tl.List([]).tag(sync=True)
     
-    def __init__(self, b, window_scale_height = 0.5, window_scale_width=0.75, fxaa = True, sao  =False, dof = False, additive = False, bg_color = [1.0, 1.0, 1.0], focus = 10, aperture = 0.001, max_blur = 0.01, bonds = [], saoScale = 100 ,saoBias = .1,saoIntensity = .1,saoKernelRadius = 10,saoMinResolution = .5,saoBlur = False,saoBlurRadius = 50,saoBlurStdDev = 1.0,saoBlurDepthCutoff = 0.05, realism = False, radius_scale = 1.0):
+    def __init__(self, b, window_scale_height = 0.5, window_scale_width=0.75, window_scale = 1.0, fxaa = True, sao  =False, dof = False, additive = False, bg_color = [1.0, 1.0, 1.0], focus = 10, aperture = 0.001, max_blur = 0.01, bonds = [], saoScale = 100 ,saoBias = .1,saoIntensity = .1,saoKernelRadius = 10,saoMinResolution = .5,saoBlur = False,saoBlurRadius = 50,saoBlurStdDev = 1.0,saoBlurDepthCutoff = 0.05, realism = False, radius_scale = 1.0):
 
         self.sao = sao
         self.saoScale = saoScale
@@ -144,6 +146,7 @@ class SpotlightView(widgets.DOMWidget):
 
         self.window_scale_height = window_scale_height
         self.window_scale_width = window_scale_width
+        self.window_scale = window_scale
 
 
 

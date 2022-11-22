@@ -190,7 +190,9 @@ class FashionView(widgets.DOMWidget):
         #print(change['new'])
         self.new_atom_observed = True
 
-        self.b.run(500)
+        #self.b.run(500)
+
+        
 
         #self.pos[0][] = (1.1*self.b.pos.T).tolist()
         #self.b.pos[:, self.add_new_atom[0]] *= 0.0

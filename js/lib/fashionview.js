@@ -39,8 +39,8 @@ export class FashionModel extends DOMWidgetModel {
             _view_name : 'FashionView',
             _model_module : 'evince',
             _view_module : 'evince',
-            _model_module_version : '0.44.0',
-            _view_module_version : '0.44.0'
+            _model_module_version : '0.45.0',
+            _view_module_version : '0.45.0'
         };
     }
 }
@@ -202,11 +202,11 @@ export class FashionView extends DOMWidgetView {
  
         //console.log("window");
         //console.log(parent.innerWidth, document.activeElement.innerWidth, document.documentElement.clientWidth, document.documentElement.offsetWidth, this.el.offsetWidth);
-        window.addEventListener( 'resize', onWindowResize );
+        
 		window.addEventListener( 'pointermove', onPointerMove );
         window.addEventListener( 'pointerdown', onPointerUp );
 
-        
+        window.addEventListener( 'resize', onWindowResize );
 
 
         //controllers for molecule editing

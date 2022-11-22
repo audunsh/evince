@@ -14,8 +14,8 @@ export class MDModel extends DOMWidgetModel {
 			_view_name : 'MDView',
 			_model_module : 'evince',
 			_view_module : 'evince',
-			_model_module_version : '0.44.0',
-			_view_module_version : '0.44.0'
+			_model_module_version : '0.45.0',
+			_view_module_version : '0.45.0'
         };
     }
 }
@@ -180,7 +180,7 @@ export class MDView extends DOMWidgetView {
             let aCurveFloat32 = new Float32Array(aCurve);
             instancedGeometry.setAttribute(
               "aCurve",
-              new THREE.InstancedBufferAttribute(aCurveFloat32, 3, false)
+              new THREE.InstancedBufferAttribute(aCurveFloat32, 2, false)
             );
             var vertexShader = `attribute vec3 aColor;
 varying vec3 vColor;
