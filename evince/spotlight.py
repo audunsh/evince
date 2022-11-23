@@ -99,6 +99,7 @@ class SpotlightView(widgets.DOMWidget):
     colors = tl.List([]).tag(sync=True)
     box = tl.List([]).tag(sync=True)
     bonds = tl.List([]).tag(sync=True)
+    transparent_bubbles = tl.Bool(False).tag(sync=True)
 
 
     window_scale = tl.Float().tag(sync=True)
@@ -131,7 +132,7 @@ class SpotlightView(widgets.DOMWidget):
 
     bg_color = tl.List([]).tag(sync=True)
     
-    def __init__(self, b, window_scale_height = 0.5, window_scale_width=0.75, window_scale = 1.0, fxaa = True, sao  =False, dof = False, additive = False, bg_color = [1.0, 1.0, 1.0], focus = 10, aperture = 0.001, max_blur = 0.01, bonds = [], saoScale = 100 ,saoBias = .1,saoIntensity = .1,saoKernelRadius = 10,saoMinResolution = .5,saoBlur = False,saoBlurRadius = 50,saoBlurStdDev = 1.0,saoBlurDepthCutoff = 0.05, realism = False, radius_scale = 1.0):
+    def __init__(self, b, window_scale_height = 0.5, window_scale_width=0.75, window_scale = 1.0, fxaa = True, sao  =False, dof = False, additive = False, bg_color = [1.0, 1.0, 1.0], focus = 10, aperture = 0.001, max_blur = 0.01, bonds = [], saoScale = 100 ,saoBias = .1,saoIntensity = .1,saoKernelRadius = 10,saoMinResolution = .5,saoBlur = False,saoBlurRadius = 50,saoBlurStdDev = 1.0,saoBlurDepthCutoff = 0.05, realism = False, radius_scale = 1.0, transparent_bubbles = False, colors = []):
 
         self.sao = sao
         self.saoScale = saoScale
@@ -161,6 +162,7 @@ class SpotlightView(widgets.DOMWidget):
         self.aperture = aperture
         self.max_blur = max_blur
 
+        self.transparent_bubbles = transparent_bubbles
 
         self.additive = additive
         self.bg_color = bg_color
@@ -171,7 +173,10 @@ class SpotlightView(widgets.DOMWidget):
         self.box = b.size.tolist()
         nc = 20
         self.radius = [1.0 for i in range(b.pos.shape[0])]
-        self.colors = np.array((interp1d(np.linspace(0,1,nc), np.random.uniform(0,1,(3, nc)) )(b.masses/b.masses.max()).T), dtype = float).tolist()
+        self.colors = colors
+        if len(self.colors)<b.n_bubbles:
+            self.colors = np.array((interp1d(np.linspace(0,1,nc), np.random.uniform(0,1,(3, nc)) )(b.masses/b.masses.max()).T), dtype = float).tolist()
+
         if realism:
             self.radius = (radius_scale*get_vwv_radius_from_atomic_number(b.masses)).tolist()
             self.colors = colorscheme(b.masses).T.tolist()

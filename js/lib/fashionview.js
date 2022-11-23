@@ -112,6 +112,9 @@ export class FashionView extends DOMWidgetView {
         this.pos_changed();
         this.model.on('change:pos', this.pos_changed, this);
         this.model.on('change:init', this.init_changed, this);
+
+        this.bonds_changed();
+        this.model.on('change:bonds', this.bonds_changed, this);
         
 
         //this.animate();
@@ -317,8 +320,6 @@ export class FashionView extends DOMWidgetView {
 
 		function animate() {
 			renderer.setAnimationLoop( render );
-            //renderer.render( scene, camera );
-			//requestAnimationFrame( animate );
 
 		}
 
@@ -365,20 +366,7 @@ export class FashionView extends DOMWidgetView {
         
                     // edge from X to Y
                     var direction = new THREE.Vector3().subVectors(pointY, pointX);
-                    //let material = new THREE.MeshStandardMaterial({ color: 0x2B2B2B });
-                    // Make the geometry (of "direction" length)
-                    //material.roughness = 0.2;
-                    //material.metalness = 0.2;
-                    //var geometry = new THREE.CylinderGeometry(.4, 0.4, direction.length(), 6, 4, true);
-                    // shift it so one end rests on the origin
-                    //geometry.applyMatrix4(new THREE.Matrix4().makeTranslation(0, direction.length() / 2, 0));
-                    //geometry.position = new THREE.Vector3( .5*(pY[0]+ pX[0]), .5*(pY[1]+ pX[1]), .5*(pY[2]+ pX[2]));
                     
-                    
-        
-        
-                    // rotate it the right way for lookAt to work
-                    //geometry.applyMatrix4(new THREE.Matrix4().makeRotationX(3.1415/2.0));
                     
                     
                     // Make a mesh with the geometry
@@ -525,41 +513,14 @@ export class FashionView extends DOMWidgetView {
     }
     
     pos_changed() {
-        //this.model.set()
         
         this.pos = this.model.get('pos');
 
-        /* 
-        let mesh = this.scene.children[0];
-        let m4 = new THREE.Matrix4();
-        
-        let aCurve = [];
+    }
 
+    bonds_changed() {
         
-        
-        if(this.box.length>2){
-        
-            for (let i = 0; i < this.pos.length; i++) {
-                this.scene.children[i].position.set( this.pos[i][0], this.pos[i][1], this.pos[i][2] );
-            }
+        this.bonds = this.model.get('bonds');
 
-            
-        }
-        if(this.box.length==2){
-            for (let i = 0; i < mesh.count; i++) {
-              aCurve.push(this.pos[i][0], this.pos[i][1]);
-            }
-            let aCurveFloat32 = new Float32Array(aCurve);
-            //console.log(mesh, mesh.geometry);
-            this.scene.children[0].geometry.setAttribute(
-              "aCurve",
-              new THREE.InstancedBufferAttribute(aCurveFloat32, 2, false)
-            );
-            
-        }
-        */
-        
-        
-       
     }
 };

@@ -39,8 +39,8 @@ export class SpotlightModel extends DOMWidgetModel {
             _view_name : 'SpotlightView',
             _model_module : 'evince',
             _view_module : 'evince',
-            _model_module_version : '0.44.0',
-            _view_module_version : '0.44.0'
+            _model_module_version : '0.45.0',
+            _view_module_version : '0.45.0'
         };
     }
 }
@@ -52,9 +52,10 @@ export class SpotlightView extends DOMWidgetView {
         const scene = new THREE.Scene();
         const postprocessing = {};
         this.scene = scene;
+
         
 
-		let camera = new THREE.PerspectiveCamera( 75, document.activeElement.clientWidth/(document.activeElement.clientWidth*.6), 0.1, 1000 );
+		let camera = new THREE.PerspectiveCamera( 50, document.activeElement.clientWidth/(document.activeElement.clientWidth*.65), 0.1, 1000 );
         //let camera = new THREE.PerspectiveCamera( 75, this.model.get("window_scale_width")*window.innerWidth/(this.model.get("window_scale_height")*window.innerHeight), 0.1, 1000 );
         this.camera = camera;
         this.camera.position.z = 5;
@@ -82,7 +83,7 @@ export class SpotlightView extends DOMWidgetView {
 		
 		
 
-		this.renderer.setSize( document.activeElement.clientWidth, document.activeElement.clientWidth*.6);
+		this.renderer.setSize( this.model.get("window_scale")*document.activeElement.clientWidth,this.model.get("window_scale")*document.activeElement.clientWidth*.65);
         //this.renderer.setSize( this.model.get("window_scale_width")*window.innerWidth, this.model.get("window_scale_height")*window.innerHeight );
 		//this.renderer.setSize( this.model.get("window_scale_width")*this.el.innerWidth, this.model.get("window_scale_height")*this.el.innerWidth );
         //this.renderer.setClearColor( 0xfaf8ec, 1);
@@ -170,8 +171,8 @@ export class SpotlightView extends DOMWidgetView {
                 aperture:this.model.get('aperture') ,
                 maxblur: this.model.get('max_blur'),
 
-                width: document.activeElement.clientWidth,
-                height: document.activeElement.clientWidth*.6
+                width: this.model.get("window_scale")*document.activeElement.clientWidth,
+                height: this.model.get("window_scale")*document.activeElement.clientWidth*.65
             } );
             
             /*
@@ -195,7 +196,7 @@ export class SpotlightView extends DOMWidgetView {
             const pixelRatio = renderer.getPixelRatio();
 
             
-            fxaaPass.uniforms[ 'resolution' ].value.set( 1 / ( pixelRatio*document.activeElement.clientWidth), 1 / (pixelRatio*document.activeElement.clientWidth*.6) );
+            fxaaPass.uniforms[ 'resolution' ].value.set( 1 / (this.model.get("window_scale")*pixelRatio*document.activeElement.clientWidth), 1 / (this.model.get("window_scale")*pixelRatio*document.activeElement.clientWidth*.65) );
 
 
             fxaaPass.renderToScreen = false;
@@ -217,6 +218,21 @@ export class SpotlightView extends DOMWidgetView {
 		this.renderer.autoClear = false;
 
         var self = this;
+
+        window.addEventListener( 'resize', onWindowResize );
+
+
+        //controllers for molecule editing
+        function onWindowResize() {
+            console.log("window_resize");
+            camera.aspect = document.activeElement.clientWidth/(document.activeElement.clientWidth*.65);
+            camera.updateProjectionMatrix();
+
+            //renderer.setSize( document.activeElement.clientWidth, document.activeElement.clientWidth*.6 );
+            self.renderer.setSize( self.model.get("window_scale")*document.activeElement.clientWidth,self.model.get("window_scale")*document.activeElement.clientWidth*.65);
+        
+
+        }
  
         
 
@@ -376,6 +392,10 @@ export class SpotlightView extends DOMWidgetView {
             material.color = new THREE.Color(this.colors[i][0],  this.colors[i][1],  this.colors[i][2]);
             material.roughness = 0.2;
             material.metalness = 0.2;
+            if(this.model.get('transparent_bubbles')){
+                material.opacity = .2;
+                material.transparent = true;
+            }
             let mesh = new THREE.Mesh( baseGeometry, material );
             mesh.position.set( this.pos[i][0], this.pos[i][1], this.pos[i][2] );
             //mesh.matrixAutoUpdate = false;
