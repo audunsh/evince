@@ -32,8 +32,8 @@ export class TemplateModel extends DOMWidgetModel {
             _view_name : 'TemplateView',
             _model_module : 'evince',
             _view_module : 'evince',
-            _model_module_version : '0.45.0',
-            _view_module_version : '0.45.0'
+            _model_module_version : '0.46.0',
+            _view_module_version : '0.46.0'
         };
     }
 }
@@ -119,5 +119,6 @@ export class TemplateView extends DOMWidgetView {
 
     value_changed() {
         //this.el.textContent = this.model.get('value');
+        console.log("value_changed");
     }
 };

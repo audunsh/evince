@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "evince": "^0.45.0"
+    "evince": "^0.46.0",
+    "omovi": "^0.7.5"
   }
 }

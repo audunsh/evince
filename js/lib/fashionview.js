@@ -11,6 +11,7 @@ import { VRButton } from 'three/examples/jsm/webxr/VRButton.js';
 import { CopyShader } from 'three/examples/jsm/shaders/CopyShader.js';
 import { FXAAShader } from 'three/examples/jsm/shaders/FXAAShader.js';
 import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass.js';
+import { GUI } from 'three/examples/jsm/libs/lil-gui.module.min.js';
 import { ConeBufferGeometry } from 'three';
 
 // See example.py for the kernel counterpart to this file.
@@ -39,8 +40,8 @@ export class FashionModel extends DOMWidgetModel {
             _view_name : 'FashionView',
             _model_module : 'evince',
             _view_module : 'evince',
-            _model_module_version : '0.45.0',
-            _view_module_version : '0.45.0'
+            _model_module_version : '0.46.0',
+            _view_module_version : '0.46.0'
         };
     }
 }
@@ -53,6 +54,9 @@ export class FashionView extends DOMWidgetView {
         super.render();
         const scene = new THREE.Scene();
         const postprocessing = {};
+
+        let selection = [];
+
 
 
         //model = this.model;
@@ -72,9 +76,7 @@ export class FashionView extends DOMWidgetView {
 
 
         
-
-        //console.log("init scene");
-
+        
 
         
 
@@ -105,18 +107,48 @@ export class FashionView extends DOMWidgetView {
         
         let controls = new OrbitControls( this.camera, this.renderer.domElement );
         this.controls = controls;
+
+
+        
+
+        /*
+        let baseGeometry = new THREE.SphereBufferGeometry(0.1, 30, 20);
+        baseGeometry.attributes.position.needsUpdate = true;
+
+        let material = new THREE.MeshStandardMaterial( );
+        //material.color = new THREE.Color(this.colors[i][0],  this.colors[i][1],  this.colors[i][2]);
+        material.roughness = 0.2;
+        material.metalness = 0.2;
+
+        let imesh = new THREE.InstancedMesh( baseGeometry, material, 1000);
+        imesh.instanceMatrix.needsUpdate = true;
+
+        this.scene.add(imesh);
+        */
+        
+
+       
+
+
+
+
         
         this.init_changed();
         this.el.append(this.renderer.domElement);
         this.el.appendChild( VRButton.createButton( renderer ) );
-        this.pos_changed();
-        this.model.on('change:pos', this.pos_changed, this);
+        this._pos_changed();
+        this._bonds_changed();
+        //this._count_changed();
+        //this.model.on('change:pos', pos_changed); //, this);
+        this.listenTo(this.model, 'change:pos', this._pos_changed, this);
+        this.listenTo(this.model, 'change:bonds', this._bonds_changed, this);
+
         this.model.on('change:init', this.init_changed, this);
 
-        this.bonds_changed();
-        this.model.on('change:bonds', this.bonds_changed, this);
+        //this.bonds_changed();
+        //this.model.on('change:bonds', this._bonds_changed, this);
+        //this.model.on('change:count', this._count_changed, this);
         
-
         //this.animate();
         
         
@@ -128,6 +160,12 @@ export class FashionView extends DOMWidgetView {
 
         let raycaster = new THREE.Raycaster();
 		let pointer = new THREE.Vector2();
+
+        const gui = new GUI();
+
+        const python_callback = {test: 15};
+
+		gui.add( python_callback, 'test', 1).onChange( this._python_callback );
 
         
 
@@ -206,8 +244,11 @@ export class FashionView extends DOMWidgetView {
         //console.log("window");
         //console.log(parent.innerWidth, document.activeElement.innerWidth, document.documentElement.clientWidth, document.documentElement.offsetWidth, this.el.offsetWidth);
         
-		window.addEventListener( 'pointermove', onPointerMove );
+		
+        
+        window.addEventListener( 'pointermove', onPointerMove );
         window.addEventListener( 'pointerdown', onPointerUp );
+        window.addEventListener( 'click', onClick );
 
         window.addEventListener( 'resize', onWindowResize );
 
@@ -223,23 +264,40 @@ export class FashionView extends DOMWidgetView {
         }
 
 
+
+        // generic functions synchronized to the python kernel
+
         // use a pointer to this
         var self = this;
 
+
         function onPointerUp(){
-            console.log("pointer_up", selectedObject.physics_typedef, selectedObject.index_in_scene);
+            //console.log("pointer_up", selectedObject.physics_typedef, selectedObject.index_in_scene);
             //var object = scene.getObjectByName( selectedObject.name );
     
             // trigger event in kernel
-            self.model.set('add_new_atom',  [selectedObject.index_in_scene, 0.0]);
+            //self.model.set('add_new_atom',  [selectedObject.index_in_scene, 0.0]);
             //self.model.touch();
             self.model.save_changes();
     
     
         }
 
-        function onPointerMove( event ) {
+        function onPointerMove(){
+            //console.log("pointer_up", selectedObject.physics_typedef, selectedObject.index_in_scene);
+            //var object = scene.getObjectByName( selectedObject.name );
+    
+            // trigger event in kernel
+            //self.model.set('add_new_atom',  [selectedObject.index_in_scene, 0.0]);
+            //self.model.touch();
+            self.model.save_changes();
+    
+    
+        }
 
+        function onClick( event ) {
+
+            /*
             if ( selectedObject ) {
 
                 //selectedObject.material.currentColor = selectedObject.material.color.getHex();
@@ -248,7 +306,7 @@ export class FashionView extends DOMWidgetView {
                 selectedObject.material.emissive.setHex( selectedObject.material.currentEmissive );
                 selectedObject = null;
     
-            }
+            }*/
 
             //console.log(document.querySelector('#threeJSRenderWrapper'));
             // console.log(document.querySelector("p").closest(".near.ancestor"));
@@ -263,7 +321,7 @@ export class FashionView extends DOMWidgetView {
 
             //pointer.x = 2*event.clientX/window.innerWidth - 1;//  / (rect.right  - rect.left);
             //pointer.y = -2*event.clientY/window.innerHeight + 1; // / (rect.bottom - rect.top);
-            console.log(pointer.x, pointer.y);
+            //console.log(pointer.x, pointer.y);
 
             // Data pixel coordinates
             //pointer.x = Math.floor(X*document.activeElement.clientWidth);
@@ -289,27 +347,40 @@ export class FashionView extends DOMWidgetView {
     
             raycaster.setFromCamera( pointer, camera );
     
-            const intersects = raycaster.intersectObject( scene, true );
+            //const intersects = raycaster.intersectObject( scene, true );
+            let imesh = self.scene.children[0];
+            let color = new THREE.Color();
+            const intersection = raycaster.intersectObject( imesh );
     
-            if ( intersects.length > 0 ) {
-    
-                const res = intersects.filter( function ( res ) {
-    
-                    return res && res.object;
-    
-                } )[ 0 ];
-    
-                if ( res && res.object ) {
-    
-                    selectedObject = res.object;
-                    //selectedObject.material.currentColor = selectedObject.material.color.getHex();
-                    //selectedObject.material.color.set( '#f00' );
+            if ( intersection.length > 0 ) {
 
-                    selectedObject.material.currentEmissive = selectedObject.material.emissive.getHex();
-                    selectedObject.material.emissive.setHex( 0x666666 );
-                    //selectedObject.material.color.set( selectedObject.material.currentColor*2 );
-    
+
+
+                const instanceId = intersection[ 0 ].instanceId;
+
+                //let selected = self.selected;
+
+                if(selection.includes(instanceId)){
+                    //imesh.setColorAt( instanceId, color.setHex( Math.random() * 0xffffff ) );
+                    imesh.setColorAt(instanceId , new THREE.Color(self.colors[instanceId][0],  self.colors[instanceId][1],  self.colors[instanceId][2]));
+                    const index = selection.indexOf(instanceId);
+                    selection.splice(index, 1);
                 }
+                else{
+                    imesh.setColorAt( instanceId, color.setHex(  0xffffff ) );
+                    //selected[instanceId] = 1;
+                    selection.push(instanceId);
+                }
+                console.log(selection);
+
+                self.model.set('selection',  selection.concat());
+                self.model.save_changes();
+                self.touch();
+                
+                
+                
+                imesh.instanceColor.needsUpdate = true;
+                
     
             }
             
@@ -326,83 +397,53 @@ export class FashionView extends DOMWidgetView {
 		function render() {
 
             
-			//renderer.render( scene, camera );
-            postprocessing.composer.render(  );
+			renderer.render( scene, camera );
+            //postprocessing.composer.render(  );
 
             //self.model.set('trigger_advance',  true);
             //self.model.save_changes();
 
 
             // experimental position update
-            self.pos = self.model.get('pos');
-            //let mesh = this.scene.children[0];
-            let m4 = new THREE.Matrix4();
+            //self.pos = self.model.get('pos');
+            //console.log("self.pos", self.pos.length);
             
-            let aCurve = [];
+            
+            //let aCurve = [];
 
             
-            
+            /*
             if(self.box.length>2){
             
                 for (let i = 0; i < self.pos.length; i++) {
-                    //let pos_i = this.pos[i];
-                    //let children_i = this.scene.children[i];
-                    //children_i.position.x = pos_i[0];
-                    //children_i.position.y = pos_i[1];
-                    //children_i.position.z = pos_i[2];
                     self.scene.children[i].position.set( self.pos[i][0], self.pos[i][1], self.pos[i][2] );
 
-                    //this.scene.children[i].position = new THREE.Vector3(this.pos[i][0], this.pos[i][1],  this.pos[i][2]);
-                }
+                }*/
+
+            
+            
+            /*
+            self.pos = self.model.get('pos');
+            const matrix = new THREE.Matrix4();
+            self.scene.children[0].count = self.pos.length; //this.model.get('count');
 
 
+
+
+
+            for (let i = 0; i < self.pos.length; i++) {
+                //console.log(this.pos[i]);
                 
-                for(let i = 0; i< self.bonds.length; i++){
-                    let pX = self.pos[self.bonds[i][0]];
-                    let pY = self.pos[self.bonds[i][1]];
-        
-                    let pointX = new THREE.Vector3(pX[0], pX[1], pX[2]);
-                    let pointY = new THREE.Vector3(pY[0], pY[1], pY[2]);
-        
-                    // edge from X to Y
-                    var direction = new THREE.Vector3().subVectors(pointY, pointX);
-                    
-                    
-                    
-                    // Make a mesh with the geometry
-                    var mesh = self.scene.children[i +self.pos.length ];
-
-                    mesh.scale.z = direction.length();
-                    
-                    //mesh.geometry.height = direction.length();
-
-                    mesh.position.x = .5*(pY[0]+ pX[0]);
-                    mesh.position.y = .5*(pY[1]+ pX[1]);
-                    mesh.position.z = .5*(pY[2]+ pX[2]);
-
-                    mesh.lookAt(pointY);
-                    //this.scene.add(mesh);
-                
-        
-        
-                }
-                
-
+                matrix.setPosition(self.pos[i][0], self.pos[i][1], self.pos[i][2] );
+                self.scene.children[0].setMatrixAt( i, matrix );
             }
-            if(self.box.length==2){
-                for (let i = 0; i < self.pos.length; i++) {
-                aCurve.push(self.pos[i][0], self.pos[i][1]);
-                }
-                let aCurveFloat32 = new Float32Array(aCurve);
-                //console.log(mesh, mesh.geometry);
-                self.scene.children[0].geometry.setAttribute(
-                "aCurve",
-                new THREE.InstancedBufferAttribute(aCurveFloat32, 2, false)
-                );
-                
-            }
+            */
+           
+        
 
-		}
+
+
+        }
         
         
         
@@ -432,31 +473,129 @@ export class FashionView extends DOMWidgetView {
         this.box = this.model.get('box');
         this.bonds = this.model.get('bonds');
         this.radius = this.model.get('radius');
-        
-        let aColor = [];
-        let aCurve = [];
-        
-        
-        
+        this.selected = this.model.get('selected');
 
-        for (let i = 0; i < this.pos.length; i++) {
-            let baseGeometry = new THREE.SphereBufferGeometry(this.radius[i], 30, 20);
-			baseGeometry.attributes.position.needsUpdate = true;
-            
-            let material = new THREE.MeshStandardMaterial( );
-            material.color = new THREE.Color(this.colors[i][0],  this.colors[i][1],  this.colors[i][2]);
-            material.roughness = 0.2;
-            material.metalness = 0.2;
-            let mesh = new THREE.Mesh( baseGeometry, material );
-            mesh.position.set( this.pos[i][0], this.pos[i][1], this.pos[i][2] );
-            //mesh.matrixAutoUpdate = false;
-            mesh.updateMatrix();
-            mesh.index_in_scene = i;
-            mesh.physics_typedef = "atom";
-            this.scene.add( mesh );
-        }
+        this.count = this.model.get('count');
+
+
+        console.log("init count:", this.count);
+        console.log("init pos", this.pos);
+        
+        //let aColor = [];
+        //let aCurve = [];
+        
+        let baseGeometry = new THREE.SphereBufferGeometry(1.0, 30, 20);
+        //baseGeometry.attributes.position.needsUpdate = true;
+
+        let material = new THREE.MeshStandardMaterial( );
+        //material.color = new THREE.Color(this.colors[i][0],  this.colors[i][1],  this.colors[i][2]);
+        material.roughness = 0.2;
+        material.metalness = 0.2;
+
+        let imesh = new THREE.InstancedMesh( baseGeometry, material, 10000);
+        imesh.count = this.pos.length;
+        imesh.instanceMatrix.needsUpdate = true;
+        //imesh.instanceColor.needsUpdate = true;
+
+        this.scene.add(imesh);
+
+        let bondGeometry = new THREE.CylinderGeometry(.4, 0.4, 1.0, 6, 4, true);
+        bondGeometry.applyMatrix4(new THREE.Matrix4().makeRotationX(3.1415/2.0));
+
+
+        let bondMesh = new THREE.InstancedMesh( bondGeometry, material, 10000);
+        bondMesh.count = this.bonds.length;
+        bondMesh.instanceMatrix.needsUpdate = true;
+
+        this.scene.add(bondMesh);
+
+
+        /*
 
         //create bonds
+        
+        */
+
+
+        let light = new THREE.AmbientLight( 0xffffff, 0.8 ); // soft white light
+        this.scene.add( light );
+        
+        const directionalLight = new THREE.DirectionalLight( 0xffffff, .5 );
+        directionalLight.position.set( 1, 1, 1 );
+        this.scene.add( directionalLight );
+        
+
+        
+        
+        
+        
+    }
+
+    _count_changed() {
+        let imesh = this.scene.children[0];
+        imesh.count = this.model.get('count');
+    }
+
+    _python_callback() {
+        let imesh = this.scene.children[0];
+        imesh.count = this.model.get('count');
+    }
+    
+    _pos_changed() {
+        console.log("pos changes");
+        this.pos = this.model.get('pos');
+        this.colors = this.model.get('colors');
+        this.radius = this.model.get('radius');
+        //const matrix = new THREE.Matrix4();
+        //let color = new THREE.Color();
+
+        let imesh = this.scene.children[0];
+        //console.log(imesh);
+        imesh.count = this.pos.length;
+        let m4 = new THREE.Matrix4();
+
+        const color = new THREE.Color();
+
+
+
+        for (let i = 0; i < this.pos.length; i++) {
+            m4.setPosition(this.pos[i][0], this.pos[i][1], this.pos[i][2] );
+
+            imesh.setMatrixAt( i, m4 );
+            //imesh.setColorAt( i, color.setHex( Math.random() * 0xffffff ) );
+            imesh.setColorAt(i , new THREE.Color(this.colors[i][0],  this.colors[i][1],  this.colors[i][2]));
+        }
+        imesh.instanceMatrix.needsUpdate = true;
+        imesh.instanceColor.needsUpdate = true;
+
+    }
+
+    _bonds_changed() {
+        this.pos = this.model.get('pos');
+        this.bonds = this.model.get('bonds');
+        this.colors = this.model.get('colors');
+
+        let m4_rot = new THREE.Matrix4();
+        let m4_trans = new THREE.Matrix4();
+        let m4_scale = new THREE.Matrix4();
+
+
+        let dummy = new THREE.Object3D();
+
+        let quaternion = new THREE.Quaternion(); 
+
+
+
+        let bmesh = this.scene.children[1];
+        console.log(this.bonds);
+
+        
+
+        
+        bmesh.count = this.bonds.length;
+
+        
+
         for(let i = 0; i< this.bonds.length; i++){
             let pX = this.pos[this.bonds[i][0]];
             let pY = this.pos[this.bonds[i][1]];
@@ -464,63 +603,46 @@ export class FashionView extends DOMWidgetView {
             let pointX = new THREE.Vector3(pX[0], pX[1], pX[2]);
             let pointY = new THREE.Vector3(pY[0], pY[1], pY[2]);
 
-            // edge from X to Y
             var direction = new THREE.Vector3().subVectors(pointY, pointX);
-            let material = new THREE.MeshStandardMaterial({ color: 0x2B2B2B });
-            // Make the geometry (of "direction" length)
-            material.roughness = 0.2;
-            material.metalness = 0.2;
-            var geometry = new THREE.CylinderGeometry(.4, 0.4, 1.0, 6, 4, true);
-            
-            
+
+            //m4_scale.makeScale(direction.length(),1.0,1.0);
 
 
-            // rotate it the right way for lookAt to work
-            geometry.applyMatrix4(new THREE.Matrix4().makeRotationX(3.1415/2.0));
-            
-            
-            // Make a mesh with the geometry
-            var mesh = new THREE.Mesh(geometry, material);
 
-            mesh.scale.z = direction.length();
+            m4_rot.lookAt( new THREE.Vector3(0,0,0), direction, new THREE.Vector3(0,1,0));
+            //m4_rot.lookAt(new THREE.Vector3(0,0,0), direction, new THREE.Vector3(1,0,1));
 
-            // identifiers for later usage
-            mesh.index_in_scene = i;
-            mesh.physics_typedef = "bond";
+            //m4.setPosition(.5*(pY[0]+ pX[0]), .5*(pY[1]+ pX[1]),.5*(pY[2]+ pX[2]));
+
             
-            // Position it where we want
-            mesh.position.x = .5*(pY[0]+ pX[0]);
-            mesh.position.y = .5*(pY[1]+ pX[1]);
-            mesh.position.z = .5*(pY[2]+ pX[2]);
+            dummy.position.set(.5*(pY[0]+ pX[0]), .5*(pY[1]+ pX[1]),.5*(pY[2]+ pX[2]) );
 
-            // And make it point to where we want
-            mesh.lookAt(pointY);
-            this.scene.add(mesh);
+            dummy.scale.set(1.0, 1.0, direction.length());
+
+            // create one and reuse it
+            //quaternion.setFromUnitVectors( direction.normalize(), new THREE.Vector3(1,0,0) );
+            //m4_rot.makeRotationFromQuaternion( quaternion );
+            
+            dummy.setRotationFromMatrix(m4_rot);
+
+            
+
+            
+
+            dummy.updateMatrix();
+
+            
+
+            bmesh.setMatrixAt( i, dummy.matrix );
+
+            bmesh.setColorAt(i , new THREE.Color(.5*this.colors[this.bonds[i][0]][0],  .5*this.colors[this.bonds[i][0]][1], .5*this.colors[this.bonds[i][0]][2]));
+
+
+
         
         }
-
+        bmesh.instanceMatrix.needsUpdate = true;
         
-
-        
-        
-        
-        let light = new THREE.AmbientLight( 0xffffff, 0.8 ); // soft white light
-        this.scene.add( light );
-        
-        const directionalLight = new THREE.DirectionalLight( 0xffffff, .5 );
-        directionalLight.position.set( 1, 1, 1 );
-        this.scene.add( directionalLight );
-    }
-    
-    pos_changed() {
-        
-        this.pos = this.model.get('pos');
-
-    }
-
-    bonds_changed() {
-        
-        this.bonds = this.model.get('bonds');
 
     }
 };

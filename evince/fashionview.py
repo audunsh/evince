@@ -92,13 +92,15 @@ class FashionView(widgets.DOMWidget):
     _model_module_version = Unicode(NPM_PACKAGE_RANGE).tag(sync=True)
 
 
-    pos = tl.List([1,2,3]).tag(sync=True)
+    pos = tl.List([[0,0,0]]).tag(sync=True)
     radius = tl.List([]).tag(sync=True)
+    count = tl.Int().tag(sync=True)
     init = tl.Bool(False).tag(sync=True)
     masses = tl.List([]).tag(sync=True)
     colors = tl.List([]).tag(sync=True)
     box = tl.List([]).tag(sync=True)
     bonds = tl.List([]).tag(sync=True)
+    selection = tl.List([]).tag(sync=True)
 
     trigger_advance = tl.Bool(False).tag(sync=True)
 
@@ -132,6 +134,8 @@ class FashionView(widgets.DOMWidget):
     additive = tl.Bool(False).tag(sync=True)
 
     bg_color = tl.List([]).tag(sync=True)
+
+    
     
     def __init__(self, b, window_scale_height = 0.5, window_scale_width=0.75, fxaa = True, sao  =False, dof = False, additive = False, bg_color = [1.0, 1.0, 1.0], focus = 10, aperture = 0.001, max_blur = 0.01, bonds = [], saoScale = 100 ,saoBias = .1,saoIntensity = .1,saoKernelRadius = 10,saoMinResolution = .5,saoBlur = False,saoBlurRadius = 50,saoBlurStdDev = 1.0,saoBlurDepthCutoff = 0.05, realism = False, radius_scale = 1.0):
 
@@ -151,6 +155,8 @@ class FashionView(widgets.DOMWidget):
 
         self.b = b
 
+        
+
 
 
         self.fxaa = fxaa
@@ -167,13 +173,14 @@ class FashionView(widgets.DOMWidget):
 
         self.additive = additive
         self.bg_color = bg_color
-        pos = np.zeros((b.pos.shape[1],3), dtype = float)
-        pos[:, :b.pos.shape[0]] = b.pos.T
-        self.pos = pos.tolist()
-        self.bonds = bonds
+        #pos = np.zeros((b.pos.shape[1],3), dtype = float)
+        #pos[:, :b.pos.shape[0]] = b.pos.T
+        self.pos = b.pos #.tolist()
+        self.count = b.n_particles
+        self.bonds = b.bonds
         self.box = b.size.tolist()
         nc = 20
-        self.radius = [1.0 for i in range(b.pos.shape[0])]
+        self.radius = [1.0 for i in range(b.n_particles)]
         self.colors = np.array((interp1d(np.linspace(0,1,nc), np.random.uniform(0,1,(3, nc)) )(b.masses/b.masses.max()).T), dtype = float).tolist()
         if realism:
             self.radius = (radius_scale*get_vwv_radius_from_atomic_number(b.masses)).tolist()
@@ -181,6 +188,13 @@ class FashionView(widgets.DOMWidget):
 
         self.masses = b.masses.tolist()
         self.init = True #trigger frontend init
+
+    @observe('selection')
+    def _execute_kernel(self, change):
+        #print(change['old'])
+        #print(change['new'])
+        self.selection = change
+
 
 
 
@@ -211,7 +225,8 @@ class FashionView(widgets.DOMWidget):
         #print(change['new'])
         #self.new_atom_observed = True
 
-        self.b.advance()
+        #self.b.advance()
+        pass
 
         #self.trigger_advance = False
 
