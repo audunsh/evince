@@ -39,8 +39,8 @@ export class SpotlightModel extends DOMWidgetModel {
             _view_name : 'SpotlightView',
             _model_module : 'evince',
             _view_module : 'evince',
-            _model_module_version : '0.46.0',
-            _view_module_version : '0.46.0'
+            _model_module_version : '0.47.0',
+            _view_module_version : '0.47.0'
         };
     }
 }

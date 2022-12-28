@@ -41,7 +41,7 @@ export const MDViewPlugin = {
       widgets.registerWidget({
           name: 'evince',
           version: version,
-          exports: { MDModel, MDView, SpotlightModel, SpotlightView, BraketModel, BraketView,LatticeModel, LatticeView }
+          exports: { MDModel, MDView, SpotlightModel, SpotlightView, BraketModel, BraketView,LatticeModel, LatticeView , FashionModel, FashionView}
       });
   },
   autoStart: true

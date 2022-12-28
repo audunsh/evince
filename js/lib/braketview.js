@@ -30,8 +30,8 @@ export class BraketModel extends DOMWidgetModel {
         _view_name : 'BraketView',
         _model_module : 'evince',
         _view_module : 'evince',
-        _model_module_version : '0.46.0',
-        _view_module_version : '0.46.0'
+        _model_module_version : '0.47.0',
+        _view_module_version : '0.47.0'
       };
     }
   }
@@ -40,7 +40,7 @@ export class BraketModel extends DOMWidgetModel {
 
 export class BraketView extends DOMWidgetView {
     render() {
-		console.log("Hello from BraketView 43.0");
+		console.log("Hello from BraketView 47.0");
         const scene = new THREE.Scene();
         this.scene = scene;
 
