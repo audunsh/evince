@@ -52,4 +52,5 @@ export {LatticeModel, LatticeView} from './latticeview';
 export {FashionModel, FashionView} from './fashionview';
 export {OmoviModel, OmoviView} from './omoviview';
 export {MorpheusModel, MorpheusView} from './morpheusview';
+export {DenseModel, DenseView} from './denseview';
 export {version} from '../package.json';

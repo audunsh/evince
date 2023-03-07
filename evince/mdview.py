@@ -75,6 +75,8 @@ class MDView(widgets.DOMWidget):
     colors = tl.Bytes().tag(sync=True)
     box = tl.List([]).tag(sync=True)
 
+    fragment_shader = tl.Unicode('').tag(sync=True)
+
     #bonds = 
 
     #colorscheme

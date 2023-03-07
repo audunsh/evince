@@ -42,8 +42,8 @@ export class MorpheusModel extends DOMWidgetModel {
             _view_name : 'MorpheusView',
             _model_module : 'evince',
             _view_module : 'evince',
-            _model_module_version : '0.47.0',
-            _view_module_version : '0.47.0'
+            _model_module_version : '0.53.0',
+            _view_module_version : '0.53.0'
         };
     }
 }
@@ -122,17 +122,18 @@ export class MorpheusView extends DOMWidgetView {
 
 
         //let baseGeometry = new THREE.SphereBufferGeometry(1.0, 20, 10);
-        let material = new THREE.MeshStandardMaterial( );
-        material.roughness = 0.2;
-        material.metalness = 0.2;
-        material.color = new THREE.Color(0.7,0.7,0.98);
+        //let material = new THREE.MeshStandardMaterial( );
+        //material.roughness = 0.2;
+        //material.metalness = 0.2;
             
 
-        //let material = new THREE.MeshPhysicalMaterial({  
-        //    roughness: 0.7,   
-        //    transmission: 0.5,  
-        //    thickness: 1
-        //  });
+        let material = new THREE.MeshPhysicalMaterial({  
+            roughness: 0.7,   
+            transmission: 0.5,  
+            thickness: 1
+        });
+        material.color = new THREE.Color(0.7,0.7,0.98);
+        
 
 
 
@@ -148,6 +149,9 @@ export class MorpheusView extends DOMWidgetView {
         let directionalLight = new THREE.DirectionalLight( 0xffffff, .5 );
         directionalLight.position.set( 1, 1, 1 );
         this.scene.add( directionalLight );
+
+        //let alight = new THREE.AmbientLight( 0x202020, 5 ); // soft white light
+        //this.scene.add( alight );
 
 
 

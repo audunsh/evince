@@ -6,33 +6,8 @@ import { OrbitControls } from 'three/examples/jsm/Controls/OrbitControls.js';
 import { VRButton } from 'three/examples/jsm/webxr/VRButton.js';
 
 
-/*
-function deserialize_numpy_array(data, manager) {
-    if(data == null)
-        return null;
-    console.log("binary array")
-    window.last_data = data
-    var ar = new Float32Array(data.data.buffer)
-    window.last_array = ar
-    return {data:ar, shape:data.shape, nested:data.nested}
-}
 
-function serialize_numpy_array(data, m) {
-    console.log("serialize")
-    return data;//[0,9]
-}
-
-
-
-
-
-serializers: _.extend({
-    x: { deserialize: deserialize_numpy_array, serialize: serialize_numpy_array  },
-    x2: { deserialize: deserialize_numpy_array, serialize: serialize_numpy_array },
-}, widgets.WidgetModel.serializers)
-*/
-
-
+// widget model
 export class MDModel extends DOMWidgetModel {
     defaults() {
         return {
@@ -41,8 +16,8 @@ export class MDModel extends DOMWidgetModel {
 			_view_name : 'MDView',
 			_model_module : 'evince',
 			_view_module : 'evince',
-			_model_module_version : '0.47.0',
-			_view_module_version : '0.47.0'
+			_model_module_version : '0.53.0',
+			_view_module_version : '0.53.0'
         };
     }
 }
@@ -57,10 +32,10 @@ export class MDView extends DOMWidgetView {
         this.scene = scene;
 
         let raycaster = new THREE.Raycaster();
-		//let pointer = new THREE.Vector2();
+
+        // raycasting for interactivity
         let selectedObject = null;
         this.raycaster = raycaster;
-        //this.pointer = null;
         const mouse = new THREE.Vector2( 1, 1 );
         this.mouse = mouse;
         this.selectedObject = selectedObject;
@@ -122,6 +97,7 @@ export class MDView extends DOMWidgetView {
         this.model.on('change:colors', this.colors_changed, this);
         this.model.on('change:radius', this.radius_changed, this);
         this.model.on('change:count', this.count_changed, this);
+        this.model.on('change:fragment_shader', this.fragment_shader_changed, this);
 
         //window.addEventListener( 'mousemove', onMouseMove , this);
         //document.addEventListener( 'mousemove', onMouseMove );
@@ -705,6 +681,12 @@ gl_FragColor = gl_FragColor + vec4(vColor, 1.0);
         );
         
         //this.scene.children[0].geometry.attributes.aColor.needsUpdate = true;
+    }
+
+    fragment_shader_changed(){
+        console.log(this.scene.children[0].material);
+        this.fragment_shader = this.model.get('fragment_shader');
+        this.scene.children[0].material.fragmentShader = this.fragment_shader;
     }
     
     

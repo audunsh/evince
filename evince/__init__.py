@@ -8,6 +8,7 @@ from .template import *
 from .fashionview import *
 from .omoviview import *
 from .morpehusview import *
+from .denseview import *
 
 def _jupyter_labextension_paths():
     """Called by Jupyter Lab Server to detect if it is a valid labextension and
