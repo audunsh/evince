@@ -91,33 +91,43 @@ class FashionView(widgets.DOMWidget):
     _model_module_version = Unicode(NPM_PACKAGE_RANGE).tag(sync=True)
 
 
-    pos = tl.List([[0,0,0]]).tag(sync=True)
-    radius = tl.List([]).tag(sync=True)
-    count = tl.Int().tag(sync=True)
-    init = tl.Bool(False).tag(sync=True)
-    masses = tl.List([]).tag(sync=True)
-    colors = tl.List([]).tag(sync=True)
-    box = tl.List([]).tag(sync=True)
+    # atom variables to sync with front-end
+    pos = tl.List([[0,0,0]]).tag(sync=True) # positions of atoms
+    radius = tl.List([]).tag(sync=True)     # radius of spheres
+    count = tl.Int().tag(sync=True)         # the number of atoms
+    init = tl.Bool(False).tag(sync=True)    # trigger for initialization
+    masses = tl.List([]).tag(sync=True)     # masses for atoms (only used to get vdw-radius)
+    colors = tl.List([]).tag(sync=True)     # colors of atoms
+    box = tl.List([]).tag(sync=True)        # optional box 
     bonds = tl.List([]).tag(sync=True)
-    selection = tl.List([]).tag(sync=True)
+    
 
-    trigger_advance = tl.Bool(False).tag(sync=True)
+    """
+    Various post-processing effects
 
-    add_new_atom = tl.List([]).tag(sync=True)
+    sao - Screen space ambient occlusion
+    source  : https://github.com/mrdoob/three.js/blob/dev/examples/jsm/postprocessing/SAOPass.js
+    overview: https://people.mpi-inf.mpg.de/~ritschel/SSDO/index.html
 
-    window_scale_height = tl.Float().tag(sync=True)
-    window_scale_width = tl.Float().tag(sync=True)
+    dof - depth of field
+    source  : https://github.com/mrdoob/three.js/blob/dev/examples/jsm/postprocessing/BokehPass.js
+    overview: https://people.mpi-inf.mpg.de/~ritschel/SSDO/index.html
 
-    #fxaa 
+    fxaa - fast approximate anti-aliasing
+    source   - https://github.com/mrdoob/three.js/blob/dev/examples/jsm/shaders/FXAAShader.js
+    overview - 10.1109/ICCRD54409.2022.9730249
+    """
+
+    # fxaa settings
     fxaa = tl.Bool(False).tag(sync=True)
 
-    #camera / dof
+    # camera / dof settings
     dof = tl.Bool(False).tag(sync=True)
     focus = tl.Float().tag(sync=True)
     aperture = tl.Float().tag(sync=True)
     max_blur = tl.Float().tag(sync=True)
 
-    #sao controls
+    # sao settings
     sao = tl.Bool(False).tag(sync=True)
     saoScale = tl.Float().tag(sync=True)
     saoBias = tl.Float().tag(sync=True)
@@ -129,20 +139,41 @@ class FashionView(widgets.DOMWidget):
     saoBlurStdDev = tl.Float().tag(sync=True)
     saoBlurDepthCutoff = tl.Float().tag(sync=True)
 
-    #colorscheme
+    # colorscheme for orbital visualization
     additive = tl.Bool(False).tag(sync=True)
 
-    bg_color = tl.List([]).tag(sync=True)
+    # general settings
+    bg_color = tl.List([]).tag(sync=True) #background color
+    
+    
+    # two way kernel-frontend communcation
     options = tl.List([]).tag(sync=True)
 
     kernel_task = tl.Int().tag(sync=True)
 
     synchronized_text = tl.Unicode('Options').tag(sync=True)
 
-    
-    
-    def __init__(self, b, window_scale_height = 0.5, window_scale_width=0.75, fxaa = True, sao  =False, dof = False, additive = False, bg_color = [1.0, 1.0, 1.0], focus = 10, aperture = 0.001, max_blur = 0.01, bonds = [], saoScale = 100 ,saoBias = .1,saoIntensity = .1,saoKernelRadius = 10,saoMinResolution = .5,saoBlur = False,saoBlurRadius = 50,saoBlurStdDev = 1.0,saoBlurDepthCutoff = 0.05, realism = False, radius_scale = 1.0, options  = []):
+    trigger_advance = tl.Bool(False).tag(sync=True)
 
+    add_new_atom = tl.List([]).tag(sync=True)
+
+    window_scale_height = tl.Float().tag(sync=True)
+    window_scale_width = tl.Float().tag(sync=True)
+
+    selection = tl.List([]).tag(sync=True)
+
+    
+    
+    def __init__(self, molecular_system, window_scale_height = 0.5, window_scale_width=0.75, fxaa = True, sao  =False, dof = False, additive = False, bg_color = [1.0, 1.0, 1.0], focus = 10, aperture = 0.001, max_blur = 0.01, bonds = [], saoScale = 100 ,saoBias = .1,saoIntensity = .1,saoKernelRadius = 10,saoMinResolution = .5,saoBlur = False,saoBlurRadius = 50,saoBlurStdDev = 1.0,saoBlurDepthCutoff = 0.05, realism = False, radius_scale = 1.0, options  = []):
+        super().__init__() # execute init of parent class, append: 
+        
+        # general settings
+        self.window_scale_height = window_scale_height
+        self.window_scale_width = window_scale_width
+        self.molecular_system = molecular_system
+        self.options = options
+
+        # enable/disable sao + settings
         self.sao = sao
         self.saoScale = saoScale
         self.saoBias = saoBias
@@ -154,46 +185,32 @@ class FashionView(widgets.DOMWidget):
         self.saoBlurStdDev = saoBlurStdDev
         self.saoBlurDepthCutoff = saoBlurDepthCutoff
 
-        self.window_scale_height = window_scale_height
-        self.window_scale_width = window_scale_width
-
-        self.b = b
-
-
-        self.options = options
-
-        
-
-
-
+        #enable / disable fxaa 
         self.fxaa = fxaa
 
+        # enable / disable dof
         self.dof = dof 
-        
-        super().__init__() # execute init of parent class, append:
-
-        
         self.focus = focus
         self.aperture = aperture
         self.max_blur = max_blur
-
-
+        
+        # color settings
         self.additive = additive
         self.bg_color = bg_color
-        #pos = np.zeros((b.pos.shape[1],3), dtype = float)
-        #pos[:, :b.pos.shape[0]] = b.pos.T
-        self.pos = b.pos #.tolist()
-        self.count = b.n_particles
-        self.bonds = b.bonds
-        self.box = b.size.tolist()
-        nc = 20
-        self.radius = [1.0 for i in range(b.n_particles)]
-        self.colors = np.array((interp1d(np.linspace(0,1,nc), np.random.uniform(0,1,(3, nc)) )(b.masses/b.masses.max()).T), dtype = float).tolist()
-        if realism:
-            self.radius = (radius_scale*get_vwv_radius_from_atomic_number(b.masses)).tolist()
-            self.colors = colorscheme(b.masses).T.tolist()
 
-        self.masses = b.masses.tolist()
+        # access system data from 
+        self.pos = molecular_system.pos #.tolist()
+        self.count = molecular_system.n_particles
+        self.bonds = molecular_system.bonds
+        self.box = molecular_system.size.tolist()
+        nc = 20
+        self.radius = [1.0 for i in range(molecular_system.n_particles)]
+        self.colors = np.array((interp1d(np.linspace(0,1,nc), np.random.uniform(0,1,(3, nc)) )(molecular_system.masses/molecular_system.masses.max()).T), dtype = float).tolist()
+        if realism:
+            self.radius = (radius_scale*get_vwv_radius_from_atomic_number(molecular_system.masses)).tolist()
+            self.colors = colorscheme(molecular_system.masses).T.tolist()
+
+        self.masses = molecular_system.masses.tolist()
         self.init = True #trigger frontend init
 
 
@@ -201,64 +218,21 @@ class FashionView(widgets.DOMWidget):
 
     @observe('kernel_task')
     def _observe_kernel_task(self, change):
-        
+        # execute this command when triggered from front-end
+        # 'change' contains the list of selected atoms
         self.b.execute_kernel(change)
 
     @observe('selection')
     def _execute_kernel(self, change):
-        #print(change['old'])
-        #print(change['new'])
         self.selection = change
-
-        # execute the change
-        
-
-
-
 
     @observe('add_new_atom')
     def _observe_add_new_atom(self, change):
-        #print(change['old'])
-        #print(change['new'])
         self.new_atom_observed = True
-
-        #self.b.run(500)
-
-        
-
-        #self.pos[0][] = (1.1*self.b.pos.T).tolist()
-        #self.b.pos[:, self.add_new_atom[0]] *= 0.0
-
-        # add a new atom at site
-
-        # self.add_new_atom = self.add_new_atom.default()
-
-        # add new atom 
-        #self.b.run(100)
-
 
     @observe('trigger_advance')
     def _observe_trigger_advance(self, change):
-        #print(change['old'])
-        #print(change['new'])
-        #self.new_atom_observed = True
-
-        #self.b.advance()
         pass
-
-        #self.trigger_advance = False
-
-        #self.pos[0][] = (1.1*self.b.pos.T).tolist()
-        #self.b.pos[:, self.add_new_atom[0]] *= 0.0
-
-        # add a new atom at site
-
-        # self.add_new_atom = self.add_new_atom.default()
-
-        # add new atom 
-        #self.b.run(100)
-
-    
 
     def save(self, filename, title = ""):
         """
