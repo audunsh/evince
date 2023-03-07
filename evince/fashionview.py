@@ -1,4 +1,3 @@
-from webbrowser import get
 import ipywidgets as widgets
 from ipywidgets import embed
 from traitlets import Unicode, validate, observe
@@ -109,7 +108,7 @@ class FashionView(widgets.DOMWidget):
     window_scale_height = tl.Float().tag(sync=True)
     window_scale_width = tl.Float().tag(sync=True)
 
-    #fxaa
+    #fxaa 
     fxaa = tl.Bool(False).tag(sync=True)
 
     #camera / dof
@@ -134,10 +133,15 @@ class FashionView(widgets.DOMWidget):
     additive = tl.Bool(False).tag(sync=True)
 
     bg_color = tl.List([]).tag(sync=True)
+    options = tl.List([]).tag(sync=True)
+
+    kernel_task = tl.Int().tag(sync=True)
+
+    synchronized_text = tl.Unicode('Options').tag(sync=True)
 
     
     
-    def __init__(self, b, window_scale_height = 0.5, window_scale_width=0.75, fxaa = True, sao  =False, dof = False, additive = False, bg_color = [1.0, 1.0, 1.0], focus = 10, aperture = 0.001, max_blur = 0.01, bonds = [], saoScale = 100 ,saoBias = .1,saoIntensity = .1,saoKernelRadius = 10,saoMinResolution = .5,saoBlur = False,saoBlurRadius = 50,saoBlurStdDev = 1.0,saoBlurDepthCutoff = 0.05, realism = False, radius_scale = 1.0):
+    def __init__(self, b, window_scale_height = 0.5, window_scale_width=0.75, fxaa = True, sao  =False, dof = False, additive = False, bg_color = [1.0, 1.0, 1.0], focus = 10, aperture = 0.001, max_blur = 0.01, bonds = [], saoScale = 100 ,saoBias = .1,saoIntensity = .1,saoKernelRadius = 10,saoMinResolution = .5,saoBlur = False,saoBlurRadius = 50,saoBlurStdDev = 1.0,saoBlurDepthCutoff = 0.05, realism = False, radius_scale = 1.0, options  = []):
 
         self.sao = sao
         self.saoScale = saoScale
@@ -154,6 +158,9 @@ class FashionView(widgets.DOMWidget):
         self.window_scale_width = window_scale_width
 
         self.b = b
+
+
+        self.options = options
 
         
 
@@ -189,11 +196,22 @@ class FashionView(widgets.DOMWidget):
         self.masses = b.masses.tolist()
         self.init = True #trigger frontend init
 
+
+    # functions synchronized with the frontend widget
+
+    @observe('kernel_task')
+    def _observe_kernel_task(self, change):
+        
+        self.b.execute_kernel(change)
+
     @observe('selection')
     def _execute_kernel(self, change):
         #print(change['old'])
         #print(change['new'])
         self.selection = change
+
+        # execute the change
+        
 
 
 
