@@ -1,0 +1,1729 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.4.3">
+    
+    
+      
+        <title>FashionView - Evince</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.6b80c2a2.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.cbb835fc.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#546d78">
+        
+      
+      
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="blue-grey" data-md-color-accent="">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#fashionview-module" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Evince" class="md-header__button md-logo" aria-label="Evince" data-md-component="logo">
+      
+  <img src="../graphics/evince_logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Evince
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              FashionView
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Evince" class="md-nav__button md-logo" aria-label="Evince" data-md-component="logo">
+      
+  <img src="../graphics/evince_logo.png" alt="logo">
+
+    </a>
+    Evince
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../intro/" class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorials/overview/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorials/installation/" class="md-nav__link">
+        Installation
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          Braketview
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Braketview" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Braketview
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorials/braketview/" class="md-nav__link">
+        BraketView
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../braketview/gto_gallery/" class="md-nav__link">
+        A gallery of gaussian type orbitals
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../braketview/hybridization/" class="md-nav__link">
+        Hybrid orbitals
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mdview/instancing/" class="md-nav__link">
+        Instancing example
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          MDView
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="MDView" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          MDView
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorials/mdview/" class="md-nav__link">
+        MDView
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mdview/interactivity/" class="md-nav__link">
+        Interactivity
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6">
+          Customization
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Customization" data-md-level="1">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          Customization
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorials/customization/" class="md-nav__link">
+        Customization
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../custom/templateview/" class="md-nav__link">
+        The template-class
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7" type="checkbox" id="__nav_7" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7">
+          SpotlightView
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="SpotlightView" data-md-level="1">
+        <label class="md-nav__title" for="__nav_7">
+          <span class="md-nav__icon md-icon"></span>
+          SpotlightView
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorials/spotlight/" class="md-nav__link">
+        SpotlightView
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorials/embedding/" class="md-nav__link">
+        Embedding
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9" type="checkbox" id="__nav_9" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_9">
+          Code Reference
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Code Reference" data-md-level="1">
+        <label class="md-nav__title" for="__nav_9">
+          <span class="md-nav__icon md-icon"></span>
+          Code Reference
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../braketview-reference/" class="md-nav__link">
+        BraketView
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mdview-reference/" class="md-nav__link">
+        MDView
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../spotlightview-reference/" class="md-nav__link">
+        SpotlightView
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          FashionView
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        FashionView
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#evince.fashionview" class="md-nav__link">
+    evince.fashionview
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#evince.fashionview.FashionView" class="md-nav__link">
+    FashionView
+  </a>
+  
+    <nav class="md-nav" aria-label="FashionView">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#evince.fashionview.FashionView--an-interactive-molecule-builder-interface-for-the-hylleraas-software-platform" class="md-nav__link">
+    An interactive molecule-builder interface for the Hylleraas Software Platform
+  </a>
+  
+    <nav class="md-nav" aria-label="An interactive molecule-builder interface for the Hylleraas Software Platform">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#evince.fashionview.FashionView--keyword-arguments" class="md-nav__link">
+    Keyword arguments:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#evince.fashionview.FashionView--example-usage" class="md-nav__link">
+    Example usage
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#evince.fashionview.FashionView.save" class="md-nav__link">
+    save()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#evince.fashionview.colorscheme" class="md-nav__link">
+    colorscheme()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#evince.fashionview.extract_bonds" class="md-nav__link">
+    extract_bonds()
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../morpheusview-reference/" class="md-nav__link">
+        MorpheusView
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#evince.fashionview" class="md-nav__link">
+    evince.fashionview
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#evince.fashionview.FashionView" class="md-nav__link">
+    FashionView
+  </a>
+  
+    <nav class="md-nav" aria-label="FashionView">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#evince.fashionview.FashionView--an-interactive-molecule-builder-interface-for-the-hylleraas-software-platform" class="md-nav__link">
+    An interactive molecule-builder interface for the Hylleraas Software Platform
+  </a>
+  
+    <nav class="md-nav" aria-label="An interactive molecule-builder interface for the Hylleraas Software Platform">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#evince.fashionview.FashionView--keyword-arguments" class="md-nav__link">
+    Keyword arguments:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#evince.fashionview.FashionView--example-usage" class="md-nav__link">
+    Example usage
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#evince.fashionview.FashionView.save" class="md-nav__link">
+    save()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#evince.fashionview.colorscheme" class="md-nav__link">
+    colorscheme()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#evince.fashionview.extract_bonds" class="md-nav__link">
+    extract_bonds()
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+
+
+<h1 id="fashionview-module">FashionView module</h1>
+
+
+<div class="doc doc-object doc-module">
+
+
+<a id="evince.fashionview"></a>
+  <div class="doc doc-contents first">
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="evince.fashionview.FashionView" class="doc doc-heading">
+        <code>FashionView</code>
+
+
+</h2>
+
+
+  <div class="doc doc-contents ">
+      <p class="doc doc-class-bases">
+        Bases: <code><span title="ipywidgets">widgets</span>.<span title="ipywidgets.DOMWidget">DOMWidget</span></code></p>
+
+  
+      <h3 id="evince.fashionview.FashionView--an-interactive-molecule-builder-interface-for-the-hylleraas-software-platform">An interactive molecule-builder interface for the Hylleraas Software Platform</h3>
+<p>Author: Audun Skau Hansen (2023)</p>
+<p>The FashionView module enables two-way communication of data between a Javascript frond-end 3D visualization and a IPython-kernel in Jupyter. User interaction with the front-end can trigger events on the kernel, and the kernel can instantly update the view.</p>
+<h4 id="evince.fashionview.FashionView--keyword-arguments">Keyword arguments:</h4>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Description</th>
+<th>Subattributes and defaults</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>molecular_system</td>
+<td>An instance of a class containing information on the molecular system</td>
+<td>  <code>pos</code> (Nx3 list with N atom positions), <code>count</code> (N atoms ), <code>bonds</code> (Nb x 2 list of connected atoms), <code>size</code> (numpy array with simulation box size)</td>
+</tr>
+<tr>
+<td>radius_scale</td>
+<td>Scaling of atomic radius</td>
+<td><code>1.0</code></td>
+</tr>
+<tr>
+<td>realism</td>
+<td>Use van der Waals radius for atoms and <a href="https://sciencenotes.org/molecule-atom-colors-cpk-colors/">CPK</a> coloring</td>
+<td><code>False</code> (bool)</td>
+</tr>
+<tr>
+<td>background_color</td>
+<td>Background color</td>
+<td><code>[1.0, 1.0, 1.0]</code> (list defining the color white)</td>
+</tr>
+<tr>
+<td>bonds</td>
+<td>Background color</td>
+<td><code>[1.0, 1.0, 1.0]</code> (list defining the color white)</td>
+</tr>
+<tr>
+<td>window_scale_height, window_scale_width</td>
+<td>Scaling of visualization within canvas</td>
+<td><code>0.5</code>,  <code>0.75</code></td>
+</tr>
+<tr>
+<td>options</td>
+<td>a list of strings to be rendered as buttons / options in the front end environment</td>
+<td></td>
+</tr>
+<tr>
+<td>fxaa</td>
+<td>Fast Approximate Anti-Aliasing (<a href="https://github.com/mrdoob/three.js/blob/dev/examples/jsm/shaders/FXAAShader.js">source</a>, <a href="10.1109/ICCRD54409.2022.9730249">overview</a>)</td>
+<td><code>True</code> (bool)</td>
+</tr>
+<tr>
+<td>sao</td>
+<td>Screen space ambient occlusion effect (<a href="https://github.com/mrdoob/three.js/blob/dev/examples/jsm/postprocessing/SAOPass.js">source</a>, <a href="https://people.mpi-inf.mpg.de/~ritschel/SSDO/index.html">overview</a>)</td>
+<td><code>False</code> (bool)</td>
+</tr>
+<tr>
+<td>saoScale</td>
+<td></td>
+<td><code>100</code></td>
+</tr>
+<tr>
+<td>saoBias</td>
+<td></td>
+<td><code>0.1</code></td>
+</tr>
+<tr>
+<td>saoIntensity</td>
+<td></td>
+<td><code>0.1</code></td>
+</tr>
+<tr>
+<td>saoKernelRadius</td>
+<td></td>
+<td><code>10</code></td>
+</tr>
+<tr>
+<td>saoMinResolution</td>
+<td></td>
+<td><code>0.5</code></td>
+</tr>
+<tr>
+<td>saoBlur</td>
+<td></td>
+<td><code>False</code> (bool)</td>
+</tr>
+<tr>
+<td>saoBlurRadius</td>
+<td></td>
+<td><code>50</code></td>
+</tr>
+<tr>
+<td>saoBlurStdDev</td>
+<td></td>
+<td><code>1.0</code></td>
+</tr>
+<tr>
+<td>saoBlurDepthCutoff</td>
+<td></td>
+<td><code>0.05</code></td>
+</tr>
+<tr>
+<td>dof</td>
+<td>Depth of field effect (<a href="https://github.com/mrdoob/three.js/blob/dev/examples/jsm/postprocessing/BokehPass.js">source</a>, <a href="https://people.mpi-inf.mpg.de/~ritschel/SSDO/index.html">overview</a>)</td>
+<td><code>False</code> (bool)</td>
+</tr>
+<tr>
+<td>focus</td>
+<td></td>
+<td><code>10</code></td>
+</tr>
+<tr>
+<td>aperture</td>
+<td></td>
+<td><code>0.001</code></td>
+</tr>
+<tr>
+<td>max_blur</td>
+<td></td>
+<td><code>0.01</code></td>
+</tr>
+</tbody>
+</table>
+<h4 id="evince.fashionview.FashionView--example-usage">Example usage</h4>
+<p>For example usage, see the provided example class using <a href="audunsh.github.io/bubblebox">BubbleBox</a></p>
+
+
+        <details class="quote">
+          <summary>Source code in <code>evince/fashionview.py</code></summary>
+          <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 72</span>
+<span class="normal"> 73</span>
+<span class="normal"> 74</span>
+<span class="normal"> 75</span>
+<span class="normal"> 76</span>
+<span class="normal"> 77</span>
+<span class="normal"> 78</span>
+<span class="normal"> 79</span>
+<span class="normal"> 80</span>
+<span class="normal"> 81</span>
+<span class="normal"> 82</span>
+<span class="normal"> 83</span>
+<span class="normal"> 84</span>
+<span class="normal"> 85</span>
+<span class="normal"> 86</span>
+<span class="normal"> 87</span>
+<span class="normal"> 88</span>
+<span class="normal"> 89</span>
+<span class="normal"> 90</span>
+<span class="normal"> 91</span>
+<span class="normal"> 92</span>
+<span class="normal"> 93</span>
+<span class="normal"> 94</span>
+<span class="normal"> 95</span>
+<span class="normal"> 96</span>
+<span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span>
+<span class="normal">112</span>
+<span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span>
+<span class="normal">116</span>
+<span class="normal">117</span>
+<span class="normal">118</span>
+<span class="normal">119</span>
+<span class="normal">120</span>
+<span class="normal">121</span>
+<span class="normal">122</span>
+<span class="normal">123</span>
+<span class="normal">124</span>
+<span class="normal">125</span>
+<span class="normal">126</span>
+<span class="normal">127</span>
+<span class="normal">128</span>
+<span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span>
+<span class="normal">132</span>
+<span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span>
+<span class="normal">136</span>
+<span class="normal">137</span>
+<span class="normal">138</span>
+<span class="normal">139</span>
+<span class="normal">140</span>
+<span class="normal">141</span>
+<span class="normal">142</span>
+<span class="normal">143</span>
+<span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span>
+<span class="normal">147</span>
+<span class="normal">148</span>
+<span class="normal">149</span>
+<span class="normal">150</span>
+<span class="normal">151</span>
+<span class="normal">152</span>
+<span class="normal">153</span>
+<span class="normal">154</span>
+<span class="normal">155</span>
+<span class="normal">156</span>
+<span class="normal">157</span>
+<span class="normal">158</span>
+<span class="normal">159</span>
+<span class="normal">160</span>
+<span class="normal">161</span>
+<span class="normal">162</span>
+<span class="normal">163</span>
+<span class="normal">164</span>
+<span class="normal">165</span>
+<span class="normal">166</span>
+<span class="normal">167</span>
+<span class="normal">168</span>
+<span class="normal">169</span>
+<span class="normal">170</span>
+<span class="normal">171</span>
+<span class="normal">172</span>
+<span class="normal">173</span>
+<span class="normal">174</span>
+<span class="normal">175</span>
+<span class="normal">176</span>
+<span class="normal">177</span>
+<span class="normal">178</span>
+<span class="normal">179</span>
+<span class="normal">180</span>
+<span class="normal">181</span>
+<span class="normal">182</span>
+<span class="normal">183</span>
+<span class="normal">184</span>
+<span class="normal">185</span>
+<span class="normal">186</span>
+<span class="normal">187</span>
+<span class="normal">188</span>
+<span class="normal">189</span>
+<span class="normal">190</span>
+<span class="normal">191</span>
+<span class="normal">192</span>
+<span class="normal">193</span>
+<span class="normal">194</span>
+<span class="normal">195</span>
+<span class="normal">196</span>
+<span class="normal">197</span>
+<span class="normal">198</span>
+<span class="normal">199</span>
+<span class="normal">200</span>
+<span class="normal">201</span>
+<span class="normal">202</span>
+<span class="normal">203</span>
+<span class="normal">204</span>
+<span class="normal">205</span>
+<span class="normal">206</span>
+<span class="normal">207</span>
+<span class="normal">208</span>
+<span class="normal">209</span>
+<span class="normal">210</span>
+<span class="normal">211</span>
+<span class="normal">212</span>
+<span class="normal">213</span>
+<span class="normal">214</span>
+<span class="normal">215</span>
+<span class="normal">216</span>
+<span class="normal">217</span>
+<span class="normal">218</span>
+<span class="normal">219</span>
+<span class="normal">220</span>
+<span class="normal">221</span>
+<span class="normal">222</span>
+<span class="normal">223</span>
+<span class="normal">224</span>
+<span class="normal">225</span>
+<span class="normal">226</span>
+<span class="normal">227</span>
+<span class="normal">228</span>
+<span class="normal">229</span>
+<span class="normal">230</span>
+<span class="normal">231</span>
+<span class="normal">232</span>
+<span class="normal">233</span>
+<span class="normal">234</span>
+<span class="normal">235</span>
+<span class="normal">236</span>
+<span class="normal">237</span>
+<span class="normal">238</span>
+<span class="normal">239</span>
+<span class="normal">240</span>
+<span class="normal">241</span>
+<span class="normal">242</span>
+<span class="normal">243</span>
+<span class="normal">244</span>
+<span class="normal">245</span>
+<span class="normal">246</span>
+<span class="normal">247</span>
+<span class="normal">248</span>
+<span class="normal">249</span>
+<span class="normal">250</span>
+<span class="normal">251</span>
+<span class="normal">252</span>
+<span class="normal">253</span>
+<span class="normal">254</span>
+<span class="normal">255</span>
+<span class="normal">256</span>
+<span class="normal">257</span>
+<span class="normal">258</span>
+<span class="normal">259</span>
+<span class="normal">260</span>
+<span class="normal">261</span>
+<span class="normal">262</span>
+<span class="normal">263</span>
+<span class="normal">264</span>
+<span class="normal">265</span>
+<span class="normal">266</span>
+<span class="normal">267</span>
+<span class="normal">268</span>
+<span class="normal">269</span>
+<span class="normal">270</span>
+<span class="normal">271</span>
+<span class="normal">272</span>
+<span class="normal">273</span>
+<span class="normal">274</span>
+<span class="normal">275</span>
+<span class="normal">276</span>
+<span class="normal">277</span>
+<span class="normal">278</span>
+<span class="normal">279</span>
+<span class="normal">280</span>
+<span class="normal">281</span>
+<span class="normal">282</span>
+<span class="normal">283</span>
+<span class="normal">284</span>
+<span class="normal">285</span>
+<span class="normal">286</span>
+<span class="normal">287</span>
+<span class="normal">288</span>
+<span class="normal">289</span>
+<span class="normal">290</span>
+<span class="normal">291</span>
+<span class="normal">292</span>
+<span class="normal">293</span>
+<span class="normal">294</span>
+<span class="normal">295</span>
+<span class="normal">296</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@widgets</span><span class="o">.</span><span class="n">register</span>
+<span class="k">class</span> <span class="nc">FashionView</span><span class="p">(</span><span class="n">widgets</span><span class="o">.</span><span class="n">DOMWidget</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    # An interactive molecule-builder interface for the Hylleraas Software Platform</span>
+<span class="sd">    Author: Audun Skau Hansen (2023)</span>
+
+<span class="sd">    The FashionView module enables two-way communication of data between a Javascript frond-end 3D visualization and a IPython-kernel in Jupyter. User interaction with the front-end can trigger events on the kernel, and the kernel can instantly update the view.</span>
+
+<span class="sd">    ## Keyword arguments:</span>
+
+
+<span class="sd">    | Argument      | Description | Subattributes and defaults |</span>
+<span class="sd">    | ----------- | ----------- | ---------- |</span>
+<span class="sd">    | molecular_system      | An instance of a class containing information on the molecular system |  ```pos``` (Nx3 list with N atom positions), ```count``` (N atoms ), ```bonds``` (Nb x 2 list of connected atoms), ```size``` (numpy array with simulation box size)</span>
+<span class="sd">    |  radius_scale    |  Scaling of atomic radius | ```1.0```  |</span>
+<span class="sd">    |  realism    |  Use van der Waals radius for atoms and &lt;a href=&quot;https://sciencenotes.org/molecule-atom-colors-cpk-colors/&quot;&gt;CPK&lt;/a&gt; coloring | ```False``` (bool) |</span>
+<span class="sd">    |  background_color    |  Background color | ```[1.0, 1.0, 1.0]``` (list defining the color white) |</span>
+<span class="sd">    |  bonds    |  Background color | ```[1.0, 1.0, 1.0]``` (list defining the color white) |</span>
+<span class="sd">    | window_scale_height, window_scale_width   | Scaling of visualization within canvas        | ```0.5```,  ```0.75``` |</span>
+<span class="sd">    | options   | a list of strings to be rendered as buttons / options in the front end environment   |</span>
+<span class="sd">    | fxaa   |   Fast Approximate Anti-Aliasing (&lt;a href=&quot;https://github.com/mrdoob/three.js/blob/dev/examples/jsm/shaders/FXAAShader.js&quot;&gt;source&lt;/a&gt;, &lt;a href=&quot;10.1109/ICCRD54409.2022.9730249&quot;&gt;overview&lt;/a&gt;)  | ```True``` (bool) |</span>
+<span class="sd">    |  sao   |   Screen space ambient occlusion effect (&lt;a href=&quot;https://github.com/mrdoob/three.js/blob/dev/examples/jsm/postprocessing/SAOPass.js&quot;&gt;source&lt;/a&gt;, &lt;a href=&quot;https://people.mpi-inf.mpg.de/~ritschel/SSDO/index.html&quot;&gt;overview&lt;/a&gt;) |```False``` (bool) |</span>
+<span class="sd">    |  saoScale    |    | ```100``` |</span>
+<span class="sd">    |  saoBias    |    | ```0.1``` |</span>
+<span class="sd">    |  saoIntensity    |    | ```0.1``` |</span>
+<span class="sd">    |  saoKernelRadius    |    | ```10``` |</span>
+<span class="sd">    |  saoMinResolution    |    | ```0.5``` |</span>
+<span class="sd">    |  saoBlur    |    | ```False``` (bool) |</span>
+<span class="sd">    |  saoBlurRadius    |    | ```50``` |</span>
+<span class="sd">    |  saoBlurStdDev    |    | ```1.0``` |</span>
+<span class="sd">    |  saoBlurDepthCutoff    |    | ```0.05``` |</span>
+<span class="sd">    |  dof   |  Depth of field effect (&lt;a href=&quot;https://github.com/mrdoob/three.js/blob/dev/examples/jsm/postprocessing/BokehPass.js&quot;&gt;source&lt;/a&gt;, &lt;a href=&quot;https://people.mpi-inf.mpg.de/~ritschel/SSDO/index.html&quot;&gt;overview&lt;/a&gt;) |```False``` (bool) |</span>
+<span class="sd">    |  focus    |    | ```10``` |</span>
+<span class="sd">    |  aperture    |    | ```0.001``` |</span>
+<span class="sd">    |  max_blur    |    | ```0.01``` |</span>
+
+
+<span class="sd">    ## Example usage</span>
+
+<span class="sd">    For example usage, see the provided example class using &lt;a href=&quot;audunsh.github.io/bubblebox&quot;&gt;BubbleBox&lt;/a&gt;</span>
+
+
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Name of the widget view class in front-end</span>
+    <span class="n">_view_name</span> <span class="o">=</span> <span class="n">Unicode</span><span class="p">(</span><span class="s1">&#39;FashionView&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">tag</span><span class="p">(</span><span class="n">sync</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># Name of the widget model class in front-end</span>
+    <span class="n">_model_name</span> <span class="o">=</span> <span class="n">Unicode</span><span class="p">(</span><span class="s1">&#39;FashionModel&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">tag</span><span class="p">(</span><span class="n">sync</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># Name of the front-end module containing widget view</span>
+    <span class="n">_view_module</span> <span class="o">=</span> <span class="n">Unicode</span><span class="p">(</span><span class="s1">&#39;evince&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">tag</span><span class="p">(</span><span class="n">sync</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># Name of the front-end module containing widget model</span>
+    <span class="n">_model_module</span> <span class="o">=</span> <span class="n">Unicode</span><span class="p">(</span><span class="s1">&#39;evince&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">tag</span><span class="p">(</span><span class="n">sync</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+
+    <span class="c1"># Version of the front-end module containing widget view</span>
+    <span class="n">_view_module_version</span> <span class="o">=</span> <span class="n">Unicode</span><span class="p">(</span><span class="n">NPM_PACKAGE_RANGE</span><span class="p">)</span><span class="o">.</span><span class="n">tag</span><span class="p">(</span><span class="n">sync</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="c1"># Version of the front-end module containing widget model</span>
+    <span class="n">_model_module_version</span> <span class="o">=</span> <span class="n">Unicode</span><span class="p">(</span><span class="n">NPM_PACKAGE_RANGE</span><span class="p">)</span><span class="o">.</span><span class="n">tag</span><span class="p">(</span><span class="n">sync</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+
+    <span class="c1"># atom variables to sync with front-end</span>
+    <span class="n">pos</span> <span class="o">=</span> <span class="n">tl</span><span class="o">.</span><span class="n">List</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]])</span><span class="o">.</span><span class="n">tag</span><span class="p">(</span><span class="n">sync</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="c1"># positions of atoms</span>
+    <span class="n">radius</span> <span class="o">=</span> <span class="n">tl</span><span class="o">.</span><span class="n">List</span><span class="p">([])</span><span class="o">.</span><span class="n">tag</span><span class="p">(</span><span class="n">sync</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>     <span class="c1"># radius of spheres</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="n">tl</span><span class="o">.</span><span class="n">Int</span><span class="p">()</span><span class="o">.</span><span class="n">tag</span><span class="p">(</span><span class="n">sync</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>         <span class="c1"># the number of atoms</span>
+    <span class="n">init</span> <span class="o">=</span> <span class="n">tl</span><span class="o">.</span><span class="n">Bool</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">tag</span><span class="p">(</span><span class="n">sync</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>    <span class="c1"># trigger for initialization</span>
+    <span class="n">masses</span> <span class="o">=</span> <span class="n">tl</span><span class="o">.</span><span class="n">List</span><span class="p">([])</span><span class="o">.</span><span class="n">tag</span><span class="p">(</span><span class="n">sync</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>     <span class="c1"># masses for atoms (only used to get vdw-radius)</span>
+    <span class="n">colors</span> <span class="o">=</span> <span class="n">tl</span><span class="o">.</span><span class="n">List</span><span class="p">([])</span><span class="o">.</span><span class="n">tag</span><span class="p">(</span><span class="n">sync</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>     <span class="c1"># colors of atoms</span>
+    <span class="n">box</span> <span class="o">=</span> <span class="n">tl</span><span class="o">.</span><span class="n">List</span><span class="p">([])</span><span class="o">.</span><span class="n">tag</span><span class="p">(</span><span class="n">sync</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>        <span class="c1"># optional box </span>
+    <span class="n">bonds</span> <span class="o">=</span> <span class="n">tl</span><span class="o">.</span><span class="n">List</span><span class="p">([])</span><span class="o">.</span><span class="n">tag</span><span class="p">(</span><span class="n">sync</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Various post-processing effects</span>
+
+<span class="sd">    sao - Screen space ambient occlusion</span>
+<span class="sd">    source  : https://github.com/mrdoob/three.js/blob/dev/examples/jsm/postprocessing/SAOPass.js</span>
+<span class="sd">    overview: https://people.mpi-inf.mpg.de/~ritschel/SSDO/index.html</span>
+
+<span class="sd">    dof - depth of field</span>
+<span class="sd">    source  : https://github.com/mrdoob/three.js/blob/dev/examples/jsm/postprocessing/BokehPass.js</span>
+<span class="sd">    overview: https://people.mpi-inf.mpg.de/~ritschel/SSDO/index.html</span>
+
+<span class="sd">    fxaa - fast approximate anti-aliasing</span>
+<span class="sd">    source   - https://github.com/mrdoob/three.js/blob/dev/examples/jsm/shaders/FXAAShader.js</span>
+<span class="sd">    overview - 10.1109/ICCRD54409.2022.9730249</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># fxaa settings</span>
+    <span class="n">fxaa</span> <span class="o">=</span> <span class="n">tl</span><span class="o">.</span><span class="n">Bool</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">tag</span><span class="p">(</span><span class="n">sync</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># camera / dof settings</span>
+    <span class="n">dof</span> <span class="o">=</span> <span class="n">tl</span><span class="o">.</span><span class="n">Bool</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">tag</span><span class="p">(</span><span class="n">sync</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">focus</span> <span class="o">=</span> <span class="n">tl</span><span class="o">.</span><span class="n">Float</span><span class="p">()</span><span class="o">.</span><span class="n">tag</span><span class="p">(</span><span class="n">sync</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">aperture</span> <span class="o">=</span> <span class="n">tl</span><span class="o">.</span><span class="n">Float</span><span class="p">()</span><span class="o">.</span><span class="n">tag</span><span class="p">(</span><span class="n">sync</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">max_blur</span> <span class="o">=</span> <span class="n">tl</span><span class="o">.</span><span class="n">Float</span><span class="p">()</span><span class="o">.</span><span class="n">tag</span><span class="p">(</span><span class="n">sync</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># sao settings</span>
+    <span class="n">sao</span> <span class="o">=</span> <span class="n">tl</span><span class="o">.</span><span class="n">Bool</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">tag</span><span class="p">(</span><span class="n">sync</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">saoScale</span> <span class="o">=</span> <span class="n">tl</span><span class="o">.</span><span class="n">Float</span><span class="p">()</span><span class="o">.</span><span class="n">tag</span><span class="p">(</span><span class="n">sync</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">saoBias</span> <span class="o">=</span> <span class="n">tl</span><span class="o">.</span><span class="n">Float</span><span class="p">()</span><span class="o">.</span><span class="n">tag</span><span class="p">(</span><span class="n">sync</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">saoIntensity</span> <span class="o">=</span> <span class="n">tl</span><span class="o">.</span><span class="n">Float</span><span class="p">()</span><span class="o">.</span><span class="n">tag</span><span class="p">(</span><span class="n">sync</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">saoKernelRadius</span> <span class="o">=</span> <span class="n">tl</span><span class="o">.</span><span class="n">Int</span><span class="p">()</span><span class="o">.</span><span class="n">tag</span><span class="p">(</span><span class="n">sync</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">saoMinResolution</span> <span class="o">=</span> <span class="n">tl</span><span class="o">.</span><span class="n">Float</span><span class="p">()</span><span class="o">.</span><span class="n">tag</span><span class="p">(</span><span class="n">sync</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">saoBlur</span> <span class="o">=</span> <span class="n">tl</span><span class="o">.</span><span class="n">Bool</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">tag</span><span class="p">(</span><span class="n">sync</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">saoBlurRadius</span> <span class="o">=</span> <span class="n">tl</span><span class="o">.</span><span class="n">Int</span><span class="p">()</span><span class="o">.</span><span class="n">tag</span><span class="p">(</span><span class="n">sync</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">saoBlurStdDev</span> <span class="o">=</span> <span class="n">tl</span><span class="o">.</span><span class="n">Float</span><span class="p">()</span><span class="o">.</span><span class="n">tag</span><span class="p">(</span><span class="n">sync</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">saoBlurDepthCutoff</span> <span class="o">=</span> <span class="n">tl</span><span class="o">.</span><span class="n">Float</span><span class="p">()</span><span class="o">.</span><span class="n">tag</span><span class="p">(</span><span class="n">sync</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># colorscheme for orbital visualization</span>
+    <span class="n">additive</span> <span class="o">=</span> <span class="n">tl</span><span class="o">.</span><span class="n">Bool</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">tag</span><span class="p">(</span><span class="n">sync</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># general settings</span>
+    <span class="n">background_color</span> <span class="o">=</span> <span class="n">tl</span><span class="o">.</span><span class="n">List</span><span class="p">([])</span><span class="o">.</span><span class="n">tag</span><span class="p">(</span><span class="n">sync</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="c1">#background color</span>
+
+
+    <span class="c1"># two way kernel-frontend communcation</span>
+    <span class="n">options</span> <span class="o">=</span> <span class="n">tl</span><span class="o">.</span><span class="n">List</span><span class="p">([])</span><span class="o">.</span><span class="n">tag</span><span class="p">(</span><span class="n">sync</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="n">kernel_task</span> <span class="o">=</span> <span class="n">tl</span><span class="o">.</span><span class="n">Int</span><span class="p">()</span><span class="o">.</span><span class="n">tag</span><span class="p">(</span><span class="n">sync</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="n">synchronized_text</span> <span class="o">=</span> <span class="n">tl</span><span class="o">.</span><span class="n">Unicode</span><span class="p">(</span><span class="s1">&#39;Options&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">tag</span><span class="p">(</span><span class="n">sync</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="n">trigger_advance</span> <span class="o">=</span> <span class="n">tl</span><span class="o">.</span><span class="n">Bool</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">tag</span><span class="p">(</span><span class="n">sync</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="n">add_new_atom</span> <span class="o">=</span> <span class="n">tl</span><span class="o">.</span><span class="n">List</span><span class="p">([])</span><span class="o">.</span><span class="n">tag</span><span class="p">(</span><span class="n">sync</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="n">window_scale_height</span> <span class="o">=</span> <span class="n">tl</span><span class="o">.</span><span class="n">Float</span><span class="p">()</span><span class="o">.</span><span class="n">tag</span><span class="p">(</span><span class="n">sync</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">window_scale_width</span> <span class="o">=</span> <span class="n">tl</span><span class="o">.</span><span class="n">Float</span><span class="p">()</span><span class="o">.</span><span class="n">tag</span><span class="p">(</span><span class="n">sync</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="n">selection</span> <span class="o">=</span> <span class="n">tl</span><span class="o">.</span><span class="n">List</span><span class="p">([])</span><span class="o">.</span><span class="n">tag</span><span class="p">(</span><span class="n">sync</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">molecular_system</span><span class="p">,</span> <span class="n">window_scale_height</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">window_scale_width</span><span class="o">=</span><span class="mf">0.75</span><span class="p">,</span> <span class="n">fxaa</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">sao</span>  <span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">dof</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">additive</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">background_color</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span> <span class="n">focus</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">aperture</span> <span class="o">=</span> <span class="mf">0.001</span><span class="p">,</span> <span class="n">max_blur</span> <span class="o">=</span> <span class="mf">0.01</span><span class="p">,</span> <span class="n">saoScale</span> <span class="o">=</span> <span class="mi">100</span> <span class="p">,</span><span class="n">saoBias</span> <span class="o">=</span> <span class="mf">.1</span><span class="p">,</span><span class="n">saoIntensity</span> <span class="o">=</span> <span class="mf">.1</span><span class="p">,</span><span class="n">saoKernelRadius</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span><span class="n">saoMinResolution</span> <span class="o">=</span> <span class="mf">.5</span><span class="p">,</span><span class="n">saoBlur</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span><span class="n">saoBlurRadius</span> <span class="o">=</span> <span class="mi">50</span><span class="p">,</span><span class="n">saoBlurStdDev</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span><span class="n">saoBlurDepthCutoff</span> <span class="o">=</span> <span class="mf">0.05</span><span class="p">,</span> <span class="n">realism</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">radius_scale</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">options</span>  <span class="o">=</span> <span class="p">[]):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span> <span class="c1"># execute init of parent class, append: </span>
+
+        <span class="c1"># general settings</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">window_scale_height</span> <span class="o">=</span> <span class="n">window_scale_height</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">window_scale_width</span> <span class="o">=</span> <span class="n">window_scale_width</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">molecular_system</span> <span class="o">=</span> <span class="n">molecular_system</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">options</span> <span class="o">=</span> <span class="n">options</span>
+
+        <span class="c1"># enable/disable sao + settings</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sao</span> <span class="o">=</span> <span class="n">sao</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">saoScale</span> <span class="o">=</span> <span class="n">saoScale</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">saoBias</span> <span class="o">=</span> <span class="n">saoBias</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">saoIntensity</span> <span class="o">=</span> <span class="n">saoIntensity</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">saoKernelRadius</span> <span class="o">=</span> <span class="n">saoKernelRadius</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">saoMinResolution</span> <span class="o">=</span> <span class="n">saoMinResolution</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">saoBlur</span> <span class="o">=</span> <span class="n">saoBlur</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">saoBlurRadius</span> <span class="o">=</span> <span class="n">saoBlurRadius</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">saoBlurStdDev</span> <span class="o">=</span> <span class="n">saoBlurStdDev</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">saoBlurDepthCutoff</span> <span class="o">=</span> <span class="n">saoBlurDepthCutoff</span>
+
+        <span class="c1">#enable / disable fxaa </span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fxaa</span> <span class="o">=</span> <span class="n">fxaa</span>
+
+        <span class="c1"># enable / disable dof</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dof</span> <span class="o">=</span> <span class="n">dof</span> 
+        <span class="bp">self</span><span class="o">.</span><span class="n">focus</span> <span class="o">=</span> <span class="n">focus</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">aperture</span> <span class="o">=</span> <span class="n">aperture</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_blur</span> <span class="o">=</span> <span class="n">max_blur</span>
+
+        <span class="c1"># color settings</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">additive</span> <span class="o">=</span> <span class="n">additive</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">background_color</span> <span class="o">=</span> <span class="n">background_color</span>
+
+        <span class="c1"># access system data from </span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pos</span> <span class="o">=</span> <span class="n">molecular_system</span><span class="o">.</span><span class="n">pos</span> <span class="c1">#.tolist()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">count</span> <span class="o">=</span> <span class="n">molecular_system</span><span class="o">.</span><span class="n">n_particles</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bonds</span> <span class="o">=</span> <span class="n">molecular_system</span><span class="o">.</span><span class="n">bonds</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">box</span> <span class="o">=</span> <span class="n">molecular_system</span><span class="o">.</span><span class="n">size</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+        <span class="n">nc</span> <span class="o">=</span> <span class="mi">20</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">radius</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">molecular_system</span><span class="o">.</span><span class="n">n_particles</span><span class="p">)]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">colors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">((</span><span class="n">interp1d</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">nc</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,(</span><span class="mi">3</span><span class="p">,</span> <span class="n">nc</span><span class="p">))</span> <span class="p">)(</span><span class="n">molecular_system</span><span class="o">.</span><span class="n">masses</span><span class="o">/</span><span class="n">molecular_system</span><span class="o">.</span><span class="n">masses</span><span class="o">.</span><span class="n">max</span><span class="p">())</span><span class="o">.</span><span class="n">T</span><span class="p">),</span> <span class="n">dtype</span> <span class="o">=</span> <span class="nb">float</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">realism</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">radius</span> <span class="o">=</span> <span class="p">(</span><span class="n">radius_scale</span><span class="o">*</span><span class="n">get_vwv_radius_from_atomic_number</span><span class="p">(</span><span class="n">molecular_system</span><span class="o">.</span><span class="n">masses</span><span class="p">))</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">colors</span> <span class="o">=</span> <span class="n">colorscheme</span><span class="p">(</span><span class="n">molecular_system</span><span class="o">.</span><span class="n">masses</span><span class="p">)</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">masses</span> <span class="o">=</span> <span class="n">molecular_system</span><span class="o">.</span><span class="n">masses</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">init</span> <span class="o">=</span> <span class="kc">True</span> <span class="c1">#trigger frontend init</span>
+
+
+    <span class="c1"># functions synchronized with the frontend widget</span>
+
+    <span class="nd">@observe</span><span class="p">(</span><span class="s1">&#39;kernel_task&#39;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">_observe_kernel_task</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">change</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This command is executed when triggered from fron-end.</span>
+<span class="sd">        The ´´´change´´´-variable contains the list of selected atoms.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">molecular_system</span><span class="o">.</span><span class="n">execute_kernel</span><span class="p">(</span><span class="n">change</span><span class="p">)</span>
+
+    <span class="nd">@observe</span><span class="p">(</span><span class="s1">&#39;selection&#39;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">_execute_kernel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">change</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Update the list of selected atoms on the kernel</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">selection</span> <span class="o">=</span> <span class="n">change</span>
+
+    <span class="nd">@observe</span><span class="p">(</span><span class="s1">&#39;add_new_atom&#39;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">_observe_add_new_atom</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">change</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Test function</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">new_atom_observed</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="nd">@observe</span><span class="p">(</span><span class="s1">&#39;trigger_advance&#39;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">_observe_trigger_advance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">change</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Test function</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Save a standalone html embedding of the view</span>
+
+
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">embed</span><span class="o">.</span><span class="n">embed_minimal_html</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="p">[</span><span class="bp">self</span><span class="p">],</span> <span class="n">title</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+        </details>
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+
+<h3 id="evince.fashionview.FashionView.save" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">save</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span></code>
+
+</h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Save a standalone html embedding of the view</p>
+
+      <details class="quote">
+        <summary>Source code in <code>evince/fashionview.py</code></summary>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">289</span>
+<span class="normal">290</span>
+<span class="normal">291</span>
+<span class="normal">292</span>
+<span class="normal">293</span>
+<span class="normal">294</span>
+<span class="normal">295</span>
+<span class="normal">296</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Save a standalone html embedding of the view</span>
+
+
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">embed</span><span class="o">.</span><span class="n">embed_minimal_html</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="p">[</span><span class="bp">self</span><span class="p">],</span> <span class="n">title</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div>
+
+
+
+  </div>
+
+  </div>
+
+</div>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+<h2 id="evince.fashionview.colorscheme" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">colorscheme</span><span class="p">(</span><span class="n">masses</span><span class="p">)</span></code>
+
+</h2>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Default CPK-colorscheme for atoms
+source: https://sciencenotes.org/molecule-atom-colors-cpk-colors/</p>
+
+      <details class="quote">
+        <summary>Source code in <code>evince/fashionview.py</code></summary>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">colorscheme</span><span class="p">(</span><span class="n">masses</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Default CPK-colorscheme for atoms</span>
+<span class="sd">    source: https://sciencenotes.org/molecule-atom-colors-cpk-colors/</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">colors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">255</span><span class="p">,</span> <span class="mi">217</span><span class="p">,</span> <span class="mi">204</span><span class="p">,</span> <span class="mi">194</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">144</span><span class="p">,</span>  <span class="mi">48</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">144</span><span class="p">,</span> <span class="mi">179</span><span class="p">,</span> <span class="mi">171</span><span class="p">,</span> <span class="mi">138</span><span class="p">,</span> <span class="mi">191</span><span class="p">,</span>
+        <span class="mi">240</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span>  <span class="mi">31</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="mi">143</span><span class="p">,</span>  <span class="mi">61</span><span class="p">,</span> <span class="mi">230</span><span class="p">,</span> <span class="mi">191</span><span class="p">,</span> <span class="mi">166</span><span class="p">,</span> <span class="mi">138</span><span class="p">,</span> <span class="mi">156</span><span class="p">,</span> <span class="mi">224</span><span class="p">,</span>
+        <span class="mi">240</span><span class="p">,</span>  <span class="mi">80</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">125</span><span class="p">,</span> <span class="mi">194</span><span class="p">,</span> <span class="mi">102</span><span class="p">,</span> <span class="mi">189</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">166</span><span class="p">,</span>  <span class="mi">92</span><span class="p">,</span> <span class="mi">112</span><span class="p">,</span>   <span class="mi">0</span><span class="p">,</span> <span class="mi">148</span><span class="p">,</span>
+        <span class="mi">148</span><span class="p">,</span> <span class="mi">115</span><span class="p">,</span>  <span class="mi">84</span><span class="p">,</span>  <span class="mi">59</span><span class="p">,</span>  <span class="mi">36</span><span class="p">,</span>  <span class="mi">10</span><span class="p">,</span>   <span class="mi">0</span><span class="p">,</span> <span class="mi">192</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">166</span><span class="p">,</span> <span class="mi">102</span><span class="p">,</span> <span class="mi">158</span><span class="p">,</span> <span class="mi">212</span><span class="p">,</span>
+        <span class="mi">148</span><span class="p">,</span>  <span class="mi">66</span><span class="p">,</span>  <span class="mi">87</span><span class="p">,</span>   <span class="mi">0</span><span class="p">,</span> <span class="mi">112</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">217</span><span class="p">,</span> <span class="mi">199</span><span class="p">,</span> <span class="mi">163</span><span class="p">,</span> <span class="mi">143</span><span class="p">,</span>  <span class="mi">97</span><span class="p">,</span>  <span class="mi">69</span><span class="p">,</span>  <span class="mi">48</span><span class="p">,</span>
+         <span class="mi">31</span><span class="p">,</span>   <span class="mi">0</span><span class="p">,</span>   <span class="mi">0</span><span class="p">,</span>   <span class="mi">0</span><span class="p">,</span>   <span class="mi">0</span><span class="p">,</span>   <span class="mi">0</span><span class="p">,</span>  <span class="mi">77</span><span class="p">,</span>  <span class="mi">77</span><span class="p">,</span>  <span class="mi">33</span><span class="p">,</span>  <span class="mi">38</span><span class="p">,</span>  <span class="mi">38</span><span class="p">,</span>  <span class="mi">23</span><span class="p">,</span> <span class="mi">208</span><span class="p">,</span>
+        <span class="mi">255</span><span class="p">,</span> <span class="mi">184</span><span class="p">,</span> <span class="mi">166</span><span class="p">,</span>  <span class="mi">87</span><span class="p">,</span> <span class="mi">158</span><span class="p">,</span> <span class="mi">171</span><span class="p">,</span> <span class="mi">117</span><span class="p">,</span>  <span class="mi">66</span><span class="p">,</span>  <span class="mi">66</span><span class="p">,</span>   <span class="mi">0</span><span class="p">,</span> <span class="mi">112</span><span class="p">,</span>   <span class="mi">0</span><span class="p">,</span>   <span class="mi">0</span><span class="p">,</span>
+          <span class="mi">0</span><span class="p">,</span>   <span class="mi">0</span><span class="p">,</span>   <span class="mi">0</span><span class="p">,</span>  <span class="mi">84</span><span class="p">,</span> <span class="mi">120</span><span class="p">,</span> <span class="mi">138</span><span class="p">,</span> <span class="mi">161</span><span class="p">,</span> <span class="mi">179</span><span class="p">,</span> <span class="mi">179</span><span class="p">,</span> <span class="mi">179</span><span class="p">,</span> <span class="mi">189</span><span class="p">,</span> <span class="mi">199</span><span class="p">,</span> <span class="mi">204</span><span class="p">,</span>
+        <span class="mi">209</span><span class="p">,</span> <span class="mi">217</span><span class="p">,</span> <span class="mi">224</span><span class="p">,</span> <span class="mi">230</span><span class="p">,</span> <span class="mi">235</span><span class="p">],</span>
+       <span class="p">[</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">181</span><span class="p">,</span> <span class="mi">144</span><span class="p">,</span>  <span class="mi">80</span><span class="p">,</span>  <span class="mi">13</span><span class="p">,</span> <span class="mi">224</span><span class="p">,</span> <span class="mi">227</span><span class="p">,</span>  <span class="mi">92</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">166</span><span class="p">,</span>
+        <span class="mi">200</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">240</span><span class="p">,</span> <span class="mi">209</span><span class="p">,</span>  <span class="mi">64</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">230</span><span class="p">,</span> <span class="mi">194</span><span class="p">,</span> <span class="mi">166</span><span class="p">,</span> <span class="mi">153</span><span class="p">,</span> <span class="mi">122</span><span class="p">,</span> <span class="mi">102</span><span class="p">,</span>
+        <span class="mi">144</span><span class="p">,</span> <span class="mi">208</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="mi">143</span><span class="p">,</span> <span class="mi">143</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="mi">161</span><span class="p">,</span>  <span class="mi">41</span><span class="p">,</span> <span class="mi">184</span><span class="p">,</span>  <span class="mi">46</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span>
+        <span class="mi">224</span><span class="p">,</span> <span class="mi">194</span><span class="p">,</span> <span class="mi">181</span><span class="p">,</span> <span class="mi">158</span><span class="p">,</span> <span class="mi">143</span><span class="p">,</span> <span class="mi">125</span><span class="p">,</span> <span class="mi">105</span><span class="p">,</span> <span class="mi">192</span><span class="p">,</span> <span class="mi">217</span><span class="p">,</span> <span class="mi">117</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span>  <span class="mi">99</span><span class="p">,</span> <span class="mi">122</span><span class="p">,</span>
+          <span class="mi">0</span><span class="p">,</span> <span class="mi">158</span><span class="p">,</span>  <span class="mi">23</span><span class="p">,</span> <span class="mi">201</span><span class="p">,</span> <span class="mi">212</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span>
+        <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">230</span><span class="p">,</span> <span class="mi">212</span><span class="p">,</span> <span class="mi">191</span><span class="p">,</span> <span class="mi">171</span><span class="p">,</span> <span class="mi">194</span><span class="p">,</span> <span class="mi">166</span><span class="p">,</span> <span class="mi">148</span><span class="p">,</span> <span class="mi">125</span><span class="p">,</span> <span class="mi">102</span><span class="p">,</span>  <span class="mi">84</span><span class="p">,</span> <span class="mi">208</span><span class="p">,</span>
+        <span class="mi">209</span><span class="p">,</span> <span class="mi">184</span><span class="p">,</span>  <span class="mi">84</span><span class="p">,</span>  <span class="mi">89</span><span class="p">,</span>  <span class="mi">79</span><span class="p">,</span>  <span class="mi">92</span><span class="p">,</span>  <span class="mi">79</span><span class="p">,</span> <span class="mi">130</span><span class="p">,</span>   <span class="mi">0</span><span class="p">,</span> <span class="mi">125</span><span class="p">,</span> <span class="mi">171</span><span class="p">,</span> <span class="mi">186</span><span class="p">,</span> <span class="mi">161</span><span class="p">,</span>
+        <span class="mi">143</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="mi">107</span><span class="p">,</span>  <span class="mi">92</span><span class="p">,</span>  <span class="mi">92</span><span class="p">,</span>  <span class="mi">79</span><span class="p">,</span>  <span class="mi">54</span><span class="p">,</span>  <span class="mi">31</span><span class="p">,</span>  <span class="mi">31</span><span class="p">,</span>  <span class="mi">13</span><span class="p">,</span>  <span class="mi">13</span><span class="p">,</span>   <span class="mi">0</span><span class="p">,</span>   <span class="mi">0</span><span class="p">,</span>
+          <span class="mi">0</span><span class="p">,</span>   <span class="mi">0</span><span class="p">,</span>   <span class="mi">0</span><span class="p">,</span>   <span class="mi">0</span><span class="p">,</span>   <span class="mi">0</span><span class="p">],</span>
+       <span class="p">[</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span>   <span class="mi">0</span><span class="p">,</span> <span class="mi">181</span><span class="p">,</span> <span class="mi">144</span><span class="p">,</span> <span class="mi">248</span><span class="p">,</span>  <span class="mi">13</span><span class="p">,</span>  <span class="mi">80</span><span class="p">,</span> <span class="mi">245</span><span class="p">,</span> <span class="mi">242</span><span class="p">,</span>   <span class="mi">0</span><span class="p">,</span> <span class="mi">166</span><span class="p">,</span>
+        <span class="mi">160</span><span class="p">,</span>   <span class="mi">0</span><span class="p">,</span>  <span class="mi">48</span><span class="p">,</span>  <span class="mi">31</span><span class="p">,</span> <span class="mi">227</span><span class="p">,</span> <span class="mi">212</span><span class="p">,</span>   <span class="mi">0</span><span class="p">,</span> <span class="mi">230</span><span class="p">,</span> <span class="mi">199</span><span class="p">,</span> <span class="mi">171</span><span class="p">,</span> <span class="mi">199</span><span class="p">,</span> <span class="mi">199</span><span class="p">,</span>  <span class="mi">51</span><span class="p">,</span>
+        <span class="mi">160</span><span class="p">,</span>  <span class="mi">80</span><span class="p">,</span>  <span class="mi">51</span><span class="p">,</span> <span class="mi">176</span><span class="p">,</span> <span class="mi">143</span><span class="p">,</span> <span class="mi">143</span><span class="p">,</span> <span class="mi">227</span><span class="p">,</span>   <span class="mi">0</span><span class="p">,</span>  <span class="mi">41</span><span class="p">,</span> <span class="mi">209</span><span class="p">,</span> <span class="mi">176</span><span class="p">,</span>   <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span>
+        <span class="mi">224</span><span class="p">,</span> <span class="mi">201</span><span class="p">,</span> <span class="mi">181</span><span class="p">,</span> <span class="mi">158</span><span class="p">,</span> <span class="mi">143</span><span class="p">,</span> <span class="mi">140</span><span class="p">,</span> <span class="mi">133</span><span class="p">,</span> <span class="mi">192</span><span class="p">,</span> <span class="mi">143</span><span class="p">,</span> <span class="mi">115</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="mi">181</span><span class="p">,</span>   <span class="mi">0</span><span class="p">,</span>
+        <span class="mi">148</span><span class="p">,</span> <span class="mi">176</span><span class="p">,</span> <span class="mi">143</span><span class="p">,</span>   <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">199</span><span class="p">,</span> <span class="mi">199</span><span class="p">,</span> <span class="mi">199</span><span class="p">,</span> <span class="mi">199</span><span class="p">,</span> <span class="mi">199</span><span class="p">,</span> <span class="mi">199</span><span class="p">,</span> <span class="mi">199</span><span class="p">,</span> <span class="mi">199</span><span class="p">,</span>
+        <span class="mi">199</span><span class="p">,</span> <span class="mi">156</span><span class="p">,</span> <span class="mi">117</span><span class="p">,</span>  <span class="mi">82</span><span class="p">,</span>  <span class="mi">56</span><span class="p">,</span>  <span class="mi">36</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">214</span><span class="p">,</span> <span class="mi">171</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="mi">135</span><span class="p">,</span> <span class="mi">224</span><span class="p">,</span>
+         <span class="mi">35</span><span class="p">,</span> <span class="mi">208</span><span class="p">,</span>  <span class="mi">77</span><span class="p">,</span>  <span class="mi">97</span><span class="p">,</span> <span class="mi">181</span><span class="p">,</span>   <span class="mi">0</span><span class="p">,</span>  <span class="mi">69</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="mi">102</span><span class="p">,</span>   <span class="mi">0</span><span class="p">,</span> <span class="mi">250</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span>
+        <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">242</span><span class="p">,</span> <span class="mi">227</span><span class="p">,</span> <span class="mi">227</span><span class="p">,</span> <span class="mi">212</span><span class="p">,</span> <span class="mi">212</span><span class="p">,</span> <span class="mi">186</span><span class="p">,</span> <span class="mi">166</span><span class="p">,</span> <span class="mi">135</span><span class="p">,</span> <span class="mi">102</span><span class="p">,</span>  <span class="mi">89</span><span class="p">,</span>
+         <span class="mi">79</span><span class="p">,</span>  <span class="mi">69</span><span class="p">,</span>  <span class="mi">56</span><span class="p">,</span>  <span class="mi">46</span><span class="p">,</span>  <span class="mi">38</span><span class="p">]])</span><span class="o">/</span><span class="mf">510.0</span>
+
+
+    <span class="k">return</span> <span class="n">interp1d</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">colors</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="n">colors</span><span class="p">,</span><span class="n">bounds_error</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">fill_value</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span><span class="mf">1.0</span><span class="p">,</span><span class="mf">1.0</span><span class="p">])(</span><span class="n">masses</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+
+<h2 id="evince.fashionview.extract_bonds" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">extract_bonds</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">btype</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span></code>
+
+</h2>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Extract harmonic oscillator interactions (btype == 2) from 
+a bubblebbox.mdbox object</p>
+<p>returns a bonds-list for spotlightviewer</p>
+
+      <details class="quote">
+        <summary>Source code in <code>evince/fashionview.py</code></summary>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">extract_bonds</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">btype</span> <span class="o">=</span> <span class="mi">2</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Extract harmonic oscillator interactions (btype == 2) from </span>
+<span class="sd">    a bubblebbox.mdbox object</span>
+
+<span class="sd">    returns a bonds-list for spotlightviewer</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">bonds</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">b</span><span class="o">.</span><span class="n">n_bubbles</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">b</span><span class="o">.</span><span class="n">n_bubbles</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">b</span><span class="o">.</span><span class="n">interactions</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mf">2.0</span><span class="p">:</span>
+                <span class="n">bonds</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">])</span>
+
+    <span class="k">return</span> <span class="n">bonds</span>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div>
+
+
+
+  </div>
+
+  </div>
+
+</div>
+
+
+
+
+              
+            </article>
+            
+          </div>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+        
+        <a href="../spotlightview-reference/" class="md-footer__link md-footer__link--prev" aria-label="Previous: SpotlightView" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              SpotlightView
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../morpheusview-reference/" class="md-footer__link md-footer__link--next" aria-label="Next: MorpheusView" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              MorpheusView
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.ecf98df9.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.2ab50757.min.js"></script>
+      
+        <script src="../javascripts/mathjax.js"></script>
+      
+        <script src="../javascripts/embed-amd.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
