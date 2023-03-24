@@ -647,32 +647,32 @@
 
 <h1 id="user-installation">User installation</h1>
 <p>If you would just like to try out Evince and supported software, the installation is simple. You'll need to install
-1) <a href="https://www.python.org/downloads/">Python 3.0</a>
-2) From your command line, type <code>pip3 install braketlab bubblebox evince</code> for the latest release.</p>
+1. <a href="https://www.python.org/downloads/">Python 3.0</a>
+2. From your command line, type <code>pip3 install braketlab bubblebox evince</code> for the latest release.</p>
 <p>You are now ready to execute the examples presented on these pages.</p>
 <h1 id="development-installation">Development installation</h1>
 <p>In order to contribute to the Evince project, you'll have to install
-1) <a href="https://github.com/git-guides/install-git">Git</a> 
-2) <a href="https://www.python.org/downloads/">Python 3.0</a>
-3) <a href="https://nodejs.org/en/download/">Node.JS</a>
-4) <a href="https://classic.yarnpkg.com/">Yarn</a></p>
+1. <a href="https://github.com/git-guides/install-git">Git</a> 
+2. <a href="https://www.python.org/downloads/">Python 3.0</a>
+3. <a href="https://nodejs.org/en/download/">Node.JS</a>
+4. <a href="https://classic.yarnpkg.com/">Yarn</a></p>
 <p>In addition, you may need a range of PyPI and NPM packages, but Evince will likely install these for you. Next, do</p>
-<pre><code>$ git clone https://github.com//evince.git
-$ cd evince
-$ pip install -e .
-$ jupyter nbextension install --py --symlink --overwrite --sys-prefix evince
-$ jupyter nbextension enable --py --sys-prefix evince
+<pre><code>    $ git clone https://github.com//evince.git
+    $ cd evince
+    $ pip install -e .
+    $ jupyter nbextension install --py --symlink --overwrite --sys-prefix evince
+    $ jupyter nbextension enable --py --sys-prefix evince
 </code></pre>
 <p>When actively developing your extension for JupyterLab, run the command:</p>
-<pre><code>$ jupyter labextension develop --overwrite evince
+<pre><code>    $ jupyter labextension develop --overwrite evince
 </code></pre>
 <p>Then you need to rebuild the JS when you make a code change:</p>
-<pre><code>$ cd js
-$ yarn run build
+<pre><code>    $ cd js
+    $ yarn run build
 </code></pre>
 <p>You then need to refresh the JupyterLab page when your javascript changes.</p>
 <h1 id="complications">Complications</h1>
-<p>Please send an e-mail to a.s.hansen@kjemi.uio.no.</p>
+<p>Please send an e-mail to audunsh4@gmail.com</p>
 
 
 
