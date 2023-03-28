@@ -1,4 +1,7 @@
 **/build
+**/evince/labextension
+**/evince/nbextension
+**/evince.egg-info
 **/dist
 **/js/dist
 **/js/node_modules
