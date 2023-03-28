@@ -42,8 +42,8 @@ export class DenseModel extends DOMWidgetModel {
             _view_name : 'DenseView',
             _model_module : 'evince',
             _view_module : 'evince',
-            _model_module_version : '0.53.0',
-            _view_module_version : '0.53.0'
+            _model_module_version : '0.55.0',
+            _view_module_version : '0.55.0'
         };
     }
 }

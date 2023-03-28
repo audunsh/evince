@@ -6,7 +6,7 @@ from .latticeview import *
 from .spotlight import *
 from .template import *
 from .fashionview import *
-from .omoviview import *
+#from .omoviview import *
 from .morpehusview import *
 from .denseview import *
 
