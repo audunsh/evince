@@ -1,14 +1,14 @@
 from ._version import __version__
 
-from .braketview import *
-from .mdview import *
-from .latticeview import *
-from .spotlight import *
-from .template import *
-from .fashionview import *
-#from .omoviview import *
-from .morpehusview import *
-from .denseview import *
+from evince.braketview import *
+from evince.mdview import *
+from evince.latticeview import *
+from evince.spotlight import *
+from evince.template import *
+from evince.fashionview import *
+from evince.pointview import *
+from evince.morpehusview import *
+from evince.denseview import *
 
 def _jupyter_labextension_paths():
     """Called by Jupyter Lab Server to detect if it is a valid labextension and
