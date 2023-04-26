@@ -28,12 +28,12 @@ export class PointModel extends DOMWidgetModel {
     defaults() {
         return {
             ...super.defaults(),
-            _model_name : 'PointModel',
-            _view_name : 'PointView',
-            _model_module : 'evince',
-            _view_module : 'evince',
-            _model_module_version : '0.55.0',
-            _view_module_version : '0.55.0'
+            _model_name: 'PointModel',
+            _view_name: 'PointView',
+            _model_module: 'evince',
+            _view_module: 'evince',
+            _model_module_version: '0.55.0',
+            _view_module_version: '0.55.0'
         };
     }
 }
@@ -45,31 +45,31 @@ export class PointView extends DOMWidgetView {
 
         // initialize the THREE.Scene object, the campera and the renderer
         const scene = new THREE.Scene();
-		this.scene = scene;
+        this.scene = scene;
 
-        let camera = new THREE.PerspectiveCamera( 75, document.activeElement.clientWidth/(document.activeElement.clientWidth*.6), 0.1, 1000 );
-        
+        let camera = new THREE.PerspectiveCamera(75, document.activeElement.clientWidth / (document.activeElement.clientWidth * .6), 0.1, 1000);
+
         //let camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
-		this.camera = camera;
-		this.camera.position.z = 5;
+        this.camera = camera;
+        this.camera.position.z = 5;
 
         const renderer = new THREE.WebGLRenderer();
         this.renderer = renderer;
-        renderer.setPixelRatio( window.devicePixelRatio );
+        renderer.setPixelRatio(window.devicePixelRatio);
 
         // set the animation loop
         //this.renderer.setAnimationLoop( this.animationLoop );
 
         //this.renderer.setSize( .5*window.innerWidth, .5*window.innerHeight );
-        this.renderer.setSize( .99*document.activeElement.clientWidth, .99*document.activeElement.clientWidth*.6);
-        
+        this.renderer.setSize(.99 * document.activeElement.clientWidth, .99 * document.activeElement.clientWidth * .6);
+
         //this.renderer.setClearColor( 0xfaf8ec, 1);
-        this.renderer.setClearColor( 0x0f0f2F, 1);
+        this.renderer.setClearColor(0x0f0f2F, 1);
         this.renderer.antialias = true;
 
 
         // init user controls for the 3D scene
-        let controls = new OrbitControls( this.camera, this.renderer.domElement );
+        let controls = new OrbitControls(this.camera, this.renderer.domElement);
         this.controls = controls;
 
         this.renderer.render(this.scene, this.camera);
@@ -89,7 +89,7 @@ export class PointView extends DOMWidgetView {
 
         const n = 1000, n2 = n / 2; // particles spread in the cube
 
-        for ( let i = 0; i < particles; i ++ ) {
+        for (let i = 0; i < particles; i++) {
 
             // positions
 
@@ -97,17 +97,17 @@ export class PointView extends DOMWidgetView {
             const y = Math.random() * n - n2;
             const z = Math.random() * n - n2;
 
-            positions.push( x, y, z );
+            positions.push(x, y, z);
 
             // colors
 
-            const vx = ( x / n ) + 0.5;
-            const vy = ( y / n ) + 0.5;
-            const vz = ( z / n ) + 0.5;
+            const vx = (x / n) + 0.5;
+            const vy = (y / n) + 0.5;
+            const vz = (z / n) + 0.5;
 
-            color.setRGB( vx, vy, vz );
+            color.setRGB(vx, vy, vz);
 
-            colors.push( color.r, color.g, color.b );
+            colors.push(color.r, color.g, color.b);
 
         }
 
@@ -120,13 +120,13 @@ export class PointView extends DOMWidgetView {
         this.col = this.model.get('col');
         let colorFloat32 = new Float32Array(this.col.buffer); //, 3);
 
-        console.log(colorFloat32.length/3);
+        console.log(colorFloat32.length / 3);
 
         geometry.setAttribute(
             "color",
             new THREE.Float32BufferAttribute(colorFloat32, 3, false)
         );
-        
+
 
         this.pos = this.model.get('pos');
         let positionFloat32 = new Float32Array(this.pos.buffer); //, 3);
@@ -137,14 +137,14 @@ export class PointView extends DOMWidgetView {
 
         geometry.computeBoundingSphere();
 
-        const material = new THREE.PointsMaterial( { size: 1, vertexColors: true } );
+        const material = new THREE.PointsMaterial({ size: 0.1, vertexColors: true });
 
-        
 
-        let points = new THREE.Points( geometry, material );
-        this.scene.add( points );
 
-        
+        let points = new THREE.Points(geometry, material);
+        this.scene.add(points);
+
+
 
 
 
@@ -160,15 +160,15 @@ export class PointView extends DOMWidgetView {
 
         animate();
 
-		function animate() {
-			renderer.setAnimationLoop( render );
+        function animate() {
+            renderer.setAnimationLoop(render);
 
-		}
+        }
 
-		function render() {
-			renderer.render( scene, camera );
+        function render() {
+            renderer.render(scene, camera);
 
-		}
+        }
 
 
     }
