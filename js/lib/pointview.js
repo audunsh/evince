@@ -32,8 +32,8 @@ export class PointModel extends DOMWidgetModel {
             _view_name: 'PointView',
             _model_module: 'evince',
             _view_module: 'evince',
-            _model_module_version: '0.55.0',
-            _view_module_version: '0.55.0'
+            _model_module_version: '0.56.0',
+            _view_module_version: '0.56.0'
         };
     }
 }
@@ -64,7 +64,10 @@ export class PointView extends DOMWidgetView {
         this.renderer.setSize(.99 * document.activeElement.clientWidth, .99 * document.activeElement.clientWidth * .6);
 
         //this.renderer.setClearColor( 0xfaf8ec, 1);
-        this.renderer.setClearColor(0x0f0f2F, 1);
+        const bg_color = new THREE.Color(this.model.get("background_color")[0], this.model.get("background_color")[1], this.model.get("background_color")[2]);
+
+        this.renderer.setClearColor(bg_color, 1);
+        //this.renderer.setClearColor(0x0f0f2F, 1);
         this.renderer.antialias = true;
 
 
@@ -120,7 +123,7 @@ export class PointView extends DOMWidgetView {
         this.col = this.model.get('col');
         let colorFloat32 = new Float32Array(this.col.buffer); //, 3);
 
-        console.log(colorFloat32.length / 3);
+        //console.log(colorFloat32.length / 3);
 
         geometry.setAttribute(
             "color",
@@ -136,6 +139,9 @@ export class PointView extends DOMWidgetView {
         );
 
         geometry.computeBoundingSphere();
+
+        geometry.needsUpdate = true;
+        //geometry.attributes.position.needsUpdate = true;
 
         const material = new THREE.PointsMaterial({ size: 0.1, vertexColors: true });
 
@@ -153,10 +159,15 @@ export class PointView extends DOMWidgetView {
 
 
         this.value_changed();
+        this.pos_changed();
 
         // Observe changes in the value traitlet in Python, and define
         // a custom callback.
         this.model.on('change:value', this.value_changed, this);
+
+        this.model.on('change:pos', this.pos_changed, this);
+        this.model.on('change:col', this.color_changed, this);
+
 
         animate();
 
@@ -165,7 +176,12 @@ export class PointView extends DOMWidgetView {
 
         }
 
+        //var self = this;
+
         function render() {
+
+
+
             renderer.render(scene, camera);
 
         }
@@ -179,5 +195,59 @@ export class PointView extends DOMWidgetView {
     value_changed() {
         //this.el.textContent = this.model.get('value');
         console.log("value_changed");
+    }
+
+    pos_changed() {
+        //console.log("changed_pos");
+        //console.log(this.scene.children[0].geometry.attributes);
+        //console.log(this.scene.children[0].geometry.attributes.position.count);
+
+
+
+
+        this.pos = this.model.get('pos');
+        let positionFloat32 = new Float32Array(this.pos.buffer); //, 3);
+
+
+
+        //this.scene.children[0].geometry.addAttribute('position', new THREE.Float32BufferAttribute(positionFloat32, 3));
+
+        console.log(this.scene.children[0].material);
+
+        this.scene.children[0].geometry.setAttribute(
+            'position',
+            new THREE.Float32BufferAttribute(positionFloat32, 3, false)
+        );
+
+
+        this.scene.children[0].geometry.attributes.position.needsUpdate = true;
+        //this.scene.children[0].geometry.needsUpdate = true;
+
+        //console.log(positionFloat32);
+
+        //this.scene.children[0].count = aCurveFloat32.length/3;
+
+        //console.log(this.scene.children[0].geometry.attributes.position);
+
+
+
+
+
+    }
+
+    color_changed() {
+        //console.log("changed_pos");
+
+        this.col = this.model.get('col');
+        let colorFloat32 = new Float32Array(this.col.buffer); //, 3);
+
+        //this.scene.children[0].count = aCurveFloat32.length/3;
+
+        this.scene.children[0].geometry.setAttribute(
+            "color",
+            new THREE.Float32BufferAttribute(colorFloat32, 3, false)
+        );
+
+        this.scene.children[0].geometry.attributes.color.needsUpdate = true;
     }
 };
